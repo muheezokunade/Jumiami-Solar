@@ -1,7 +1,49 @@
 import ContactForm from "@/components/contact-form";
+import InteractiveMap from "@/components/interactive-map";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter, ExternalLink } from "lucide-react";
+
+const officeLocations = [
+  {
+    title: "Head Office",
+    address: "Ikota shopping complex, Road 3, opp. Union Bank, Suite E167, 150/151, VGC Ajah Lagos.",
+    phone: "08118887425"
+  },
+  {
+    title: "Ilorin Branch Office",
+    address: "Shop 4B samtosh plaza, No. 171, Ibrahim Taiwo Rd. Opp. access Bank, Ilorin",
+    phone: "09156082923"
+  },
+  {
+    title: "Abeokuta Branch Office",
+    address: "Alhaji Mulikat sonekan (oosele) House, Opposite NNPC Filling Station, Somorin Obantoko Abeokuta, Ogun state.",
+    phone: "08118887425"
+  }
+];
+
+const socialMediaLinks = [
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/jumiamisolar1_?igsh=MTBhaDNvYWl0ZTMwYw==",
+    icon: Instagram
+  },
+  {
+    name: "TikTok",
+    url: "https://www.tiktok.com/@oloriejires?_t=ZS-8ySaWTV8Ry3&_r=1",
+    icon: ExternalLink
+  },
+  {
+    name: "X (Twitter)",
+    url: "https://x.com/bukkysulyman?s=08",
+    icon: Twitter
+  },
+  {
+    name: "Facebook",
+    url: "https://www.facebook.com/share/16oRet54tR/",
+    icon: Facebook
+  }
+];
 
 export default function Contact() {
   return (
@@ -36,60 +78,54 @@ export default function Contact() {
             
             {/* Contact Information */}
             <div className="space-y-8">
-              {/* Office Location */}
+              {/* Office Locations */}
               <div className="glass-morphism rounded-2xl p-8">
-                <h3 className="text-2xl font-bold mb-6">Visit Our Lagos Showroom</h3>
+                <h3 className="text-2xl font-bold mb-6">Our Office Locations</h3>
                 
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-[hsl(19,100%,58%)] rounded-lg flex items-center justify-center flex-shrink-0">
-                      <MapPin className="h-6 w-6 text-white" />
+                <div className="space-y-6">
+                  {officeLocations.map((office, index) => (
+                    <div key={index} className="border-b border-white/10 pb-6 last:border-b-0 last:pb-0">
+                      <h4 className="text-lg font-bold text-[hsl(19,100%,58%)] mb-3">{office.title}</h4>
+                      
+                      <div className="space-y-3">
+                        <div className="flex items-start space-x-3">
+                          <MapPin className="h-5 w-5 text-[hsl(19,100%,58%)] mt-1 flex-shrink-0" />
+                          <p className="text-gray-300 text-sm leading-relaxed">{office.address}</p>
+                        </div>
+                        
+                        <div className="flex items-center space-x-3">
+                          <Phone className="h-5 w-5 text-[hsl(19,100%,58%)]" />
+                          <a 
+                            href={`tel:${office.phone}`}
+                            className="text-gray-300 hover:text-[hsl(19,100%,58%)] transition-colors text-sm"
+                          >
+                            {office.phone}
+                          </a>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Address</h4>
-                      <p className="text-gray-300">Ikota shopping complex, Road 3, suite E 167, 150, 151, opposite Providus Bank, VGC, Ajah, Lagos</p>
-                    </div>
-                  </div>
+                  ))}
                   
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-[hsl(19,100%,58%)] rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Phone className="h-6 w-6 text-white" />
+                  <div className="pt-4 border-t border-white/10">
+                    <div className="flex items-center space-x-3">
+                      <Mail className="h-5 w-5 text-[hsl(19,100%,58%)]" />
+                      <a 
+                        href="mailto:info@jumiamisolar.com"
+                        className="text-gray-300 hover:text-[hsl(19,100%,58%)] transition-colors"
+                      >
+                        info@jumiamisolar.com
+                      </a>
                     </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Phone</h4>
-                      <p className="text-gray-300">+234 xxx xxx xxxx</p>
-                      <p className="text-gray-300">+234 xxx xxx xxxx</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-[hsl(19,100%,58%)] rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Mail className="h-6 w-6 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Email</h4>
-                      <p className="text-gray-300">info@jumiamasolar.com</p>
-                      <p className="text-gray-300">sales@jumiamasolar.com</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-[hsl(19,100%,58%)] rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Clock className="h-6 w-6 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Business Hours</h4>
-                      <p className="text-gray-300">Mon - Fri: 8:00AM - 6:00PM</p>
-                      <p className="text-gray-300">Sat: 9:00AM - 4:00PM</p>
-                      <p className="text-gray-300">Sun: Closed</p>
+                    
+                    <div className="flex items-center space-x-3 mt-3">
+                      <Clock className="h-5 w-5 text-[hsl(19,100%,58%)]" />
+                      <div className="text-gray-300 text-sm">
+                        <p>Mon - Fri: 8:00AM - 6:00PM</p>
+                        <p>Sat: 9:00AM - 4:00PM</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-                
-                <Button className="w-full mt-6 bg-white/10 text-white hover:bg-white/20 transition-all duration-300">
-                  <MapPin className="h-5 w-5 text-[hsl(19,100%,58%)] mr-2" />
-                  View on Google Maps
-                </Button>
               </div>
               
               {/* Social Media */}
@@ -97,37 +133,21 @@ export default function Contact() {
                 <h3 className="text-2xl font-bold mb-6">Follow Us</h3>
                 
                 <div className="grid grid-cols-2 gap-4">
-                  <a 
-                    href="#" 
-                    className="flex items-center space-x-3 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-300"
-                  >
-                    <Facebook className="h-5 w-5 text-[hsl(19,100%,58%)]" />
-                    <span>Facebook</span>
-                  </a>
-                  
-                  <a 
-                    href="#" 
-                    className="flex items-center space-x-3 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-300"
-                  >
-                    <Instagram className="h-5 w-5 text-[hsl(19,100%,58%)]" />
-                    <span>Instagram</span>
-                  </a>
-                  
-                  <a 
-                    href="#" 
-                    className="flex items-center space-x-3 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-300"
-                  >
-                    <Twitter className="h-5 w-5 text-[hsl(19,100%,58%)]" />
-                    <span>Twitter</span>
-                  </a>
-                  
-                  <a 
-                    href="#" 
-                    className="flex items-center space-x-3 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-300"
-                  >
-                    <Linkedin className="h-5 w-5 text-[hsl(19,100%,58%)]" />
-                    <span>LinkedIn</span>
-                  </a>
+                  {socialMediaLinks.map((social) => {
+                    const IconComponent = social.icon;
+                    return (
+                      <a 
+                        key={social.name}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center space-x-3 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-300"
+                      >
+                        <IconComponent className="h-5 w-5 text-[hsl(19,100%,58%)]" />
+                        <span>{social.name}</span>
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -140,10 +160,10 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-[hsl(0,0%,10%)] mb-6 font-serif">
-              Find <span className="text-[hsl(19,100%,58%)]">Our Location</span>
+              Find <span className="text-[hsl(19,100%,58%)]">Our Locations</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Visit our Lagos showroom to see our products firsthand and speak with our solar experts
+              Visit any of our office locations to see our products firsthand and speak with our solar experts
             </p>
           </div>
           
@@ -153,7 +173,7 @@ export default function Contact() {
               <Card className="floating-card p-8 shadow-lg h-full">
                 <CardContent className="p-0 space-y-6">
                   <div>
-                    <h3 className="text-2xl font-bold text-[hsl(0,0%,10%)] mb-4">Showroom Features</h3>
+                    <h3 className="text-2xl font-bold text-[hsl(0,0%,10%)] mb-4">Office Features</h3>
                     <div className="space-y-3">
                       <div className="flex items-center space-x-3">
                         <div className="w-2 h-2 bg-[hsl(19,100%,58%)] rounded-full"></div>
@@ -177,8 +197,8 @@ export default function Contact() {
                   <div>
                     <h4 className="text-lg font-bold text-[hsl(0,0%,10%)] mb-3">Getting Here</h4>
                     <div className="space-y-2 text-gray-600">
-                      <p>• Easy access from Lekki-Epe Expressway</p>
-                      <p>• Opposite Providus Bank for easy identification</p>
+                      <p>• Easy access from major roads</p>
+                      <p>• Well-marked locations for easy identification</p>
                       <p>• Public transport and ride-sharing available</p>
                     </div>
                   </div>
@@ -195,16 +215,9 @@ export default function Contact() {
               </Card>
             </div>
             
-            {/* Map Placeholder */}
+            {/* Interactive Map */}
             <div className="lg:col-span-2">
-              <div className="bg-gray-200 rounded-2xl h-96 lg:h-full flex items-center justify-center">
-                <div className="text-center text-gray-500">
-                  <MapPin className="h-16 w-16 mx-auto mb-4 text-[hsl(19,100%,58%)]" />
-                  <h3 className="text-xl font-bold mb-2">Interactive Map</h3>
-                  <p>Google Maps integration would be displayed here</p>
-                  <p className="text-sm mt-2">Ikota Shopping Complex, VGC, Ajah, Lagos</p>
-                </div>
-              </div>
+              <InteractiveMap />
             </div>
           </div>
         </div>

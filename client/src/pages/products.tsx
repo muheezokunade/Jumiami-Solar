@@ -1,341 +1,292 @@
-import ProductCard from "@/components/product-card";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
-import { CloudSun, Zap, Battery, Lightbulb } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { 
+  Zap, 
+  Battery, 
+  CloudSun, 
+  Settings, 
+  Shield, 
+  Star,
+  ArrowRight,
+  CheckCircle,
+  Package,
+  Truck,
+  Headphones,
+  Award
+} from "lucide-react";
+import ProductCard from "@/components/product-card";
 
-export default function Products() {
-  const { toast } = useToast();
+// Enhanced product data without pricing
+const products = [
+  {
+    id: 1,
+    name: "Premium Solar Panels",
+    category: "panels",
+    description: "High-efficiency monocrystalline solar panels with advanced anti-reflective coating for maximum energy production.",
+    imageUrl: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    icon: <CloudSun className="h-8 w-8 text-white" />,
+    features: ["25-year warranty", "High efficiency", "Anti-PID technology", "Corrosion resistant"],
+    specifications: {
+      power: "400W - 550W",
+      efficiency: "21.5%",
+      dimensions: "1765 x 1048 x 35mm",
+      weight: "20.5kg"
+    },
+    benefits: ["Maximum energy output", "Durable construction", "Low maintenance", "Long lifespan"]
+  },
+  {
+    id: 2,
+    name: "Hybrid Inverters",
+    category: "inverters",
+    description: "Advanced hybrid inverters with smart grid integration and battery backup capabilities for reliable power supply.",
+    imageUrl: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    icon: <Zap className="h-8 w-8 text-white" />,
+    features: ["Grid-tied operation", "Battery backup", "Smart monitoring", "MPPT technology"],
+    specifications: {
+      power: "3kW - 10kW",
+      efficiency: "96.5%",
+      input: "DC 200-500V",
+      output: "AC 220/240V"
+    },
+    benefits: ["Seamless grid integration", "Backup power capability", "Real-time monitoring", "Energy optimization"]
+  },
+  {
+    id: 3,
+    name: "Lithium Battery Systems",
+    category: "batteries",
+    description: "High-performance lithium-ion battery systems with intelligent BMS for optimal performance and safety.",
+    imageUrl: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    icon: <Battery className="h-8 w-8 text-white" />,
+    features: ["Long cycle life", "Deep discharge capability", "Smart BMS", "Modular design"],
+    specifications: {
+      capacity: "5kWh - 20kWh",
+      voltage: "48V",
+      cycles: "6000+",
+      warranty: "10 years"
+    },
+    benefits: ["Extended backup time", "High reliability", "Scalable capacity", "Low maintenance"]
+  },
+  {
+    id: 4,
+    name: "Solar Mounting Systems",
+    category: "accessories",
+    description: "Professional-grade mounting systems designed for various roof types and ground installations.",
+    imageUrl: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    icon: <Settings className="h-8 w-8 text-white" />,
+    features: ["Aluminum construction", "Adjustable tilt", "Easy installation", "Weather resistant"],
+    specifications: {
+      material: "Aluminum 6063-T5",
+      coating: "Anodized finish",
+      load: "Up to 5400N",
+      compatibility: "All panel types"
+    },
+    benefits: ["Secure installation", "Optimal positioning", "Durable construction", "Easy maintenance"]
+  },
+  {
+    id: 5,
+    name: "Solar Charge Controllers",
+    category: "accessories",
+    description: "Advanced MPPT charge controllers with LCD display and comprehensive protection features.",
+    imageUrl: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    icon: <Shield className="h-8 w-8 text-white" />,
+    features: ["MPPT technology", "LCD display", "Multiple protections", "Temperature compensation"],
+    specifications: {
+      current: "60A - 100A",
+      voltage: "12V/24V/48V",
+      efficiency: "98%",
+      protection: "Overcharge, over-discharge, short circuit"
+    },
+    benefits: ["Maximum power tracking", "Battery protection", "Real-time monitoring", "Reliable operation"]
+  },
+  {
+    id: 6,
+    name: "Solar Monitoring Systems",
+    category: "accessories",
+    description: "Smart monitoring solutions with mobile app integration for real-time system performance tracking.",
+    imageUrl: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    icon: <Star className="h-8 w-8 text-white" />,
+    features: ["Real-time monitoring", "Mobile app", "Data logging", "Alert system"],
+    specifications: {
+      connectivity: "WiFi/4G",
+      display: "7-inch touchscreen",
+      storage: "1 year data",
+      compatibility: "All major brands"
+    },
+    benefits: ["Performance tracking", "Remote monitoring", "Fault detection", "Energy optimization"]
+  }
+];
 
-  const handleRequestQuote = (productName: string) => {
-    toast({
-      title: "Quote Requested",
-      description: `Thank you for your interest in ${productName}. We'll contact you shortly with a detailed quote.`,
-    });
-  };
+const categories = [
+  { id: "all", label: "All Products", icon: Package },
+  { id: "panels", label: "Solar Panels", icon: CloudSun },
+  { id: "inverters", label: "Inverters", icon: Zap },
+  { id: "batteries", label: "Batteries", icon: Battery },
+  { id: "accessories", label: "Accessories", icon: Settings }
+];
 
-  const products = [
-    {
-      title: "Solar Panels",
-      description: "High-efficiency panels including our flagship 14.4 kW systems for maximum energy output.",
-      imageUrl: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-      icon: <CloudSun className="h-8 w-8 text-white" />
-    },
-    {
-      title: "Inverters",
-      description: "Hybrid and pure sine wave inverters from 12 kVA to 108 kVA for all power requirements.",
-      imageUrl: "https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-      icon: <Zap className="h-8 w-8 text-white" />
-    },
-    {
-      title: "Batteries",
-      description: "Premium lithium batteries from 22 kW to 270 kW capacity for reliable energy storage.",
-      imageUrl: "https://pixabay.com/get/gdc9f9697d339c0d979aff0fb9b670650afacac1cc310a87499a580e4ce1b7aaed2914fbbeb4b5c377f39408221c97c15f7843f28e2a7242eae647bf06b4af931_1280.jpg",
-      icon: <Battery className="h-8 w-8 text-white" />
-    },
-    {
-      title: "Accessories",
-      description: "Street lights, mounting systems, cables, and all essential solar accessories.",
-      imageUrl: "https://pixabay.com/get/g267350aa2e1e42d39209ef49e527dc90115bb5aa783f33a281f8c608cf37f18b01623fad889333bc8b616287642f6010907f0c8a9c553ec2761c961ab3af5ef4_1280.jpg",
-      icon: <Lightbulb className="h-8 w-8 text-white" />  
-    }
-  ];
+const services = [
+  {
+    icon: <Truck className="h-6 w-6" />,
+    title: "Free Delivery",
+    description: "Free delivery to your location across Nigeria"
+  },
+  {
+    icon: <Headphones className="h-6 w-6" />,
+    title: "24/7 Support",
+    description: "Round-the-clock technical support and assistance"
+  },
+  {
+    icon: <Award className="h-6 w-6" />,
+    title: "Warranty",
+    description: "Comprehensive warranty coverage on all products"
+  },
+  {
+    icon: <CheckCircle className="h-6 w-6" />,
+    title: "Installation",
+    description: "Professional installation by certified technicians"
+  }
+];
+
+export default function ProductsPage() {
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  const filteredProducts = selectedCategory === "all" 
+    ? products 
+    : products.filter(product => product.category === selectedCategory);
 
   return (
-    <div className="pt-16">
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] text-white">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 font-serif animate-fade-in">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-[hsl(0,0%,10%)] mb-4">
             Premium Solar Products
           </h1>
-          <p className="text-xl md:text-2xl mb-8 animate-slide-up">
-            Discover our comprehensive range of high-quality solar panels, inverters, batteries, and accessories
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Discover our comprehensive range of high-quality solar products designed for optimal performance, 
+            durability, and energy efficiency across Nigeria.
           </p>
         </div>
-      </section>
 
-      {/* Products Grid */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-[hsl(0,0%,10%)] mb-6 font-serif">
-              Our Product <span className="text-[hsl(19,100%,58%)]">Categories</span>
+        {/* Services Banner */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          {services.map((service, index) => (
+            <div key={index} className="bg-white rounded-xl p-4 shadow-lg text-center">
+              <div className="text-[hsl(19,100%,58%)] mb-2 flex justify-center">
+                {service.icon}
+              </div>
+              <h3 className="font-semibold text-[hsl(0,0%,10%)] mb-1">{service.title}</h3>
+              <p className="text-sm text-gray-600">{service.description}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Category Filter */}
+        <div className="mb-8">
+          <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
+            <TabsList className="grid w-full grid-cols-5 bg-white shadow-lg">
+              {categories.map((category) => {
+                const IconComponent = category.icon;
+                return (
+                  <TabsTrigger 
+                    key={category.id} 
+                    value={category.id}
+                    className="flex items-center space-x-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[hsl(19,100%,58%)] data-[state=active]:to-[hsl(47,100%,63%)] data-[state=active]:text-white"
+                  >
+                    <IconComponent className="h-4 w-4" />
+                    <span className="hidden sm:inline">{category.label}</span>
+                  </TabsTrigger>
+                );
+              })}
+            </TabsList>
+          </Tabs>
+        </div>
+
+        {/* Products Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {filteredProducts.map((product) => (
+            <ProductCard 
+              key={product.id} 
+              title={product.name}
+              description={product.description}
+              imageUrl={product.imageUrl}
+              icon={product.icon}
+              features={product.features}
+              specifications={product.specifications}
+              benefits={product.benefits}
+            />
+          ))}
+        </div>
+
+        {/* Product Features Section */}
+        <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 mb-12">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-[hsl(0,0%,10%)] mb-4">
+              Why Choose Our Products?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From residential installations to commercial projects, we offer a complete range of solar products tailored to Nigeria's energy needs.
+              We partner with world-leading manufacturers to provide you with the highest quality solar products
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {products.map((product, index) => (
-              <ProductCard
-                key={index}
-                title={product.title}
-                description={product.description}
-                imageUrl={product.imageUrl}
-                icon={product.icon}
-                onRequestQuote={() => handleRequestQuote(product.title)}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Detailed Product Sections */}
-      
-      {/* Solar Panels Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-[hsl(0,0%,10%)] mb-6 font-serif">
-                Solar <span className="text-[hsl(19,100%,58%)]">Panels</span>
-              </h2>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Our premium solar panels are designed to withstand Nigeria's tropical climate while delivering maximum efficiency. From residential rooftops to large commercial installations, we have the right panels for every project.
-              </p>
-              
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-[hsl(19,100%,58%)] rounded-full"></div>
-                  <span className="font-semibold">14.4 kW High-Efficiency Panels</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-[hsl(19,100%,58%)] rounded-full"></div>
-                  <span className="font-semibold">Monocrystalline & Polycrystalline Options</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-[hsl(19,100%,58%)] rounded-full"></div>
-                  <span className="font-semibold">25-Year Performance Warranty</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-[hsl(19,100%,58%)] rounded-full"></div>
-                  <span className="font-semibold">Anti-PID Technology</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-[hsl(19,100%,58%)] rounded-full"></div>
-                  <span className="font-semibold">Corrosion-Resistant Frames</span>
-                </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-full flex items-center justify-center mb-6 mx-auto">
+                <Award className="h-8 w-8 text-white" />
               </div>
+              <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-4">Premium Quality</h3>
+              <p className="text-gray-600">All products meet international standards and come with comprehensive warranties</p>
             </div>
             
-            <div className="relative">
-              <img 
-                src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400" 
-                alt="High-efficiency solar panels" 
-                className="rounded-2xl shadow-2xl floating-card" 
-              />
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-full flex items-center justify-center mb-6 mx-auto">
+                <CheckCircle className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-4">Certified Products</h3>
+              <p className="text-gray-600">ISO certified products with proven performance and reliability</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-full flex items-center justify-center mb-6 mx-auto">
+                <Headphones className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-4">Expert Support</h3>
+              <p className="text-gray-600">Technical support and guidance from our experienced solar specialists</p>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Inverters Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="order-2 lg:order-1 relative">
-              <img 
-                src="https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400" 
-                alt="Solar inverter system" 
-                className="rounded-2xl shadow-2xl floating-card" 
-              />
-            </div>
-            
-            <div className="order-1 lg:order-2">
-              <h2 className="text-4xl font-bold text-[hsl(0,0%,10%)] mb-6 font-serif">
-                Solar <span className="text-[hsl(19,100%,58%)]">Inverters</span>
-              </h2>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Our range of inverters converts DC power from solar panels into AC power for your home or business. Available in various capacities to match your energy requirements perfectly.
-              </p>
-              
-              <div className="grid grid-cols-2 gap-6 mb-8">
-                <Card className="p-4 text-center">
-                  <CardContent className="p-0">
-                    <div className="text-2xl font-bold text-[hsl(19,100%,58%)] mb-2">12 kVA</div>
-                    <div className="text-sm text-gray-600">Residential</div>
-                  </CardContent>
-                </Card>
-                <Card className="p-4 text-center">
-                  <CardContent className="p-0">
-                    <div className="text-2xl font-bold text-[hsl(19,100%,58%)] mb-2">50 kVA</div>
-                    <div className="text-sm text-gray-600">Small Commercial</div>
-                  </CardContent>
-                </Card>
-                <Card className="p-4 text-center">
-                  <CardContent className="p-0">
-                    <div className="text-2xl font-bold text-[hsl(19,100%,58%)] mb-2">108 kVA</div>
-                    <div className="text-sm text-gray-600">Large Commercial</div>
-                  </CardContent>
-                </Card>
-                <Card className="p-4 text-center">
-                  <CardContent className="p-0">
-                    <div className="text-2xl font-bold text-[hsl(19,100%,58%)] mb-2">Custom</div>
-                    <div className="text-sm text-gray-600">Industrial</div>
-                  </CardContent>
-                </Card>
-              </div>
-              
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-[hsl(19,100%,58%)] rounded-full"></div>
-                  <span className="font-semibold">Pure Sine Wave Output</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-[hsl(19,100%,58%)] rounded-full"></div>
-                  <span className="font-semibold">Hybrid & Grid-Tie Options</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-[hsl(19,100%,58%)] rounded-full"></div>
-                  <span className="font-semibold">Advanced MPPT Technology</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Batteries Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-centers">
-            <div>
-              <h2 className="text-4xl font-bold text-[hsl(0,0%,10%)] mb-6 font-serif">
-                Energy Storage <span className="text-[hsl(19,100%,58%)]">Batteries</span>
-              </h2>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Store your solar energy with our premium battery systems. From lithium-ion to tubular batteries, we offer reliable energy storage solutions for uninterrupted power supply.
-              </p>
-              
-              <div className="grid grid-cols-3 gap-4 mb-8">
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-xl font-bold text-[hsl(19,100%,58%)] mb-1">22 kW</div>
-                  <div className="text-sm text-gray-600">Residential</div>
-                </div>
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-xl font-bold text-[hsl(19,100%,58%)] mb-1">100 kW</div>
-                  <div className="text-sm text-gray-600">Commercial</div>
-                </div>
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-xl font-bold text-[hsl(19,100%,58%)] mb-1">270 kW</div>
-                  <div className="text-sm text-gray-600">Industrial</div>
-                </div>
-              </div>
-              
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-[hsl(19,100%,58%)] rounded-full"></div>
-                  <span className="font-semibold">Lithium & Tubular Options</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-[hsl(19,100%,58%)] rounded-full"></div>
-                  <span className="font-semibold">10+ Year Lifespan</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-[hsl(19,100%,58%)] rounded-full"></div>
-                  <span className="font-semibold">Deep Cycle Performance</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-[hsl(19,100%,58%)] rounded-full"></div>
-                  <span className="font-semibold">Temperature Compensation</span>
-                </div>
-              </div>
-            </div>
-            
-            <div className="relative">
-              <img 
-                src="https://pixabay.com/get/gdc9f9697d339c0d979aff0fb9b670650afacac1cc310a87499a580e4ce1b7aaed2914fbbeb4b5c377f39408221c97c15f7843f28e2a7242eae647bf06b4af931_1280.jpg" 
-                alt="Lithium battery storage" 
-                className="rounded-2xl shadow-2xl floating-card" 
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Accessories Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[hsl(0,0%,10%)] mb-6 font-serif">
-              Solar <span className="text-[hsl(19,100%,58%)]">Accessories</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Complete your solar installation with our range of high-quality accessories and components
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Card className="floating-card text-center p-6">
-              <CardContent className="p-0">
-                <Lightbulb className="h-12 w-12 mx-auto mb-4 text-[hsl(19,100%,58%)]" />
-                <h3 className="text-lg font-bold mb-2">LED Street Lights</h3>
-                <p className="text-gray-600 text-sm">Solar-powered LED street lighting solutions for security and illumination</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="floating-card text-center p-6">
-              <CardContent className="p-0">
-                <div className="h-12 w-12 mx-auto mb-4 bg-[hsl(19,100%,58%)] rounded-lg flex items-center justify-center">
-                  <div className="w-6 h-6 bg-white rounded"></div>
-                </div>
-                <h3 className="text-lg font-bold mb-2">Mounting Systems</h3>
-                <p className="text-gray-600 text-sm">Robust mounting rails and hardware for secure panel installation</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="floating-card text-center p-6">
-              <CardContent className="p-0">
-                <div className="h-12 w-12 mx-auto mb-4 bg-[hsl(19,100%,58%)] rounded-lg flex items-center justify-center">
-                  <div className="w-8 h-1 bg-white rounded"></div>
-                </div>
-                <h3 className="text-lg font-bold mb-2">DC Cables</h3>
-                <p className="text-gray-600 text-sm">High-quality solar cables rated for outdoor installations</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="floating-card text-center p-6">
-              <CardContent className="p-0">
-                <div className="h-12 w-12 mx-auto mb-4 bg-[hsl(19,100%,58%)] rounded-lg flex items-center justify-center">
-                  <div className="w-6 h-6 border-2 border-white rounded"></div>
-                </div>
-                <h3 className="text-lg font-bold mb-2">Monitoring Systems</h3>
-                <p className="text-gray-600 text-sm">Real-time system monitoring and performance tracking</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-[hsl(0,0%,10%)] text-white">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 font-serif">
-            Ready to Choose Your <span className="text-[hsl(19,100%,58%)]">Solar Solution?</span>
-          </h2>
-          <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
-            Our experts will help you select the perfect combination of products for your energy needs and budget.
+        {/* CTA Section */}
+        <div className="text-center bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-3xl p-8 md:p-12">
+          <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Ready to Go Solar?
+          </h3>
+          <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
+            Get a free consultation and quote for your solar installation. 
+            Our experts will help you choose the perfect products for your needs.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg"
-              className="bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] text-white px-10 py-4 text-lg font-semibold hover:from-[hsl(47,100%,63%)] hover:to-[hsl(19,100%,58%)] transition-all duration-300 transform hover:scale-105"
-              onClick={() => handleRequestQuote("Complete Solar System")}
+              className="bg-white text-[hsl(19,100%,58%)] hover:bg-gray-100 font-semibold px-8 py-3 rounded-full"
             >
-              Get Custom Quote
+              <Package className="h-5 w-5 mr-2" />
+              Get Free Quote
             </Button>
             <Button 
               variant="outline"
               size="lg"
-              className="border-white text-white px-10 py-4 text-lg font-semibold hover:bg-white hover:text-[hsl(0,0%,10%)] transition-all duration-300"
+              className="border-white text-white hover:bg-white/10 font-semibold px-8 py-3 rounded-full"
             >
-              Visit Showroom
+              <ArrowRight className="h-5 w-5 mr-2" />
+              View Services
             </Button>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

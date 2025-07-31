@@ -1,301 +1,266 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import TestimonialCard from "@/components/testimonial-card";
+import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
+import TestimonialCard from "@/components/testimonial-card";
 import type { Testimonial } from "@shared/schema";
 
-export default function Testimonials() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+export default function TestimonialsPage() {
+  const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   const { data: testimonials, isLoading, error } = useQuery<Testimonial[]>({
     queryKey: ["/api/testimonials"],
   });
 
   const nextTestimonial = () => {
-    if (testimonials) {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    if (testimonials && testimonials.length > 0) {
+      setCurrentTestimonialIndex((prev) => 
+        prev === testimonials.length - 1 ? 0 : prev + 1
+      );
     }
   };
 
   const prevTestimonial = () => {
-    if (testimonials) {
-      setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    if (testimonials && testimonials.length > 0) {
+      setCurrentTestimonialIndex((prev) => 
+        prev === 0 ? testimonials.length - 1 : prev - 1
+      );
     }
   };
 
-  if (error) {
+  // Auto-play testimonials
+  useEffect(() => {
+    if (!isAutoPlaying || !testimonials || testimonials.length === 0) return;
+
+    const interval = setInterval(() => {
+      nextTestimonial();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, testimonials, currentTestimonialIndex]);
+
+  // Pause auto-play on user interaction
+  const handleUserInteraction = () => {
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 10000); // Resume after 10 seconds
+  };
+
+  if (isLoading) {
     return (
-      <div className="pt-16 min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">Error Loading Testimonials</h2>
-          <p className="text-gray-600">Unable to load testimonials. Please try again later.</p>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold text-[hsl(0,0%,10%)] mb-4">
+              What Our Clients Say
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Discover why customers choose Jumiami Solar for their energy needs
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[1, 2, 3].map((i) => (
+              <Card key={i} className="bg-white rounded-2xl shadow-lg overflow-hidden animate-pulse">
+                <CardContent className="p-8">
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 bg-gray-200 rounded-full mr-4"></div>
+                    <div>
+                      <div className="h-4 bg-gray-200 rounded w-32 mb-2"></div>
+                      <div className="h-3 bg-gray-200 rounded w-24"></div>
+                    </div>
+                  </div>
+                  <div className="flex mb-4">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <div key={star} className="w-5 h-5 bg-gray-200 rounded mr-1"></div>
+                    ))}
+                  </div>
+                  <div className="space-y-2">
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
     );
   }
 
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-[hsl(0,0%,10%)] mb-4">
+              What Our Clients Say
+            </h1>
+            <p className="text-xl text-gray-600 mb-8">
+              Discover why customers choose Jumiami Solar for their energy needs
+            </p>
+            <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
+              <p className="text-red-600">Failed to load testimonials. Please try again later.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!testimonials || testimonials.length === 0) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-[hsl(0,0%,10%)] mb-4">
+              What Our Clients Say
+            </h1>
+            <p className="text-xl text-gray-600 mb-8">
+              Discover why customers choose Jumiami Solar for their energy needs
+            </p>
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 max-w-md mx-auto">
+              <p className="text-gray-600">No testimonials available at the moment.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const featuredTestimonial = testimonials[currentTestimonialIndex];
+
   return (
-    <div className="pt-16">
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] text-white">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 font-serif animate-fade-in">
-            Customer Testimonials
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-[hsl(0,0%,10%)] mb-4">
+            What Our Clients Say
           </h1>
-          <p className="text-xl md:text-2xl mb-8 animate-slide-up">
-            Hear from our satisfied customers about their solar energy experience
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Discover why customers choose Jumiami Solar for their energy needs
           </p>
         </div>
-      </section>
 
-      {/* Featured Testimonial Carousel */}
-      <section className="py-20 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {isLoading ? (
-            <Card className="glass-morphism rounded-2xl text-white">
-              <CardContent className="p-12 text-center">
-                <Skeleton className="w-20 h-20 rounded-full mx-auto mb-6" />
-                <Skeleton className="h-6 w-48 mx-auto mb-4" />
-                <Skeleton className="h-4 w-32 mx-auto mb-6" />
-                <Skeleton className="h-20 w-full mb-6" />
-                <div className="flex justify-center mb-4">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Skeleton key={i} className="w-5 h-5 mx-1" />
+        {/* Featured Testimonial */}
+        <div className="mb-16">
+          <div className="relative max-w-4xl mx-auto">
+            <Card className="bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-3xl shadow-2xl overflow-hidden">
+              <CardContent className="p-8 md:p-12 relative">
+                <Quote className="absolute top-6 right-6 h-12 w-12 text-white/20" />
+                
+                <div className="flex items-center mb-6">
+                  {featuredTestimonial.imageUrl && (
+                    <img 
+                      src={featuredTestimonial.imageUrl} 
+                      alt={`${featuredTestimonial.name} testimonial`}
+                      className="w-20 h-20 rounded-full object-cover mr-6 border-4 border-white/30"
+                    />
+                  )}
+                  <div>
+                    <h3 className="text-2xl font-bold text-white mb-1">{featuredTestimonial.name}</h3>
+                    <p className="text-white/90 text-lg">
+                      {featuredTestimonial.title}
+                      {featuredTestimonial.company && `, ${featuredTestimonial.company}`}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex mb-6">
+                  {Array.from({ length: featuredTestimonial.rating }, (_, i) => (
+                    <Star key={i} className="h-6 w-6 text-white fill-current mr-1" />
                   ))}
+                </div>
+                
+                <blockquote className="text-white text-xl md:text-2xl leading-relaxed font-medium mb-8">
+                  "{featuredTestimonial.content}"
+                </blockquote>
+                
+                <div className="flex items-center justify-between">
+                  <div className="text-white/80 text-sm">
+                    {currentTestimonialIndex + 1} of {testimonials.length}
+                  </div>
+                  
+                  <div className="flex items-center space-x-4">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => {
+                        prevTestimonial();
+                        handleUserInteraction();
+                      }}
+                      className="text-white hover:bg-white/20 rounded-full"
+                    >
+                      <ChevronLeft className="h-6 w-6" />
+                    </Button>
+                    
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => {
+                        nextTestimonial();
+                        handleUserInteraction();
+                      }}
+                      className="text-white hover:bg-white/20 rounded-full"
+                    >
+                      <ChevronRight className="h-6 w-6" />
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
-          ) : testimonials && testimonials.length > 0 ? (
-            <div className="relative">
-              <Card className="glass-morphism rounded-2xl text-white">
-                <CardContent className="p-12 text-center">
-                  <Quote className="h-16 w-16 mx-auto mb-6 text-[hsl(47,100%,63%)] opacity-50" />
-                  
-                  {testimonials[currentIndex].imageUrl && (
-                    <img 
-                      src={testimonials[currentIndex].imageUrl} 
-                      alt={`${testimonials[currentIndex].name} testimonial`}
-                      className="w-20 h-20 rounded-full object-cover mx-auto mb-6"
-                    />
-                  )}
-                  
-                  <h3 className="text-2xl font-bold mb-2">{testimonials[currentIndex].name}</h3>
-                  <p className="text-white/80 mb-6">
-                    {testimonials[currentIndex].title}
-                    {testimonials[currentIndex].company && `, ${testimonials[currentIndex].company}`}
-                  </p>
-                  
-                  <div className="flex justify-center mb-6">
-                    {Array.from({ length: testimonials[currentIndex].rating }, (_, i) => (
-                      <Star key={i} className="h-6 w-6 text-[hsl(47,100%,63%)] fill-current" />
-                    ))}
-                  </div>
-                  
-                  <blockquote className="text-xl leading-relaxed italic max-w-3xl mx-auto">
-                    "{testimonials[currentIndex].content}"
-                  </blockquote>
-                </CardContent>
-              </Card>
-              
-              {/* Carousel Navigation */}
-              <div className="flex justify-center mt-8 space-x-4">
-                <Button
-                  onClick={prevTestimonial}
-                  size="icon"
-                  className="bg-white/20 hover:bg-white/30 text-white border-0"
-                >
-                  <ChevronLeft className="h-5 w-5" />
-                </Button>
-                <Button
-                  onClick={nextTestimonial}
-                  size="icon"
-                  className="bg-white/20 hover:bg-white/30 text-white border-0"
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </Button>
-              </div>
-              
-              {/* Pagination Dots */}
-              <div className="flex justify-center mt-4 space-x-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`w-3 h-3 rounded-full transition-all ${
-                      index === currentIndex 
-                        ? 'bg-white' 
-                        : 'bg-white/30 hover:bg-white/50'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          ) : (
-            <Card className="glass-morphism rounded-2xl text-white">
-              <CardContent className="p-12 text-center">
-                <h3 className="text-2xl font-bold text-white mb-4">No Testimonials Available</h3>
-                <p className="text-white/80">Customer testimonials will be displayed here once available.</p>
-              </CardContent>
-            </Card>
-          )}
-        </div>
-      </section>
-
-      {/* All Testimonials Grid */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-[hsl(0,0%,10%)] mb-6 font-serif">
-              What Our Clients <span className="text-[hsl(19,100%,58%)]">Say</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Don't just take our word for it. Here's what our satisfied customers have to say about their experience with Jumiami Solar.
-            </p>
-          </div>
-          
-          {isLoading ? (
-            <div className="grid md:grid-cols-3 gap-8">
-              {Array.from({ length: 6 }).map((_, index) => (
-                <Card key={index} className="glass-morphism rounded-2xl">
-                  <CardContent className="p-8">
-                    <div className="flex items-center mb-6">
-                      <Skeleton className="w-16 h-16 rounded-full mr-4" />
-                      <div>
-                        <Skeleton className="h-5 w-32 mb-2" />
-                        <Skeleton className="h-4 w-24" />
-                      </div>
-                    </div>
-                    <div className="flex mb-4">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Skeleton key={i} className="w-5 h-5 mr-1" />
-                      ))}
-                    </div>
-                    <Skeleton className="h-20 w-full" />
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          ) : testimonials && testimonials.length > 0 ? (
-            <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial) => (
-                <TestimonialCard key={testimonial.id} testimonial={testimonial} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-16">
-              <h3 className="text-2xl font-bold text-gray-600 mb-4">No Testimonials Available</h3>
-              <p className="text-gray-500">Customer testimonials will be displayed here once available.</p>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Customer Satisfaction Stats */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-[hsl(0,0%,10%)] mb-6 font-serif">
-              Customer <span className="text-[hsl(19,100%,58%)]">Satisfaction</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our commitment to excellence is reflected in our customer satisfaction metrics
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-4 gap-8 text-center">
-            <div className="floating-card bg-white rounded-2xl p-8 shadow-lg">
-              <div className="text-4xl font-bold text-[hsl(19,100%,58%)] mb-4 font-serif">4.9/5</div>
-              <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-2">Average Rating</h3>
-              <p className="text-gray-600">Based on customer reviews and feedback</p>
-            </div>
-            
-            <div className="floating-card bg-white rounded-2xl p-8 shadow-lg">
-              <div className="text-4xl font-bold text-[hsl(19,100%,58%)] mb-4 font-serif">100%</div>
-              <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-2">Completion Rate</h3>
-              <p className="text-gray-600">All projects completed successfully</p>
-            </div>
-            
-            <div className="floating-card bg-white rounded-2xl p-8 shadow-lg">
-              <div className="text-4xl font-bold text-[hsl(19,100%,58%)] mb-4 font-serif">95%</div>
-              <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-2">Referral Rate</h3>
-              <p className="text-gray-600">Customers who refer us to others</p>
-            </div>
-            
-            <div className="floating-card bg-white rounded-2xl p-8 shadow-lg">
-              <div className="text-4xl font-bold text-[hsl(19,100%,58%)] mb-4 font-serif">24hr</div>
-              <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-2">Response Time</h3>
-              <p className="text-gray-600">Average support response time</p>
-            </div>
           </div>
         </div>
-      </section>
 
-      {/* Trust Indicators */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-[hsl(0,0%,10%)] mb-6 font-serif">
-              Why Customers <span className="text-[hsl(19,100%,58%)]">Trust Us</span>
-            </h2>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <Star className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-4">Quality Assurance</h3>
-              <p className="text-gray-600">Premium products, professional installation, and comprehensive warranties ensure long-term satisfaction.</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <Quote className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-4">Transparent Communication</h3>
-              <p className="text-gray-600">Clear, honest communication throughout the entire process from consultation to completion.</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <ChevronRight className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-4">Ongoing Support</h3>
-              <p className="text-gray-600">Dedicated customer support and maintenance services ensure your solar system performs optimally.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-[hsl(0,0%,10%)] text-white">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 font-serif">
-            Join Our <span className="text-[hsl(19,100%,58%)]">Satisfied</span> Customers
+        {/* All Testimonials Grid */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-[hsl(0,0%,10%)] text-center mb-8">
+            More Customer Stories
           </h2>
-          <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
-            Experience the Jumiami Solar difference. Get your free consultation today and join thousands of satisfied customers.
+          
+          {testimonials && testimonials.length > 0 ? (
+            <div className="grid md:grid-cols-3 gap-8">
+              {testimonials.map((testimonial, index) => {
+                return (
+                    <TestimonialCard key={testimonial.id} testimonial={testimonial} />
+                );
+              })}
+            </div>
+          ) : (
+            <div className="text-center text-gray-600">
+              <p>No testimonials available.</p>
+            </div>
+          )}
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-3xl p-8 md:p-12">
+          <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Ready to Join Our Happy Customers?
+          </h3>
+          <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
+            Experience the same quality service and satisfaction that our clients rave about.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg"
-              className="bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] text-white px-10 py-4 text-lg font-semibold hover:from-[hsl(47,100%,63%)] hover:to-[hsl(19,100%,58%)] transition-all duration-300 transform hover:scale-105"
+              className="bg-white text-[hsl(19,100%,58%)] hover:bg-gray-100 font-semibold px-8 py-3 rounded-full"
             >
-              Get Free Consultation
+              Get Free Quote
             </Button>
             <Button 
               variant="outline"
               size="lg"
-              className="border-white text-white px-10 py-4 text-lg font-semibold hover:bg-white hover:text-[hsl(0,0%,10%)] transition-all duration-300"
+              className="border-white text-white hover:bg-white/10 font-semibold px-8 py-3 rounded-full"
             >
-              Request Quote
+              View Our Projects
             </Button>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
 
 interface ProductCardProps {
   title: string;
@@ -8,9 +8,11 @@ interface ProductCardProps {
   imageUrl: string;
   icon: React.ReactNode;
   onRequestQuote?: () => void;
+  price?: string;
+  features?: string[];
 }
 
-export default function ProductCard({ title, description, imageUrl, icon, onRequestQuote }: ProductCardProps) {
+export default function ProductCard({ title, description, imageUrl, icon, onRequestQuote, price, features }: ProductCardProps) {
   return (
     <Card className="floating-card bg-white rounded-2xl shadow-lg overflow-hidden">
       <div className="relative">
@@ -27,7 +29,22 @@ export default function ProductCard({ title, description, imageUrl, icon, onRequ
         </div>
         
         <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-3">{title}</h3>
-        <p className="text-gray-600 mb-6">{description}</p>
+        <p className="text-gray-600 mb-4">{description}</p>
+        
+        {price && (
+          <div className="text-2xl font-bold text-[hsl(19,100%,58%)] mb-4">{price}</div>
+        )}
+        
+        {features && features.length > 0 && (
+          <div className="space-y-2 mb-6">
+            {features.slice(0, 3).map((feature, index) => (
+              <div key={index} className="flex items-center justify-center space-x-2">
+                <CheckCircle className="h-4 w-4 text-[hsl(19,100%,58%)] flex-shrink-0" />
+                <span className="text-sm text-gray-600">{feature}</span>
+              </div>
+            ))}
+          </div>
+        )}
         
         <Button
           variant="ghost"
