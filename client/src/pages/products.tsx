@@ -20,13 +20,13 @@ import {
 import ProductCard from "@/components/product-card";
 
 // Enhanced product data without pricing
-const products = [
-  {
+  const products = [
+    {
     id: 1,
     name: "Premium Solar Panels",
     category: "panels",
     description: "High-efficiency monocrystalline solar panels with advanced anti-reflective coating for maximum energy production.",
-    imageUrl: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+      imageUrl: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
     icon: <CloudSun className="h-8 w-8 text-white" />,
     features: ["25-year warranty", "High efficiency", "Anti-PID technology", "Corrosion resistant"],
     specifications: {
@@ -205,7 +205,7 @@ export default function ProductsPage() {
           </Tabs>
         </div>
 
-        {/* Products Grid */}
+      {/* Products Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {filteredProducts.map((product) => (
             <ProductCard 
@@ -231,7 +231,7 @@ export default function ProductsPage() {
               We partner with world-leading manufacturers to provide you with the highest quality solar products
             </p>
           </div>
-
+          
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="w-16 h-16 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-full flex items-center justify-center mb-6 mx-auto">
@@ -244,7 +244,7 @@ export default function ProductsPage() {
             <div className="text-center">
               <div className="w-16 h-16 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <CheckCircle className="h-8 w-8 text-white" />
-              </div>
+            </div>
               <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-4">Certified Products</h3>
               <p className="text-gray-600">ISO certified products with proven performance and reliability</p>
             </div>
@@ -259,7 +259,7 @@ export default function ProductsPage() {
           </div>
         </div>
 
-        {/* CTA Section */}
+      {/* CTA Section */}
         <div className="text-center bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-3xl p-8 md:p-12">
           <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Ready to Go Solar?

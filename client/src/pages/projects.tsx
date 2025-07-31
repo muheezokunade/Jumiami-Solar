@@ -274,21 +274,21 @@ export default function ProjectsPage() {
           <div className="bg-white rounded-xl p-6 shadow-lg text-center">
             <div className="text-3xl font-bold text-[hsl(19,100%,58%)] mb-2">{stats.totalProjects}</div>
             <div className="text-gray-600">Completed Projects</div>
-          </div>
+            </div>
           <div className="bg-white rounded-xl p-6 shadow-lg text-center">
             <div className="text-3xl font-bold text-[hsl(19,100%,58%)] mb-2">{stats.totalCapacity} kW</div>
             <div className="text-gray-600">Total Capacity</div>
-          </div>
+            </div>
           <div className="bg-white rounded-xl p-6 shadow-lg text-center">
             <div className="text-3xl font-bold text-[hsl(19,100%,58%)] mb-2">₦{stats.totalSavings}M+</div>
             <div className="text-gray-600">Client Savings</div>
-          </div>
+            </div>
           <div className="bg-white rounded-xl p-6 shadow-lg text-center">
             <div className="text-3xl font-bold text-[hsl(19,100%,58%)] mb-2">{stats.averageRating.toFixed(1)}</div>
             <div className="text-gray-600">Average Rating</div>
           </div>
-        </div>
-
+          </div>
+          
         {/* Category Filter */}
         <div className="mb-8">
           <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
@@ -308,19 +308,19 @@ export default function ProjectsPage() {
               })}
             </TabsList>
           </Tabs>
-        </div>
-
-        {/* Projects Grid */}
+          </div>
+          
+          {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {filteredProjects.map((project) => (
-            <ProjectCard 
-              key={project.id} 
-              project={project}
+              {filteredProjects.map((project) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
               onClick={() => setSelectedProject(project)}
-            />
-          ))}
-        </div>
-
+                />
+              ))}
+          </div>
+          
         {/* Featured Project Detail */}
         {selectedProject && (
           <div className="bg-white rounded-3xl shadow-2xl overflow-hidden mb-12">
@@ -389,7 +389,7 @@ export default function ProjectsPage() {
                         <span className="text-gray-600">{feature}</span>
                       </div>
                     ))}
-                  </div>
+                </div>
                 </div>
 
                 {/* Challenge & Solution */}
@@ -400,34 +400,34 @@ export default function ProjectsPage() {
                       Challenge
                     </h4>
                     <p className="text-gray-600 text-sm">{selectedProject.challenges}</p>
-                  </div>
+          </div>
                   <div>
                     <h4 className="font-semibold text-[hsl(0,0%,10%)] mb-2 flex items-center">
                       <TrendingUp className="h-4 w-4 mr-2" />
                       Solution
                     </h4>
                     <p className="text-gray-600 text-sm">{selectedProject.solution}</p>
-                  </div>
+        </div>
                   <div>
                     <h4 className="font-semibold text-[hsl(0,0%,10%)] mb-2 flex items-center">
                       <CheckCircle className="h-4 w-4 mr-2" />
                       Results
                     </h4>
                     <p className="text-gray-600 text-sm">{selectedProject.results}</p>
-                  </div>
-                </div>
-
+          </div>
+            </div>
+            
                 {/* Client Testimonial */}
                 <div className="bg-gradient-to-r from-[hsl(19,100%,58%)]/10 to-[hsl(47,100%,63%)]/10 rounded-lg p-4">
                   <p className="text-gray-700 italic">"{selectedProject.testimonial}"</p>
                   <p className="text-sm text-gray-600 mt-2">- {selectedProject.client}</p>
                 </div>
-              </div>
+            </div>
             </div>
           </div>
         )}
 
-        {/* CTA Section */}
+      {/* CTA Section */}
         <div className="text-center bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-3xl p-8 md:p-12">
           <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Ready to Start Your Solar Project?

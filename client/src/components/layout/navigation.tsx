@@ -90,49 +90,49 @@ export default function Navigation() {
       {/* Main Navigation - Cleaner */}
       <nav 
         className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-          isScrolled 
+        isScrolled 
             ? "bg-white/95 backdrop-blur-xl shadow-2xl border-b border-gray-100" 
             : "bg-white/90 backdrop-blur-lg"
-        }`}
+      }`}
         style={{ top: isScrolled ? '0' : '0' }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 sm:h-20">
             {/* Logo - Simplified */}
             <Link href="/" className="flex items-center space-x-3 group">
               <div className="relative">
-                <img 
-                  src={logoImage}
-                  alt="Jumiami Solar Shop Logo" 
+            <img 
+              src={logoImage}
+              alt="Jumiami Solar Shop Logo" 
                   className="h-10 w-auto sm:h-14 transition-all duration-300 group-hover:scale-110"
-                />
+            />
               </div>
               <div>
                 <h1 className="text-lg sm:text-xl font-bold text-[hsl(0,0%,10%)]">Jumiami Solar</h1>
                 <p className="text-xs text-[hsl(19,100%,58%)] font-medium">Sustainable Energy</p>
               </div>
-            </Link>
-            
+          </Link>
+          
             {/* Desktop Navigation - Flat Structure */}
             <div className="hidden lg:flex items-center space-x-1">
-              {navItems.map((item) => (
-                <Link 
-                  key={item.href} 
-                  href={item.href}
+            {navItems.map((item) => (
+              <Link 
+                key={item.href} 
+                href={item.href}
                   className={`relative px-3 py-2 rounded-lg font-medium transition-all duration-300 group ${
-                    location === item.href 
+                  location === item.href 
                       ? "text-[hsl(19,100%,58%)] bg-[hsl(19,100%,58%)]/10" 
                       : "text-[hsl(0,0%,10%)] hover:text-[hsl(19,100%,58%)] hover:bg-[hsl(19,100%,58%)]/5"
-                  }`}
-                >
-                  {item.label}
+                }`}
+              >
+                {item.label}
                   <div className={`absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] transition-all duration-300 group-hover:w-full group-hover:left-0 ${
                     location === item.href ? 'w-full left-0' : ''
                   }`}></div>
-                </Link>
-              ))}
-            </div>
-
+              </Link>
+            ))}
+          </div>
+          
             {/* CTA Button - Simplified */}
             <div className="hidden md:flex items-center space-x-4">
               <Button 
@@ -157,8 +157,8 @@ export default function Navigation() {
                     <span className={`absolute top-2 left-0 w-6 h-0.5 bg-[hsl(0,0%,10%)] transition-all duration-300 group-hover:bg-[hsl(19,100%,58%)] ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
                     <span className={`absolute top-4 left-0 w-6 h-0.5 bg-[hsl(0,0%,10%)] transition-all duration-300 group-hover:bg-[hsl(19,100%,58%)] ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
                   </div>
-                </Button>
-              </SheetTrigger>
+              </Button>
+            </SheetTrigger>
               <SheetContent side="right" className="w-full sm:w-[400px] bg-white/95 backdrop-blur-xl border-l border-gray-200 p-0" style={{ zIndex: 9999 }}>
                 <div className="flex flex-col h-full relative">
                   {/* Mobile Header - Simplified */}
@@ -192,12 +192,12 @@ export default function Navigation() {
                       {navItems.map((item, index) => {
                         const IconComponent = item.icon;
                         return (
-                          <Link 
-                            key={item.href} 
-                            href={item.href}
+                  <Link 
+                    key={item.href} 
+                    href={item.href}
                             onClick={() => setIsMobileMenuOpen(false)}
                             className={`flex items-center justify-between px-4 py-3 rounded-xl font-medium transition-all duration-300 touch-manipulation ${
-                              location === item.href 
+                      location === item.href 
                                 ? "bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] text-white shadow-lg" 
                                 : "text-[hsl(0,0%,10%)] hover:bg-[hsl(19,100%,58%)]/10 hover:text-[hsl(19,100%,58%)] active:bg-[hsl(19,100%,58%)]/20"
                             }`}
@@ -208,7 +208,7 @@ export default function Navigation() {
                               <span className="text-base">{item.label}</span>
                             </div>
                             <ChevronRight className="h-4 w-4 opacity-60" />
-                          </Link>
+                  </Link>
                         );
                       })}
                     </div>
@@ -276,12 +276,12 @@ export default function Navigation() {
                       </div>
                     </div>
                   </div>
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
-      </nav>
+      </div>
+    </nav>
     </>
   );
 }
