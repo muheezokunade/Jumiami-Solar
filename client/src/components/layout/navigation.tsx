@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Sun, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
+import logoImage from "@assets/FB_IMG_1753880100791 - Faridah Sulaimon_1753982843756.jpg";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -38,12 +39,11 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-2 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-lg flex items-center justify-center transition-transform group-hover:scale-110">
-              <Sun className="h-6 w-6 text-white" />
-            </div>
-            <span className="text-xl font-bold text-[hsl(0,0%,10%)] font-serif">
-              Jumiami Solar
-            </span>
+            <img 
+              src={logoImage}
+              alt="Jumiami Solar Shop Logo" 
+              className="h-12 w-auto transition-transform group-hover:scale-110"
+            />
           </Link>
           
           {/* Desktop Navigation */}

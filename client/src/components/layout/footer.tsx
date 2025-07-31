@@ -1,5 +1,6 @@
 import { Link } from "wouter";
-import { Sun, Facebook, Instagram, Twitter, Linkedin, MapPin, Phone, Mail, Clock } from "lucide-react";
+import { Facebook, Instagram, Twitter, Linkedin, MapPin, Phone, Mail, Clock } from "lucide-react";
+import logoImage from "@assets/FB_IMG_1753880100791 - Faridah Sulaimon_1753982843756.jpg";
 
 const quickLinks = [
   { href: "/", label: "Home" },
@@ -28,10 +29,11 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-lg flex items-center justify-center">
-                <Sun className="h-6 w-6 text-white" />
-              </div>
-              <span className="text-2xl font-bold font-serif">Jumiami Solar</span>
+              <img 
+                src={logoImage}
+                alt="Jumiami Solar Shop Logo" 
+                className="h-16 w-auto"
+              />
             </div>
             <p className="text-gray-400 mb-6">
               Kicking out darkness in the environment with premium solar solutions across Nigeria.

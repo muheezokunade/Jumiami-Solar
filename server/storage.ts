@@ -54,7 +54,7 @@ export class MemStorage implements IStorage {
       {
         name: "Michael Okafor",
         title: "Homeowner",
-        company: "",
+        company: null,
         content: "Best investment I've made for my home. The solar system powers everything - AC, refrigerator, lights. The maintenance service is excellent and I'm saving thousands on electricity bills.",
         rating: 5,
         imageUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=150"
