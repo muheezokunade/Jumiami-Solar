@@ -1,0 +1,108 @@
+Build an elegant, modern, and visually impressive website for Jumiami Solar, a solar energy company based in Lagos, Nigeria. The site should reflect the brand’s mission to “kick out darkness in the environment” and showcase their services (sales, installation, repair, maintenance), product range, and testimonials.
+
+Overall Tone and Feel
+Professional and modern while also warm and approachable.
+
+Use the brand colors white, orange, and yellow prominently to reinforce the bright, sun-powered theme.
+
+Plenty of white space to create a clean, uncluttered look.
+
+Subtle animations on scroll (e.g., fade-in, slide-up) to make the site feel dynamic without being distracting.
+
+Sleek typography: Choose modern sans-serif fonts (e.g., Montserrat, Lato) for headings and readable fonts (e.g., Open Sans) for body text.
+
+Responsive layout: Ensure the design adapts beautifully across desktop, tablet, and mobile.
+
+Layout & Structure
+Hero Section
+
+Full-screen hero with a captivating image or video representing clean energy and solar panels (pull from the provided Google Drive images: e.g., the first few links).
+
+Overlay the mission statement: “Kick out darkness in the environment” in bold, large typography.
+
+Include a compelling subheading highlighting the core service (“We sell, install, repair and maintain inverters & solar products”).
+
+A prominent call-to-action (CTA) button: “Get a Free Consultation” or “Contact Us Now,” styled in orange or yellow.
+
+About Us Section
+
+Present a brief company history (e.g., “Over 5 years of powering homes and businesses with quality solar solutions”).
+
+Mention the location: “Ikota shopping complex, Road 3, suite E 167, 150, 151, opposite Providus Bank, VGC, Ajah, Lagos.”
+
+Use icons or illustrations next to bullet points highlighting selling points like “Top-Quality Products,” “Expert Installation,” and “Comprehensive Maintenance.”
+
+Add a secondary CTA (“Learn More About Our Story”).
+
+Products & Services Section
+
+Break into sub-sections:
+
+Solar Panels: Provide details on models (e.g., “14.4 kW solar panel”) with brief descriptions and images.
+
+Inverters: Create categories such as hybrid inverters, pure sine wave, transformer-based, with descriptions like “12 kVA Inverter,” “50 kVA Inverter,” and so on.
+
+Batteries: Highlight lithium batteries, tubular batteries, and dry cell batteries, including capacities (e.g., “22 kW Lithium battery,” “270 kW lithium battery”).
+
+Accessories: List other products like street lights, solar panels, accessories etc.
+
+Display products in cards or columns, each with an image from the Drive links, product names, short descriptions, and CTAs like “Request Quote.”
+
+Featured Projects / Partnerships
+
+Use a slider or grid to showcase high-profile projects and partners (e.g., MRS Company installations with “14.4 kW solar panel, 22 kW lithium battery, 12 kVA inverter,” Easy-Transact’s “270 kW lithium battery, 108 kVA inverter,” and JBNL installations).
+
+Include images from the corresponding Google Drive folders.
+
+Add short success stories about the impact of these installations, focusing on reliability and customer satisfaction.
+
+Testimonials Section
+
+Embed testimonials from clients (pull from Google or request text quotes).
+
+Use a carousel with headshots or icons and short quotes praising product quality and services.
+
+Visually distinct section with a colored background to stand out.
+
+Why Choose Us / Differentiators
+
+Highlight your strengths: “Quality products,” “Professional installation,” “5+ years of expertise,” and “Comprehensive maintenance.”
+
+Use iconography and short, catchy headlines to grab attention.
+
+Contact & Call-to-Action
+
+Include a simple contact form for inquiries (name, email, phone, message).
+
+Provide a clickable address with Google Maps integration to the store’s location.
+
+Provide phone number(s) and social media icons.
+
+Footer
+
+Reiterate navigation links: Home, About, Products, Services, Projects, Testimonials, Contact.
+
+Include social media icons, business hours, and any relevant certifications or affiliations.
+
+Visual & Interaction Design
+Navigation Bar: Sticky and semi-transparent. Use subtle hover effects and highlight active links.
+
+Color Palette: Dominant white background with orange (#FFA500) for CTAs and highlights; yellow (#FFD700) for accent elements.
+
+Shapes & Dividers: Use smooth curves or angled dividers between sections for a modern feel.
+
+Image Gallery: Create a lightbox feature; allow users to click product images to view larger versions.
+
+Micro-interactions: Animated icons, slight box-shadow on cards, hover effects to signal interactivity.
+
+Accessibility: Ensure text contrast meets standards and images have alt text.
+
+Additional Considerations
+Utilize any provided Google Drive images relevant to each product category and project showcase.
+
+Where images are missing or not specific enough, use complementary stock photos representing solar technology or sustainable energy.
+
+Keep text readable and concise. Use headings and subheadings to guide the user.
+
+Reflect brand voice: confident, forward-thinking, and service-oriented.
+
