@@ -81,9 +81,9 @@ export default function HeroSection() {
         
         {/* Subtitle - Simplified */}
         <p className={`text-lg sm:text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed transform transition-all duration-1000 delay-400 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          Premium solar panels, inverters & maintenance services.
+          Save ₦50,000+ monthly on electricity bills.
           <br />
-          <span className="text-[hsl(19,100%,58%)] font-semibold">Transform your energy future with Jumiami Solar</span>
+          <span className="text-[hsl(19,100%,58%)] font-semibold">Get 25-year warranty + 40% ROI in 3 years</span>
         </p>
         
         {/* Stats - Cleaner Grid */}
@@ -114,7 +114,7 @@ export default function HeroSection() {
               className="group bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] hover:from-[hsl(47,100%,63%)] hover:to-[hsl(19,100%,58%)] text-white px-8 py-4 text-lg font-bold shadow-2xl hover:shadow-[hsl(19,100%,58%)]/25 transition-all duration-300 transform hover:scale-105"
             >
               <Zap className="h-5 w-5 mr-2 group-hover:rotate-12 transition-transform" />
-              Get Free Consultation
+              Get Free Quote + ₦50K Discount
             </Button>
           </Link>
           <Link href="/projects">
@@ -124,7 +124,7 @@ export default function HeroSection() {
               className="group border-2 border-white/30 text-white hover:bg-white hover:text-slate-900 px-8 py-4 text-lg font-semibold backdrop-blur-sm transition-all duration-300 transform hover:scale-105"
             >
               <Play className="h-5 w-5 mr-2 group-hover:translate-x-1 transition-transform" />
-              View Our Projects
+              See Real Customer Savings
             </Button>
           </Link>
         </div>
@@ -133,15 +133,15 @@ export default function HeroSection() {
         <div className={`mt-8 flex flex-wrap justify-center items-center gap-4 text-gray-400 text-sm transform transition-all duration-1000 delay-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <div className="flex items-center space-x-2 bg-white/5 backdrop-blur-sm rounded-full px-4 py-2">
             <Shield className="h-4 w-4 text-[hsl(19,100%,58%)]" />
-            <span>Certified Installers</span>
+            <span>25-Year Warranty</span>
           </div>
           <div className="flex items-center space-x-2 bg-white/5 backdrop-blur-sm rounded-full px-4 py-2">
             <Award className="h-4 w-4 text-[hsl(19,100%,58%)]" />
-            <span>5+ Years Experience</span>
+            <span>40% ROI in 3 Years</span>
           </div>
           <div className="flex items-center space-x-2 bg-white/5 backdrop-blur-sm rounded-full px-4 py-2">
             <Sun className="h-4 w-4 text-[hsl(19,100%,58%)]" />
-            <span>Premium Solar Products</span>
+            <span>₦50K Monthly Savings</span>
           </div>
         </div>
       </div>

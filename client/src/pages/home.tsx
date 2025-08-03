@@ -27,7 +27,7 @@ export default function Home() {
               </h2>
               
               <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
-                Jumiami Solar is Nigeria's most trusted solar energy company, serving Lagos, Ilorin, and Abeokuta with premium solar solutions. We've completed over 1000 installations across Nigeria, helping homes and businesses switch to clean, reliable solar power. Our expert team provides solar panel installation, inverters, batteries, and maintenance services throughout Nigeria.
+                Jumiami Solar helps Nigerian homes and businesses save ₦50,000+ monthly on electricity bills. Our solar systems pay for themselves in 3-4 years with 40% ROI. We offer 25-year panel warranties, 5-year inverter warranties, and 0% interest financing. Serving Lagos, Ilorin, and Abeokuta with premium solar panels, inverters, and maintenance services.
               </p>
               
               <div className="space-y-6">
@@ -36,8 +36,8 @@ export default function Home() {
                     <Award className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg sm:text-xl font-semibold text-[hsl(0,0%,10%)] mb-2">Premium Solar Products Nigeria</h3>
-                    <p className="text-gray-600 text-sm sm:text-base">Top-quality solar panels, inverters, and batteries from trusted global manufacturers. Best solar equipment in Lagos, Ilorin, and Abeokuta.</p>
+                    <h3 className="text-lg sm:text-xl font-semibold text-[hsl(0,0%,10%)] mb-2">Save ₦50,000+ Monthly on Bills</h3>
+                    <p className="text-gray-600 text-sm sm:text-base">Our solar systems reduce electricity costs by 80-90%. Average customer saves ₦50,000+ monthly with 40% ROI in 3 years.</p>
                   </div>
                 </div>
                 
@@ -46,8 +46,8 @@ export default function Home() {
                     <Settings className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg sm:text-xl font-semibold text-[hsl(0,0%,10%)] mb-2">Expert Solar Installation Nigeria</h3>
-                    <p className="text-gray-600 text-sm sm:text-base">Certified solar technicians ensuring safe, efficient installations across Nigeria. Professional solar panel installation in Lagos, Ilorin, and Abeokuta.</p>
+                    <h3 className="text-lg sm:text-xl font-semibold text-[hsl(0,0%,10%)] mb-2">25-Year Warranty + 0% Interest Financing</h3>
+                    <p className="text-gray-600 text-sm sm:text-base">Premium solar panels with 25-year warranty. Flexible payment plans with 0% interest for qualified customers.</p>
                   </div>
                 </div>
                 
@@ -56,8 +56,8 @@ export default function Home() {
                     <Wrench className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg sm:text-xl font-semibold text-[hsl(0,0%,10%)] mb-2">Solar Maintenance & Support</h3>
-                    <p className="text-gray-600 text-sm sm:text-base">24/7 solar maintenance and support across Nigeria. Keep your solar system running at peak performance with our expert team.</p>
+                    <h3 className="text-lg sm:text-xl font-semibold text-[hsl(0,0%,10%)] mb-2">Free Installation + 2 Years Maintenance</h3>
+                    <p className="text-gray-600 text-sm sm:text-base">Professional installation included. 2 years free maintenance and 24/7 support to keep your system running optimally.</p>
                   </div>
                 </div>
               </div>
@@ -107,10 +107,10 @@ export default function Home() {
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {[
-              { icon: Award, title: "Quality Products", desc: "Premium solar panels, inverters, and batteries from world-class manufacturers with proven track records.", delay: 0 },
-              { icon: Settings, title: "Professional Installation", desc: "Certified technicians with extensive experience in Nigerian conditions ensure safe, efficient installations.", delay: 200 },
-              { icon: Calendar, title: "4+ Years Expertise", desc: "Four years of experience serving Lagos, Ilorin, and Abeokuta with consistent excellence.", delay: 400 },
-              { icon: Wrench, title: "Comprehensive Maintenance", desc: "Complete after-sales support including regular maintenance, repairs, and system optimization.", delay: 600 }
+              { icon: Award, title: "₦50K Monthly Savings", desc: "Our solar systems reduce electricity costs by 80-90%. Average customer saves ₦50,000+ monthly on utility bills.", delay: 0 },
+              { icon: Settings, title: "40% ROI in 3 Years", desc: "Solar systems pay for themselves in 3-4 years. Get 40% return on investment with our proven installations.", delay: 200 },
+              { icon: Calendar, title: "25-Year Warranty", desc: "Premium solar panels with 25-year performance warranty. 5-year inverter warranty for complete peace of mind.", delay: 400 },
+              { icon: Wrench, title: "0% Interest Financing", desc: "Flexible payment plans with 0% interest for qualified customers. Make solar accessible to everyone.", delay: 600 }
             ].map((item, index) => (
               <div key={index} className={`text-center group transform transition-all duration-1000 delay-${item.delay} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
                 <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 animate-glow">
@@ -126,9 +126,9 @@ export default function Home() {
           <div className={`mt-12 sm:mt-16 bg-white rounded-3xl p-8 sm:p-12 transform transition-all duration-1000 delay-800 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               {[
-                { icon: ShieldCheck, title: "Warranty Protection", desc: "Comprehensive warranties on all products and installations for complete peace of mind." },
-                { icon: Clock, title: "24/7 Support", desc: "Round-the-clock customer support and emergency response for critical issues." },
-                { icon: DollarSign, title: "Flexible Payment", desc: "Multiple payment options and financing solutions to make solar accessible to everyone." }
+                { icon: ShieldCheck, title: "Free Installation", desc: "Professional installation included in all packages. No hidden fees or additional charges." },
+                { icon: Clock, title: "2 Years Free Maintenance", desc: "Complete maintenance package for 2 years. 24/7 support and emergency response included." },
+                { icon: DollarSign, title: "₦50K Discount Available", desc: "Special discount for first-time customers. Limited time offer - save ₦50,000 on your installation." }
               ].map((item, index) => (
                 <div key={index} className="flex items-start space-x-4 group">
                   <div className="w-12 h-12 bg-[hsl(19,100%,58%)] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -152,7 +152,7 @@ export default function Home() {
             Ready to Go <span className="text-[hsl(19,100%,58%)]">Solar?</span>
           </h2>
           <p className={`text-lg sm:text-xl text-gray-300 mb-8 sm:mb-12 max-w-3xl mx-auto transform transition-all duration-1000 delay-400 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            Join hundreds of satisfied customers who have made the switch to clean, reliable solar energy. Get your free consultation today.
+            Join hundreds of satisfied customers saving ₦50,000+ monthly. Get your free quote today and save ₦50,000 on installation.
           </p>
           <div className={`flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center transform transition-all duration-1000 delay-600 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <Link href="/contact">
@@ -160,7 +160,7 @@ export default function Home() {
                 size="lg"
                 className="group bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] hover:from-[hsl(47,100%,63%)] hover:to-[hsl(19,100%,58%)] text-white px-8 sm:px-10 py-4 text-lg font-semibold shadow-2xl hover:shadow-[hsl(19,100%,58%)]/25 transition-all duration-300 transform hover:scale-105"
               >
-                Get Free Consultation
+                Get Free Quote + ₦50K Discount
                 <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
@@ -170,7 +170,7 @@ export default function Home() {
                 size="lg"
                 className="group border-2 border-white/30 text-white hover:bg-white hover:text-[hsl(0,0%,10%)] px-8 sm:px-10 py-4 text-lg font-semibold backdrop-blur-sm transition-all duration-300 transform hover:scale-105"
               >
-                View Products
+                See Customer Savings
                 <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
