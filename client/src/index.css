@@ -24,11 +24,15 @@
   --ring: hsl(26, 14.3%, 4.1%);
   --radius: 0.5rem;
   
-  /* Jumiami Solar Brand Colors */
-  --brand-orange: hsl(19, 100%, 58%);
-  --brand-yellow: hsl(47, 100%, 63%);
-  --deep-charcoal: hsl(0, 0%, 10%);
-  --electric-yellow: hsl(47, 100%, 63%);
+  /* Jumiami Solar Brand Colors - Unified */
+  --brand-primary: hsl(19, 100%, 58%); /* Orange */
+  --brand-secondary: hsl(47, 100%, 63%); /* Yellow */
+  --brand-dark: hsl(0, 0%, 10%); /* Deep Charcoal */
+  --brand-light: hsl(0, 0%, 98%); /* Off White */
+  --brand-accent: hsl(19, 100%, 58%); /* Primary Orange */
+  --brand-success: hsl(142, 76%, 36%); /* Green for success */
+  --brand-warning: hsl(47, 100%, 63%); /* Yellow for warnings */
+  --brand-error: hsl(0, 84%, 60%); /* Red for errors */
 }
 
 .dark {

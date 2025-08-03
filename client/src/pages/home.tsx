@@ -18,7 +18,7 @@ export default function Home() {
       
       {/* About Preview Section */}
       <section className="py-16 sm:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className={`${isVisible ? 'opacity-100' : 'opacity-0'}`}>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[hsl(0,0%,10%)] mb-6 lg:mb-8 font-serif">
@@ -32,7 +32,7 @@ export default function Home() {
               
               <div className="space-y-6">
                 <div className="flex items-start space-x-4 group">
-                  <div className="w-12 h-12 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 bg-[hsl(19,100%,58%)] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                     <Award className="h-6 w-6 text-white" />
                   </div>
                   <div>
@@ -42,7 +42,7 @@ export default function Home() {
                 </div>
                 
                 <div className="flex items-start space-x-4 group">
-                  <div className="w-12 h-12 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 bg-[hsl(19,100%,58%)] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                     <Settings className="h-6 w-6 text-white" />
                   </div>
                   <div>
@@ -52,7 +52,7 @@ export default function Home() {
                 </div>
                 
                 <div className="flex items-start space-x-4 group">
-                  <div className="w-12 h-12 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 bg-[hsl(19,100%,58%)] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                     <Wrench className="h-6 w-6 text-white" />
                   </div>
                   <div>
@@ -73,21 +73,21 @@ export default function Home() {
             </div>
             
             <div className={`relative ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-              <div className="rounded-2xl shadow-2xl w-full h-64 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] flex items-center justify-center">
+              <div className="rounded-2xl shadow-xl w-full h-64 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(19,100%,50%)] flex items-center justify-center">
                 <div className="text-white text-center">
                   <div className="text-4xl font-bold mb-2">Solar Installation</div>
                   <div className="text-lg opacity-90">Professional & Reliable</div>
                 </div>
               </div>
               
-              <div className="absolute -bottom-6 -left-6 glass-morphism rounded-2xl p-4 sm:p-6 text-white backdrop-blur-sm">
+              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100">
                 <div className="text-2xl sm:text-3xl font-bold text-[hsl(19,100%,58%)] font-serif">500+</div>
-                <div className="text-xs sm:text-sm">Successful Installations</div>
+                <div className="text-xs sm:text-sm text-gray-600">Successful Installations</div>
               </div>
               
-              <div className="absolute -top-6 -right-6 glass-morphism rounded-2xl p-4 sm:p-6 text-white backdrop-blur-sm">
-                <div className="text-2xl sm:text-3xl font-bold text-[hsl(47,100%,63%)] font-serif">4+</div>
-                <div className="text-xs sm:text-sm">Years Experience</div>
+              <div className="absolute -top-6 -right-6 bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100">
+                <div className="text-2xl sm:text-3xl font-bold text-[hsl(19,100%,58%)] font-serif">4+</div>
+                <div className="text-xs sm:text-sm text-gray-600">Years Experience</div>
               </div>
             </div>
           </div>
@@ -95,8 +95,8 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold text-[hsl(0,0%,10%)] mb-6 font-serif ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
               Why Choose <span className="text-[hsl(19,100%,58%)]">Jumiami Solar</span>
@@ -113,9 +113,9 @@ export default function Home() {
               { icon: Calendar, title: "25-Year Warranty", desc: "Premium solar panels with 25-year performance warranty. 5-year inverter warranty for complete peace of mind." },
               { icon: Wrench, title: "0% Interest Financing", desc: "Flexible payment plans with 0% interest for qualified customers. Make solar accessible to everyone." }
             ].map((item, index) => (
-              <div key={index} className={`text-center group ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-                <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
-                  <item.icon className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
+              <div key={index} className={`text-center group bg-white rounded-xl p-6 shadow-sm border border-gray-100 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+                <div className="w-16 h-16 bg-[hsl(19,100%,58%)] rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
+                  <item.icon className="h-8 w-8 text-white" />
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-[hsl(0,0%,10%)] mb-4">{item.title}</h3>
                 <p className="text-gray-600 text-sm sm:text-base">{item.desc}</p>
@@ -124,7 +124,7 @@ export default function Home() {
           </div>
           
           {/* Additional Benefits */}
-          <div className={`mt-12 sm:mt-16 bg-white rounded-3xl p-8 sm:p-12 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <div className={`mt-12 sm:mt-16 bg-white rounded-2xl p-8 sm:p-12 shadow-sm border border-gray-100 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               {[
                 { icon: ShieldCheck, title: "Free Installation", desc: "Professional installation included in all packages. No hidden fees or additional charges." },
@@ -147,7 +147,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-[hsl(0,0%,10%)] via-slate-900 to-[hsl(0,0%,10%)] text-white">
+      <section className="py-16 sm:py-20 bg-[hsl(0,0%,10%)] text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
             Ready to Go <span className="text-[hsl(19,100%,58%)]">Solar?</span>
@@ -159,7 +159,7 @@ export default function Home() {
             <Link href="/contact" aria-label="Get free quote and ₦50K discount">
               <Button 
                 size="lg"
-                className="group bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] hover:from-[hsl(47,100%,63%)] hover:to-[hsl(19,100%,58%)] text-white px-8 sm:px-10 py-4 text-lg font-semibold shadow-2xl hover:shadow-[hsl(19,100%,58%)]/25 transition-all duration-300 transform hover:scale-105 min-h-[48px] min-w-[48px]"
+                className="group bg-[hsl(19,100%,58%)] hover:bg-[hsl(19,100%,50%)] text-white px-8 sm:px-10 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 min-h-[48px] min-w-[48px]"
               >
                 Get Free Quote + ₦50K Discount
                 <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
