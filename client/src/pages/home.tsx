@@ -16,6 +16,30 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       <HeroSection />
       
+      {/* Statistics Section */}
+      <section className="py-12 bg-slate-900">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+            <div className="bg-slate-800 text-white p-4 sm:p-6 rounded-xl text-center card-hover-lift">
+              <div className="text-2xl sm:text-3xl font-bold text-orange-400 mb-2">500+</div>
+              <div className="text-gray-300 text-sm sm:text-base">Installations</div>
+            </div>
+            <div className="bg-slate-800 text-white p-4 sm:p-6 rounded-xl text-center card-hover-lift">
+              <div className="text-2xl sm:text-3xl font-bold text-orange-400 mb-2">4.8/5</div>
+              <div className="text-gray-300 text-sm sm:text-base">Rating</div>
+            </div>
+            <div className="bg-slate-800 text-white p-4 sm:p-6 rounded-xl text-center card-hover-lift">
+              <div className="text-2xl sm:text-3xl font-bold text-orange-400 mb-2">₦50K+</div>
+              <div className="text-gray-300 text-sm sm:text-base">Monthly Savings</div>
+            </div>
+            <div className="bg-slate-800 text-white p-4 sm:p-6 rounded-xl text-center card-hover-lift">
+              <div className="text-2xl sm:text-3xl font-bold text-orange-400 mb-2">25yr</div>
+              <div className="text-gray-300 text-sm sm:text-base">Warranty</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
       {/* Services */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4">
