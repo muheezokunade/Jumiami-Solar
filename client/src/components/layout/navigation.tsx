@@ -66,28 +66,28 @@ export default function Navigation() {
 
   return (
     <>
-      {/* Top Contact Bar - Simplified */}
-      <div className="bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] text-white py-2 px-4 hidden sm:block">
-        <div className="max-w-7xl mx-auto flex justify-between items-center text-sm">
+      {/* Top Contact Bar - Reduced height */}
+      <div className="bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] text-white py-1 px-4 hidden sm:block">
+        <div className="max-w-7xl mx-auto flex justify-between items-center text-xs">
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-2">
-              <Phone className="h-4 w-4" />
+              <Phone className="h-3 w-3" />
               <span className="hidden md:inline">08118887425</span>
               <span className="md:hidden">08118887425</span>
             </div>
             <div className="flex items-center space-x-2">
-              <Mail className="h-4 w-4" />
+              <Mail className="h-3 w-3" />
               <span className="hidden lg:inline">info@jumiamisolar.com</span>
               <span className="lg:hidden">info@jumiamisolar.com</span>
             </div>
           </div>
           <div className="hidden md:block">
-            <span className="font-medium">Free Solar Consultation</span>
+            <span className="font-medium text-xs">Free Solar Consultation</span>
           </div>
         </div>
       </div>
 
-      {/* Main Navigation - Cleaner */}
+      {/* Main Navigation - Reduced height */}
       <nav 
         className={`fixed top-0 w-full z-50 transition-all duration-500 ${
         isScrolled 
@@ -97,18 +97,18 @@ export default function Navigation() {
         style={{ top: isScrolled ? '0' : '0' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 sm:h-20">
-            {/* Logo - Simplified */}
+          <div className="flex justify-between items-center h-12 sm:h-14">
+            {/* Logo - Smaller */}
             <Link href="/" className="flex items-center space-x-3 group">
               <div className="relative">
             <img 
               src={logoImage}
               alt="Jumiami Solar Shop Logo" 
-                  className="h-10 w-auto sm:h-14 transition-all duration-300 group-hover:scale-110"
+                  className="h-8 w-auto sm:h-10 transition-all duration-300 group-hover:scale-110"
             />
               </div>
               <div>
-                <h1 className="text-lg sm:text-xl font-bold text-[hsl(0,0%,10%)]">Jumiami Solar</h1>
+                <h1 className="text-base sm:text-lg font-bold text-[hsl(0,0%,10%)]">Jumiami Solar</h1>
                 <p className="text-xs text-[hsl(19,100%,58%)] font-medium">Sustainable Energy</p>
               </div>
           </Link>
@@ -119,7 +119,7 @@ export default function Navigation() {
               <Link 
                 key={item.href} 
                 href={item.href}
-                  className={`relative px-3 py-2 rounded-lg font-medium transition-all duration-300 group ${
+                  className={`relative px-3 py-1.5 rounded-lg font-medium transition-all duration-300 group ${
                   location === item.href 
                       ? "text-[hsl(19,100%,58%)] bg-[hsl(19,100%,58%)]/10" 
                       : "text-[hsl(0,0%,10%)] hover:text-[hsl(19,100%,58%)] hover:bg-[hsl(19,100%,58%)]/5"
@@ -133,10 +133,10 @@ export default function Navigation() {
             ))}
           </div>
           
-            {/* CTA Button - Simplified */}
+            {/* CTA Button - Smaller */}
             <div className="hidden md:flex items-center space-x-4">
               <Button 
-                className="bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] hover:from-[hsl(47,100%,63%)] hover:to-[hsl(19,100%,58%)] text-white font-semibold px-6 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                className="bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] hover:from-[hsl(47,100%,63%)] hover:to-[hsl(19,100%,58%)] text-white font-semibold px-4 py-1.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm"
               >
                 Get Quote
               </Button>
@@ -161,17 +161,17 @@ export default function Navigation() {
             </SheetTrigger>
               <SheetContent side="right" className="w-full sm:w-[400px] bg-white/95 backdrop-blur-xl border-l border-gray-200 p-0" style={{ zIndex: 9999 }}>
                 <div className="flex flex-col h-full relative">
-                  {/* Mobile Header - Simplified */}
-                  <div className="flex items-center justify-between py-4 px-6 border-b border-gray-200 bg-gradient-to-r from-[hsl(19,100%,58%)]/5 to-[hsl(47,100%,63%)]/5 relative">
+                  {/* Mobile Header - Smaller */}
+                  <div className="flex items-center justify-between py-3 px-6 border-b border-gray-200 bg-gradient-to-r from-[hsl(19,100%,58%)]/5 to-[hsl(47,100%,63%)]/5 relative">
                     <div className="flex items-center space-x-3">
                       <img 
                         src={logoImage}
                         alt="Jumiami Solar Shop Logo" 
-                        className="h-12 w-auto"
+                        className="h-10 w-auto"
                       />
                       <div>
-                        <h2 className="text-lg font-bold text-[hsl(0,0%,10%)]">Jumiami Solar</h2>
-                        <p className="text-sm text-[hsl(19,100%,58%)] font-medium">Sustainable Energy</p>
+                        <h2 className="text-base font-bold text-[hsl(0,0%,10%)]">Jumiami Solar</h2>
+                        <p className="text-xs text-[hsl(19,100%,58%)] font-medium">Sustainable Energy</p>
                       </div>
                     </div>
                     <Button 
@@ -182,7 +182,7 @@ export default function Navigation() {
                       aria-label="Close mobile menu"
                       style={{ position: 'relative', zIndex: 10000 }}
                     >
-                      <X className="h-6 w-6" />
+                      <X className="h-5 w-5" />
                     </Button>
                   </div>
 
@@ -196,7 +196,7 @@ export default function Navigation() {
                     key={item.href} 
                     href={item.href}
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className={`flex items-center justify-between px-4 py-3 rounded-xl font-medium transition-all duration-300 touch-manipulation ${
+                            className={`flex items-center justify-between px-4 py-2.5 rounded-xl font-medium transition-all duration-300 touch-manipulation ${
                       location === item.href 
                                 ? "bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] text-white shadow-lg" 
                                 : "text-[hsl(0,0%,10%)] hover:bg-[hsl(19,100%,58%)]/10 hover:text-[hsl(19,100%,58%)] active:bg-[hsl(19,100%,58%)]/20"
@@ -204,10 +204,10 @@ export default function Navigation() {
                             style={{ animationDelay: `${index * 50}ms` }}
                           >
                             <div className="flex items-center space-x-3">
-                              <IconComponent className="h-5 w-5 flex-shrink-0" />
-                              <span className="text-base">{item.label}</span>
+                              <IconComponent className="h-4 w-4 flex-shrink-0" />
+                              <span className="text-sm">{item.label}</span>
                             </div>
-                            <ChevronRight className="h-4 w-4 opacity-60" />
+                            <ChevronRight className="h-3 w-3 opacity-60" />
                   </Link>
                         );
                       })}
@@ -216,19 +216,19 @@ export default function Navigation() {
                     {/* Quick Actions - Simplified */}
                     <div className="mt-6 px-2">
                       <div className="bg-gradient-to-r from-[hsl(19,100%,58%)]/10 to-[hsl(47,100%,63%)]/10 rounded-xl p-4">
-                        <h3 className="font-semibold text-[hsl(0,0%,10%)] mb-3">Quick Actions</h3>
+                        <h3 className="font-semibold text-[hsl(0,0%,10%)] mb-3 text-sm">Quick Actions</h3>
                         <div className="space-y-2">
                           <Button 
-                            className="w-full bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] hover:from-[hsl(47,100%,63%)] hover:to-[hsl(19,100%,58%)] text-white font-semibold py-3 rounded-xl shadow-lg touch-manipulation"
+                            className="w-full bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] hover:from-[hsl(47,100%,63%)] hover:to-[hsl(19,100%,58%)] text-white font-semibold py-2 rounded-xl shadow-lg touch-manipulation text-sm"
                           >
-                            <PhoneCall className="h-4 w-4 mr-2" />
+                            <PhoneCall className="h-3 w-3 mr-2" />
                             Call Now
                           </Button>
                           <Button 
                             variant="outline"
-                            className="w-full border-[hsl(19,100%,58%)] text-[hsl(19,100%,58%)] hover:bg-[hsl(19,100%,58%)]/10 font-semibold py-3 rounded-xl touch-manipulation"
+                            className="w-full border-[hsl(19,100%,58%)] text-[hsl(19,100%,58%)] hover:bg-[hsl(19,100%,58%)]/10 font-semibold py-2 rounded-xl touch-manipulation text-sm"
                           >
-                            <Mail className="h-4 w-4 mr-2" />
+                            <Mail className="h-3 w-3 mr-2" />
                             Send Email
                           </Button>
                         </div>
@@ -238,7 +238,7 @@ export default function Navigation() {
                     {/* Social Media Links - Organized */}
                     <div className="mt-6 px-2">
                       <div className="bg-gradient-to-r from-gray-50 to-slate-50 rounded-xl p-4">
-                        <h3 className="font-semibold text-[hsl(0,0%,10%)] mb-3">Follow Us</h3>
+                        <h3 className="font-semibold text-[hsl(0,0%,10%)] mb-3 text-sm">Follow Us</h3>
                         <div className="grid grid-cols-2 gap-2">
                           {socialMediaLinks.map((social) => {
                             const IconComponent = social.icon;
@@ -250,8 +250,8 @@ export default function Navigation() {
                                 rel="noopener noreferrer"
                                 className="flex items-center space-x-2 p-2 rounded-lg hover:bg-[hsl(19,100%,58%)]/10 transition-colors"
                               >
-                                <IconComponent className="h-4 w-4 text-[hsl(19,100%,58%)]" />
-                                <span className="text-sm text-[hsl(0,0%,10%)]">{social.name}</span>
+                                <IconComponent className="h-3 w-3 text-[hsl(19,100%,58%)]" />
+                                <span className="text-xs text-[hsl(0,0%,10%)]">{social.name}</span>
                               </a>
                             );
                           })}
@@ -261,17 +261,17 @@ export default function Navigation() {
                   </div>
 
                   {/* Mobile Footer - Simplified */}
-                  <div className="border-t border-gray-200 pt-4 px-6 pb-6 bg-gray-50/50">
+                  <div className="border-t border-gray-200 pt-3 px-6 pb-4 bg-gray-50/50">
                     <div className="space-y-2">
-                      <div className="flex items-center space-x-2 text-sm text-gray-600">
-                        <Phone className="h-4 w-4" />
+                      <div className="flex items-center space-x-2 text-xs text-gray-600">
+                        <Phone className="h-3 w-3" />
                         <span>08118887425</span>
                       </div>
-                      <div className="flex items-center space-x-2 text-sm text-gray-600">
-                        <Mail className="h-4 w-4" />
+                      <div className="flex items-center space-x-2 text-xs text-gray-600">
+                        <Mail className="h-3 w-3" />
                         <span>info@jumiamisolar.com</span>
                       </div>
-                      <div className="text-xs text-gray-500 text-center pt-2">
+                      <div className="text-xs text-gray-500 text-center pt-1">
                         <p>Free consultation available</p>
                       </div>
                     </div>
