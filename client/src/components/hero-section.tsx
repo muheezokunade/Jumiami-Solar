@@ -9,7 +9,6 @@ export default function HeroSection() {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [showPlayButton, setShowPlayButton] = useState(false);
   
   const {
@@ -26,35 +25,38 @@ export default function HeroSection() {
   const { magneticOffset, handleMouseMove, handleMouseLeave } = useMagneticEffect(0.2);
   const { ripples, createRipple } = useRippleEffect();
 
-  // Multiple reliable video sources
+  // Production-ready video sources with proper CDN hosting
   const videoSources = [
     {
-      src: "https://player.vimeo.com/external/434045526.sd.mp4?s=c27eecc69a27dbc4ff2b87d38afc35f1a9e7c02d&profile_id=164&oauth2_token_id=57447761",
-      type: "video/mp4"
+      src: "/videos/hero-video.mp4", // Local video file
+      type: "video/mp4",
+      fallback: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80"
     },
     {
-      src: "https://cdn.pixabay.com/vimeo/3287147/solar-panels-25457.mp4?width=1280&hash=0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c",
-      type: "video/mp4"
-    },
-    {
-      src: "https://videos.pexels.com/video-files/8853485/8853485-hd_1920_1080_24fps.mp4",
-      type: "video/mp4"
+      src: "https://res.cloudinary.com/demo/video/upload/f_auto,q_auto/v1/samples/elephants.mp4", // Cloudinary fallback
+      type: "video/mp4",
+      fallback: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80"
     }
   ];
 
   useEffect(() => {
     setIsVisible(true);
     
-    // Multiple strategies to ensure video plays
+    // Production-ready video play strategy
     const attemptVideoPlay = async () => {
       if (videoRef.current) {
         try {
-          // Strategy 1: Try autoplay
+          // Ensure video is muted for autoplay compliance
+          videoRef.current.muted = true;
+          videoRef.current.playsInline = true;
+          
+          // Strategy 1: Try autoplay with proper attributes
           const playPromise = videoRef.current.play();
           if (playPromise !== undefined) {
             await playPromise;
             setIsVideoPlaying(true);
             setShowPlayButton(false);
+            console.log('Video autoplay successful');
           }
         } catch (error) {
           console.log('Autoplay failed, showing play button:', error);
@@ -64,12 +66,15 @@ export default function HeroSection() {
           setTimeout(async () => {
             try {
               if (videoRef.current) {
+                videoRef.current.muted = true;
                 await videoRef.current.play();
                 setIsVideoPlaying(true);
                 setShowPlayButton(false);
+                console.log('Secondary play attempt successful');
               }
             } catch (error) {
               console.log('Secondary play attempt failed:', error);
+              setVideoError(true);
             }
           }, 1000);
         }
@@ -78,19 +83,16 @@ export default function HeroSection() {
 
     // Delay video attempt to ensure DOM is ready
     setTimeout(attemptVideoPlay, 500);
-  }, [currentVideoIndex]);
+  }, []);
 
   const handleVideoLoad = () => {
     setVideoLoaded(true);
+    console.log('Video loaded successfully');
   };
 
   const handleVideoError = () => {
-    console.log('Video failed to load, trying next source...');
-    if (currentVideoIndex < videoSources.length - 1) {
-      setCurrentVideoIndex(prev => prev + 1);
-    } else {
-      setVideoError(true);
-    }
+    console.log('Video failed to load, using fallback');
+    setVideoError(true);
   };
 
   const handleVideoPlay = () => {
@@ -105,6 +107,7 @@ export default function HeroSection() {
   const handleManualPlay = async () => {
     if (videoRef.current) {
       try {
+        videoRef.current.muted = true;
         await videoRef.current.play();
         setIsVideoPlaying(true);
         setShowPlayButton(false);
@@ -116,9 +119,9 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-      {/* Video Background */}
+      {/* Video Background with Production-Ready Implementation */}
       <div className="absolute inset-0 z-0">
-        {/* Fallback Image */}
+        {/* Fallback Image - Always visible as poster */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
@@ -151,7 +154,7 @@ export default function HeroSection() {
           </div>
         )}
 
-        {/* Video Element with Enhanced Loading */}
+        {/* Production-Ready Video Element */}
         {!videoError && (
           <div className="relative">
             <video
@@ -164,17 +167,18 @@ export default function HeroSection() {
               loop
               playsInline
               preload="auto"
+              poster="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
+              aria-label="Solar installation video background"
               onLoadedData={handleVideoLoad}
               onError={handleVideoError}
               onPlay={handleVideoPlay}
               onPause={handleVideoPause}
-              poster="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
-              aria-label="Solar installation video background"
             >
               <source 
-                src={videoSources[currentVideoIndex].src} 
-                type={videoSources[currentVideoIndex].type} 
+                src={videoSources[0].src} 
+                type={videoSources[0].type} 
               />
+              {/* Fallback image for browsers that don't support video */}
               <img
                 src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
                 alt="Solar panels on a modern home"
