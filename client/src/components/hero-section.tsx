@@ -1,158 +1,311 @@
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
+import { ArrowRight, Play, CheckCircle } from "lucide-react";
 import { Link } from "wouter";
-import { Phone, Mail, ArrowRight, CheckCircle, Star, Zap, Calculator, Sun, ChevronDown, ChevronDown as ChevronDownIcon, MessageCircle, Shield, TrendingUp, MapPin, Play, Users, Award } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useMicroInteractions } from "@/hooks/use-micro-interactions";
 
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
-  const [monthlyBill, setMonthlyBill] = useState("");
-  const [scrollY, setScrollY] = useState(0);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [showPlayButton, setShowPlayButton] = useState(false);
+  
+  const {
+    useTypingAnimation,
+    useFloatingAnimation,
+    useMagneticEffect,
+    useRippleEffect,
+    handleHover,
+    handleClick
+  } = useMicroInteractions();
+  
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const floatingOffset = useFloatingAnimation(8, 3000);
+  const { magneticOffset, handleMouseMove, handleMouseLeave } = useMagneticEffect(0.2);
+  const { ripples, createRipple } = useRippleEffect();
+
+  // Multiple reliable video sources
+  const videoSources = [
+    {
+      src: "https://player.vimeo.com/external/434045526.sd.mp4?s=c27eecc69a27dbc4ff2b87d38afc35f1a9e7c02d&profile_id=164&oauth2_token_id=57447761",
+      type: "video/mp4"
+    },
+    {
+      src: "https://cdn.pixabay.com/vimeo/3287147/solar-panels-25457.mp4?width=1280&hash=0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c",
+      type: "video/mp4"
+    },
+    {
+      src: "https://videos.pexels.com/video-files/8853485/8853485-hd_1920_1080_24fps.mp4",
+      type: "video/mp4"
+    }
+  ];
 
   useEffect(() => {
     setIsVisible(true);
     
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
+    // Multiple strategies to ensure video plays
+    const attemptVideoPlay = async () => {
+      if (videoRef.current) {
+        try {
+          // Strategy 1: Try autoplay
+          const playPromise = videoRef.current.play();
+          if (playPromise !== undefined) {
+            await playPromise;
+            setIsVideoPlaying(true);
+            setShowPlayButton(false);
+          }
+        } catch (error) {
+          console.log('Autoplay failed, showing play button:', error);
+          setShowPlayButton(true);
+          
+          // Strategy 2: Try with user interaction simulation
+          setTimeout(async () => {
+            try {
+              if (videoRef.current) {
+                await videoRef.current.play();
+                setIsVideoPlaying(true);
+                setShowPlayButton(false);
+              }
+            } catch (error) {
+              console.log('Secondary play attempt failed:', error);
+            }
+          }, 1000);
+        }
+      }
     };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+
+    // Delay video attempt to ensure DOM is ready
+    setTimeout(attemptVideoPlay, 500);
+  }, [currentVideoIndex]);
+
+  const handleVideoLoad = () => {
+    setVideoLoaded(true);
+  };
+
+  const handleVideoError = () => {
+    console.log('Video failed to load, trying next source...');
+    if (currentVideoIndex < videoSources.length - 1) {
+      setCurrentVideoIndex(prev => prev + 1);
+    } else {
+      setVideoError(true);
+    }
+  };
+
+  const handleVideoPlay = () => {
+    setIsVideoPlaying(true);
+    setShowPlayButton(false);
+  };
+
+  const handleVideoPause = () => {
+    setIsVideoPlaying(false);
+  };
+
+  const handleManualPlay = async () => {
+    if (videoRef.current) {
+      try {
+        await videoRef.current.play();
+        setIsVideoPlaying(true);
+        setShowPlayButton(false);
+      } catch (error) {
+        console.log('Manual play failed:', error);
+      }
+    }
+  };
 
   return (
-    <section className="relative min-h-[80vh] flex items-center overflow-hidden pt-4 pb-8" id="hero">
-      {/* Dynamic Background */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+      {/* Video Background */}
       <div className="absolute inset-0 z-0">
-        {/* Mobile: Simple gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 md:hidden"></div>
+        {/* Fallback Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80')`
+          }}
+          role="img"
+          aria-label="Solar panels on a modern home"
+        ></div>
+
+        {/* Animated Background Fallback */}
+        {videoError && (
+          <div className="absolute inset-0 video-fallback">
+            {/* Enhanced animated solar panels */}
+            <div className="absolute inset-0 overflow-hidden">
+              {[...Array(8)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute solar-panel bg-gradient-to-br from-orange-400/30 to-yellow-400/30 rounded-lg"
+                  style={{
+                    left: `${(i * 15) % 100}%`,
+                    top: `${(i * 12) % 100}%`,
+                    width: `${40 + (i % 3) * 20}px`,
+                    height: `${40 + (i % 3) * 20}px`,
+                    animationDelay: `${i * 0.3}s`,
+                    animationDuration: '4s'
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Video Element with Enhanced Loading */}
+        {!videoError && (
+          <div className="relative">
+            <video
+              ref={videoRef}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                videoLoaded && isVideoPlaying ? 'opacity-100' : 'opacity-0'
+              } ${!videoLoaded ? 'video-loading' : ''}`}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              onLoadedData={handleVideoLoad}
+              onError={handleVideoError}
+              onPlay={handleVideoPlay}
+              onPause={handleVideoPause}
+              poster="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
+              aria-label="Solar installation video background"
+            >
+              <source 
+                src={videoSources[currentVideoIndex].src} 
+                type={videoSources[currentVideoIndex].type} 
+              />
+              <img
+                src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
+                alt="Solar panels on a modern home"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </video>
+            
+            {/* Manual Play Button with Enhanced Styling */}
+            {showPlayButton && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+                <Button
+                  onClick={handleManualPlay}
+                  className="bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 border border-white/30 px-8 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px] group hero-animate-glow"
+                >
+                  <Play className="mr-3 h-6 w-6" />
+                  Play Video
+                </Button>
+              </div>
+            )}
+            
+            {/* Loading Indicator */}
+            {!videoLoaded && !videoError && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                <div className="text-white text-center">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
+                  <p className="text-lg font-light">Loading video...</p>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
         
-        {/* Desktop: Enhanced background with solar elements */}
-        <div className="absolute inset-0 hidden md:block">
-          {/* Solar Background Image */}
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-            {/* Solar panels image overlay */}
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI4MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDgwMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxwYXR0ZXJuIGlkPSJzb2xhci1wYW5lbHMiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSIxMDAiIGhlaWdodD0iNjAiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSgxNSkiPgogICAgICA8cmVjdCB3aWR0aD0iNDUiIGhlaWdodD0iMzAiIGZpbGw9IiMzNEE4NTMiIG9wYWNpdHk9IjAuMSIvPgogICAgICA8cmVjdCB4PSI1MCIgd2lkdGg9IjQ1IiBoZWlnaHQ9IjMwIiBmaWxsPSIjMzRBODUzIiBvcGFjaXR5PSIwLjEiLz4KICAgICAgPHJlY3QgeT0iMzUiIHdpZHRoPSI0NSIgaGVpZ2h0PSIzMCIgZmlsbD0iIzM0QTg1MyIgb3BhY2l0eT0iMC4xIi8+CiAgICAgIDxyZWN0IHg9IjUwIiB5PSIzNSIgd2lkdGg9IjQ1IiBoZWlnaHQ9IjMwIiBmaWxsPSIjMzRBODUzIiBvcGFjaXR5PSIwLjEiLz4KICAgIDwvcGF0dGVybj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNzb2xhci1wYW5lbHMpIi8+Cjwvc3ZnPgo=')] opacity-20"></div>
-          </div>
-          
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/40"></div>
-          
-          {/* Sun Rays Effect */}
-          <div className="absolute top-0 right-0 w-96 h-96 opacity-30">
-            <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-yellow-400/30 via-orange-400/20 to-transparent rounded-full blur-3xl"></div>
-            <div className="absolute top-4 right-4 w-32 h-32 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full blur-2xl animate-pulse"></div>
-          </div>
-          
-          {/* Floating Solar Elements */}
-          <div className="absolute inset-0 opacity-15">
-            <div className="absolute top-32 left-32 w-24 h-16 bg-gradient-to-r from-blue-400/30 to-cyan-400/30 rounded-lg transform rotate-12"></div>
-            <div className="absolute top-48 right-48 w-20 h-12 bg-gradient-to-r from-blue-400/30 to-cyan-400/30 rounded-lg transform -rotate-6"></div>
-            <div className="absolute bottom-32 left-48 w-28 h-18 bg-gradient-to-r from-blue-400/30 to-cyan-400/30 rounded-lg transform rotate-3"></div>
-            <div className="absolute bottom-48 right-32 w-16 h-10 bg-gradient-to-r from-blue-400/30 to-cyan-400/30 rounded-lg transform -rotate-12"></div>
-          </div>
-          
-          {/* Glowing Orbs */}
-          <div className="absolute inset-0">
-            <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-br from-orange-400/20 to-yellow-400/20 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute top-40 right-40 w-24 h-24 bg-gradient-to-br from-orange-400/20 to-yellow-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-            <div className="absolute bottom-40 left-40 w-20 h-20 bg-gradient-to-br from-orange-400/20 to-yellow-400/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
-            <div className="absolute bottom-20 right-20 w-28 h-28 bg-gradient-to-br from-orange-400/20 to-yellow-400/20 rounded-full blur-3xl animate-pulse delay-3000"></div>
-          </div>
-        </div>
+        {/* Enhanced overlay with gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
       </div>
 
-      {/* Main Content */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-6 py-16 text-center mobile-optimized">
-        
-        {/* Premium Solutions Badge */}
-        <div className={`mb-4 sm:mb-6 transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <div className="inline-flex items-center space-x-2 sm:space-x-3 bg-slate-800 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium text-xs sm:text-sm">
-            <Sun className="h-3 w-3 sm:h-4 sm:w-4 text-orange-400" />
-            <span>Premium Solar Solutions</span>
-            <span className="text-gray-400 hidden sm:inline">•</span>
-            <span className="text-gray-300 text-xs sm:text-sm">Lagos • Ilorin • Abeokuta</span>
-          </div>
-        </div>
-
-        {/* Main Headline - Strengthened text hierarchy */}
-        <div className={`mb-3 sm:mb-4 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-3 sm:mb-4 max-w-[18ch] mx-auto">
-            Power Your Future<br/>
-            <span className="bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">
-              With Solar ☀️
-            </span>
+      {/* Tesla-style Content */}
+      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+        <div className={`transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          {/* Tesla-style Large Headline */}
+          <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light text-white mb-8 tracking-tight leading-none">
+            Powering Nigeria's
+            <br />
+            <span className="text-orange-400">Solar Revolution</span>
           </h1>
-        </div>
-        
-        {/* Sub-headline - Limited width for legibility */}
-        <div className={`mb-4 sm:mb-6 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <p className="text-base sm:text-lg text-white mb-2 sm:mb-3 max-w-[16ch] mx-auto text-center">
-            Transform your energy bills with{" "}
-            <span className="bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent font-semibold">
-              ₦50,000+
-            </span>{" "}
-            monthly savings
-          </p>
-          <p className="text-sm sm:text-base text-gray-300 max-w-[16ch] mx-auto text-center">
-            25-year warranty • 40% ROI • 0% interest financing
-          </p>
-        </div>
 
-        {/* CTA Section - Reordered and restyled */}
-        <div className={`mb-4 sm:mb-6 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-center mb-4">
-            <div className="relative w-full sm:w-auto">
-              <label htmlFor="monthly-bill" className="sr-only">Enter your monthly bill</label>
-              <input 
-                id="monthly-bill"
-                type="text" 
-                value={monthlyBill}
-                onChange={(e) => setMonthlyBill(e.target.value)}
-                className="w-full sm:w-48 px-4 py-3 border-2 border-gray-300 rounded-xl bg-white text-gray-700 placeholder-gray-500 focus:outline-none focus:border-orange-400 transition-colors duration-200 text-base font-medium min-h-[48px] touch-manipulation mobile-touch-target"
-                placeholder="Enter your monthly bill"
-                aria-label="Monthly bill amount in Naira"
-              />
-            </div>
+          {/* Tesla-style Subtitle */}
+          <p className="text-xl sm:text-2xl md:text-3xl text-white/90 font-light mb-8 max-w-4xl mx-auto tracking-wide">
+            Premium solar panels, inverters & maintenance services.
+          </p>
+
+          {/* Additional subtitle */}
+          <p className="text-lg sm:text-xl text-white/80 font-light mb-12 max-w-3xl mx-auto tracking-wide">
+            Transform your energy future with Jumiami Solar
+          </p>
+
+          {/* Tesla-style Simple CTA */}
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Button 
               size="lg"
-              className="w-full sm:w-auto bg-gradient-to-r from-orange-400 to-yellow-400 hover:from-yellow-400 hover:to-orange-400 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 rounded-xl hero-button-glow min-h-[48px] touch-manipulation mobile-touch-target"
+              className="bg-white text-black hover:bg-gray-100 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px] group relative overflow-hidden"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              onClick={(e) => {
+                handleClick('order-button');
+                createRipple(e);
+              }}
+              style={{
+                transform: `translate(${magneticOffset.x}px, ${magneticOffset.y}px)`
+              }}
             >
-              <Calculator className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-              Get Free Quote
+              {/* Ripple effects */}
+              {ripples.map(ripple => (
+                <span
+                  key={ripple.id}
+                  className="absolute bg-white/30 rounded-full animate-ping"
+                  style={{
+                    left: ripple.x,
+                    top: ripple.y,
+                    width: '20px',
+                    height: '20px',
+                    transform: 'translate(-50%, -50%)'
+                  }}
+                />
+              ))}
+              Order Now
+              <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
             </Button>
-          </div>
-          
-          {/* Secondary CTA - Surfaced and restyled */}
-          <div className="text-center">
-            <Link href="#calculator" className="inline-flex items-center text-orange-400 hover:text-yellow-400 font-medium text-base sm:text-lg transition-colors duration-200 touch-manipulation min-h-[48px] mobile-touch-target">
-              Calculate your ROI <ArrowRight className="ml-1 h-4 w-4 sm:h-5 sm:w-5" />
+            <Link href="/projects">
+              <Button 
+                variant="outline"
+                size="lg"
+                className="border-2 border-white/30 text-white hover:bg-white hover:text-black px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px] group relative overflow-hidden"
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                onClick={(e) => {
+                  handleClick('portfolio-button');
+                  createRipple(e);
+                }}
+                style={{
+                  transform: `translate(${magneticOffset.x}px, ${magneticOffset.y}px)`
+                }}
+              >
+                {/* Ripple effects */}
+                {ripples.map(ripple => (
+                  <span
+                    key={ripple.id}
+                    className="absolute bg-white/30 rounded-full animate-ping"
+                    style={{
+                      left: ripple.x,
+                      top: ripple.y,
+                      width: '20px',
+                      height: '20px',
+                      transform: 'translate(-50%, -50%)'
+                    }}
+                  />
+                ))}
+                <Play className="mr-3 h-5 w-5" />
+                View Our Portfolio
+              </Button>
             </Link>
           </div>
         </div>
-
-        {/* Contact Information - Phone only on mobile */}
-        <div className={`mb-4 sm:mb-6 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <div className="flex justify-center">
-            <a 
-              href="tel:+2348118887425"
-              className="flex items-center space-x-3 bg-slate-800 text-white px-6 py-3 rounded-lg hover:bg-slate-700 transition-colors duration-200 touch-manipulation min-h-[48px] card-hover-lift mobile-touch-target"
-            >
-              <Phone className="h-5 w-5 text-orange-400 flex-shrink-0" />
-              <span className="font-medium text-base">+234 811 888 7425</span>
-            </a>
-          </div>
-        </div>
-
-
-
-
       </div>
-      
-      {/* Floating WhatsApp - Mobile optimized */}
-      <div className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50">
-        <button className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full p-3 sm:p-4 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center">
-          <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6" />
-        </button>
+
+      {/* Tesla-style Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+        <div className="flex flex-col items-center space-y-2 text-white/60">
+          <span className="text-sm font-light tracking-wide">Scroll</span>
+          <div className="w-px h-8 bg-white/30 animate-pulse"></div>
+        </div>
       </div>
     </section>
   );

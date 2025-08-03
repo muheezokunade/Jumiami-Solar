@@ -23,7 +23,7 @@ export default function PricingPage() {
         "1 Inverter (2kW)",
         "2 Solar Batteries",
         "Professional Installation",
-        "25-Year Panel Warranty",
+        "5-Year Panel Warranty",
         "5-Year Inverter Warranty",
         "2 Years Free Maintenance",
         "Monthly Savings: ₦25,000"
@@ -41,7 +41,7 @@ export default function PricingPage() {
         "1 Inverter (5kW)",
         "4 Solar Batteries",
         "Professional Installation",
-        "25-Year Panel Warranty",
+        "5-Year Panel Warranty",
         "5-Year Inverter Warranty",
         "2 Years Free Maintenance",
         "Monthly Savings: ₦50,000"
@@ -59,7 +59,7 @@ export default function PricingPage() {
         "1 Inverter (10kW)",
         "8 Solar Batteries",
         "Professional Installation",
-        "25-Year Panel Warranty",
+        "5-Year Panel Warranty",
         "5-Year Inverter Warranty",
         "2 Years Free Maintenance",
         "Monthly Savings: ₦80,000"
@@ -227,9 +227,9 @@ export default function PricingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Card className="bg-white shadow-sm border-l-4 border-[hsl(19,100%,58%)]">
               <CardContent className="p-6">
-                <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-3">25-Year Panel Warranty</h3>
+                <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-3">5-Year Panel Warranty</h3>
                 <p className="text-gray-600 mb-4">
-                  Premium solar panels with 25-year performance warranty. Guaranteed to maintain at least 80% efficiency after 25 years.
+                  Premium solar panels with 5-year performance warranty. Guaranteed to maintain at least 80% efficiency after 5 years.
                 </p>
                 <ul className="space-y-2 text-sm text-gray-600">
                   <li>• Performance guarantee for 25 years</li>

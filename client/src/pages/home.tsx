@@ -1,9 +1,10 @@
 import HeroSection from "@/components/hero-section";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
-import { Award, Wrench, Calendar, Settings, ShieldCheck, Clock, DollarSign, MapPin, Phone, Mail, ArrowRight, CheckCircle, Star, Zap, Users, TrendingUp, Building, Factory, Calculator, Shield, Truck, Headphones, ThumbsUp, Quote, HomeIcon } from "lucide-react";
+import { ArrowRight, CheckCircle, Calculator, Phone, TrendingUp, Shield, DollarSign, Award, Users, Star, Zap, Battery, Settings, MapPin, Clock, Wrench, Mail } from "lucide-react";
 import { useState, useEffect } from "react";
+import { AnimatedStats, RealTimeUpdates, InteractiveProgress, AnimatedFeatureList } from "@/components/dynamic-content";
+import { SolarCalculator, SolarSystemSimulator, InteractiveTestimonialCarousel, LiveEnergyMonitor } from "@/components/interactive-elements";
 
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -16,292 +17,520 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       <HeroSection />
       
-      {/* Statistics Section */}
-      <section className="py-12 bg-slate-900">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
-            <div className="bg-slate-800 text-white p-4 sm:p-6 rounded-xl text-center card-hover-lift">
-              <div className="text-2xl sm:text-3xl font-bold text-orange-400 mb-2">500+</div>
-              <div className="text-gray-300 text-sm sm:text-base">Installations</div>
+      {/* Jumiami Trust Signals - Brand Colors */}
+      <section className="py-20 bg-gradient-to-br from-orange-500 via-orange-400 to-yellow-400" aria-labelledby="trust-heading">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 id="trust-heading" className="text-4xl font-light text-white mb-6">
+              Nigeria's Most Trusted Solar Company
+            </h2>
+            <p className="text-xl text-white/90 max-w-2xl mx-auto">
+              The only solar company with NERC certification and ISO 9001:2015 standards
+            </p>
             </div>
-            <div className="bg-slate-800 text-white p-4 sm:p-6 rounded-xl text-center card-hover-lift">
-              <div className="text-2xl sm:text-3xl font-bold text-orange-400 mb-2">4.8/5</div>
-              <div className="text-gray-300 text-sm sm:text-base">Rating</div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {[
+              {
+                title: "NERC Certified",
+                description: "Only solar company approved by Nigerian Electricity Regulatory Commission",
+                icon: Award,
+                number: "1st",
+                ariaLabel: "First NERC certified solar company in Nigeria"
+              },
+              {
+                title: "500+ Families Served",
+                description: "More Nigerian families trust us than any other solar company",
+                icon: Users,
+                number: "500+",
+                ariaLabel: "Over 500 Nigerian families served"
+              },
+              {
+                title: "4.9/5 Customer Rating",
+                description: "Highest customer satisfaction rating in the industry",
+                icon: Star,
+                number: "4.9/5",
+                ariaLabel: "Four point nine out of five customer rating"
+              }
+            ].map((feature, index) => (
+              <div 
+                key={index} 
+                className={`text-center transform transition-all duration-1000 delay-${index * 200} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                role="region"
+                aria-labelledby={`feature-${index}-title`}
+              >
+                <div 
+                  className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-8"
+                  aria-label={feature.ariaLabel}
+                >
+                  <feature.icon className="h-12 w-12 text-white" aria-hidden="true" />
             </div>
-            <div className="bg-slate-800 text-white p-4 sm:p-6 rounded-xl text-center card-hover-lift">
-              <div className="text-2xl sm:text-3xl font-bold text-orange-400 mb-2">₦50K+</div>
-              <div className="text-gray-300 text-sm sm:text-base">Monthly Savings</div>
+                <div className="text-4xl font-light text-white mb-4" aria-label={`${feature.number} ${feature.title}`}>
+                  {feature.number}
             </div>
-            <div className="bg-slate-800 text-white p-4 sm:p-6 rounded-xl text-center card-hover-lift">
-              <div className="text-2xl sm:text-3xl font-bold text-orange-400 mb-2">25yr</div>
-              <div className="text-gray-300 text-sm sm:text-base">Warranty</div>
+                <h3 id={`feature-${index}-title`} className="text-xl font-light text-white mb-4">
+                  {feature.title}
+                </h3>
+                <p className="text-white/90 text-base">
+                  {feature.description}
+                </p>
             </div>
+            ))}
           </div>
         </div>
       </section>
       
-      {/* Services */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4">
+      {/* Quick Product Preview */}
+      <section className="py-20 bg-white" aria-labelledby="products-heading">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Solar Solutions for Every Need
+            <h2 id="products-heading" className="text-4xl font-light text-gray-900 mb-6">
+              Premium Solar Solutions
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From residential rooftops to commercial installations, we provide complete solar solutions across Nigeria
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              High-quality solar products designed for Nigerian homes and businesses
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                icon: HomeIcon,
-                title: "Residential Solar",
-                description: "Complete home solar systems with battery backup. Save ₦30,000-₦80,000 monthly on electricity bills.",
-                features: ["5-10kW Systems", "Battery Backup", "Grid-Tied Options", "Smart Monitoring"],
-                color: "from-blue-500 to-cyan-500"
+                name: "Solar Panels",
+                description: "High-efficiency monocrystalline panels",
+                image: "https://images.pexels.com/photos/371917/pexels-photo-371917.jpeg",
+                icon: Zap,
+                features: ["400W-550W", "5-year warranty", "High efficiency"]
               },
               {
-                icon: Building,
-                title: "Commercial Solar",
-                description: "Large-scale commercial installations for businesses. Reduce operational costs by 60-80%.",
-                features: ["20-100kW Systems", "Industrial Grade", "ROI Calculator", "Maintenance Plans"],
-                color: "from-green-500 to-emerald-500"
+                name: "Hybrid Inverters",
+                description: "Smart grid integration with backup",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGdhHXSe4zey3vJ8Shzf7b535FElelgAKGUQ&s",
+                icon: Settings,
+                features: ["3kW-10kW", "Battery backup", "Smart monitoring"]
               },
               {
-                icon: Factory,
-                title: "Industrial Solar",
-                description: "Heavy-duty solar solutions for factories and manufacturing. Massive cost savings and reliability.",
-                features: ["100kW+ Systems", "Custom Solutions", "24/7 Support", "Performance Guarantee"],
-                color: "from-orange-500 to-red-500"
+                name: "Battery Systems",
+                description: "Lithium-ion energy storage solutions",
+                image: "https://www.energy.gov/sites/default/files/2021-11/35974719113_24cfb03c24_o.jpg",
+                icon: Battery,
+                features: ["5kWh-20kWh", "10-year warranty", "Smart BMS"]
+              },
+              {
+                name: "Mounting Systems",
+                description: "Professional installation hardware",
+                image: "https://images.pexels.com/photos/17489152/pexels-photo-17489152.jpeg",
+                icon: Shield,
+                features: ["Aluminum construction", "Weather resistant", "Easy installation"]
               }
-            ].map((service, index) => (
-              <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-0 bg-white">
-                <CardContent className="p-8">
-                  <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <service.icon className="h-8 w-8 text-white" />
+            ].map((product, index) => (
+              <div 
+                key={index}
+                className={`bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-1000 delay-${index * 200} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                role="article"
+                aria-label={`${product.name} product preview`}
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4">
+                    <product.icon className="h-8 w-8 text-white" aria-hidden="true" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">{service.title}</h3>
-                  <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
-                  <ul className="space-y-3">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-gray-600">
-                        <CheckCircle className="h-4 w-4 text-green-500 mr-3 flex-shrink-0" />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-light text-gray-900 mb-2">{product.name}</h3>
+                  <p className="text-gray-600 mb-4">{product.description}</p>
+                  <ul className="space-y-1">
+                    {product.features.map((feature, idx) => (
+                      <li key={idx} className="text-sm text-gray-500 flex items-center">
+                        <CheckCircle className="h-4 w-4 text-orange-500 mr-2" aria-hidden="true" />
                         {feature}
                       </li>
                     ))}
                   </ul>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              What Our Customers Say
-            </h2>
-            <p className="text-xl text-gray-600">
-              Real stories from satisfied customers across Nigeria
-            </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Adebayo Oke",
-                location: "Lagos",
-                savings: "₦65,000/month",
-                rating: 5,
-                testimonial: "Jumiami Solar transformed our home energy. We went from ₦85,000 monthly bills to ₦20,000. The installation was professional and the system works perfectly.",
-                avatar: "AO"
-              },
-              {
-                name: "Fatima Hassan",
-                location: "Ilorin",
-                savings: "₦45,000/month",
-                rating: 5,
-                testimonial: "Best investment we've made. Our business electricity costs dropped by 70%. The team was knowledgeable and the warranty gives us peace of mind.",
-                avatar: "FH"
-              },
-              {
-                name: "Emeka Okonkwo",
-                location: "Abeokuta",
-                savings: "₦55,000/month",
-                rating: 5,
-                testimonial: "Excellent service from start to finish. The solar system pays for itself and we're saving ₦55,000 monthly. Highly recommend Jumiami Solar!",
-                avatar: "EO"
-              }
-            ].map((testimonial, index) => (
-              <Card key={index} className="bg-gray-50 border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                <CardContent className="p-8">
-                  <div className="flex items-center mb-6">
-                    <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                      {testimonial.avatar}
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                      <p className="text-sm text-gray-600">{testimonial.location}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  
-                  <blockquote className="text-gray-700 mb-6 italic leading-relaxed">
-                    "{testimonial.testimonial}"
-                  </blockquote>
-                  
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm text-gray-600">
-                      <span className="font-semibold text-green-600">{testimonial.savings}</span> savings
-                    </div>
-                    <Quote className="h-5 w-5 text-gray-400" />
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="text-center mt-12">
+            <Link to="/products">
+              <Button 
+                size="lg"
+                className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white hover:from-orange-600 hover:to-yellow-600 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px] group shadow-lg"
+                aria-label="View all solar products and services"
+              >
+                View All Products
+                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Pricing */}
-      <section className="py-20 bg-gray-900 text-white">
-        <div className="max-w-6xl mx-auto px-4">
+      {/* Dynamic Stats Section */}
+      <AnimatedStats />
+
+      {/* Real-time Updates */}
+      <RealTimeUpdates />
+
+      {/* Enhanced Service Areas with Progress Bars */}
+      <section className="py-20 bg-white" aria-labelledby="service-areas-heading">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">
-              Transparent Pricing
+            <h2 id="service-areas-heading" className="text-4xl font-light text-gray-900 mb-6">
+              Service Coverage
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              No hidden fees. Clear pricing with flexible payment options
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              We serve major cities across Nigeria with expanding coverage
             </p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              {
-                title: "Starter Package",
-                price: "₦2.5M",
-                savings: "₦30K/month",
-                features: ["5kW System", "8 Solar Panels", "5kWh Battery", "Inverter Included", "Installation Free", "2-Year Warranty"],
-                popular: false
-              },
-              {
-                title: "Popular Package",
-                price: "₦4.2M",
-                savings: "₦55K/month",
-                features: ["10kW System", "16 Solar Panels", "10kWh Battery", "Smart Inverter", "Free Installation", "5-Year Warranty", "Monitoring App"],
-                popular: true
-              },
-              {
-                title: "Premium Package",
-                price: "₦6.8M",
-                savings: "₦85K/month",
-                features: ["15kW System", "24 Solar Panels", "15kWh Battery", "Hybrid Inverter", "Free Installation", "10-Year Warranty", "24/7 Support"],
-                popular: false
-              }
-            ].map((package_, index) => (
-              <Card key={index} className={`relative ${package_.popular ? 'ring-2 ring-orange-500 bg-white/10' : 'bg-white/5'} border-white/20`}>
-                {package_.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
-                      Most Popular
-                    </span>
+              { city: "Lagos", coverage: 95, projects: 150, rating: 4.9 },
+              { city: "Ilorin", coverage: 88, projects: 85, rating: 4.8 },
+              { city: "Abeokuta", coverage: 92, projects: 120, rating: 4.9 }
+            ].map((area, index) => (
+              <div
+                key={area.city}
+                className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-all duration-300"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-semibold text-gray-900">{area.city}</h3>
+                  <div className="flex items-center">
+                    <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                    <span className="ml-1 text-sm font-medium">{area.rating}</span>
                   </div>
-                )}
-                <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold mb-2">{package_.title}</h3>
-                  <div className="mb-6">
-                    <span className="text-4xl font-bold">{package_.price}</span>
-                    <span className="text-gray-400 ml-2">one-time</span>
-                  </div>
-                  <div className="text-green-400 font-semibold mb-6">
-                    Save {package_.savings}
-                  </div>
-                  <ul className="space-y-3 mb-8">
-                    {package_.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm">
-                        <CheckCircle className="h-4 w-4 text-green-400 mr-3 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button className="w-full bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-yellow-500 hover:to-orange-500 text-white font-semibold py-3 rounded-xl">
-                    Get Free Quote
-                  </Button>
-                </CardContent>
-              </Card>
+                </div>
+                
+                <InteractiveProgress 
+                  percentage={area.coverage} 
+                  label="Service Coverage" 
+                  color="orange"
+                />
+                
+                <div className="flex items-center justify-between text-sm text-gray-600 mt-4">
+                  <span>{area.projects} projects completed</span>
+                  <span>{area.coverage}% coverage</span>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                Why Leading Nigerian Businesses Choose Jumiami Solar
+      {/* Enhanced Installation Process */}
+      <section className="py-20 bg-gray-50" aria-labelledby="installation-heading">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 id="installation-heading" className="text-4xl font-light text-gray-900 mb-6">
+              Simple Installation Process
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              From consultation to completion in just 4 easy steps
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                step: "01",
+                title: "Free Consultation",
+                description: "Expert assessment of your energy needs and site evaluation",
+                features: ["Energy audit", "Site assessment", "Custom quote"]
+              },
+              {
+                step: "02",
+                title: "System Design",
+                description: "Professional design optimized for your specific requirements",
+                features: ["Custom layout", "Efficiency optimization", "Permit assistance"]
+              },
+              {
+                step: "03",
+                title: "Installation",
+                description: "Professional installation by certified technicians",
+                features: ["Expert technicians", "Quality assurance", "Safety compliance"]
+              },
+              {
+                step: "04",
+                title: "Monitoring",
+                description: "Ongoing support and performance monitoring",
+                features: ["24/7 monitoring", "Maintenance alerts", "Performance tracking"]
+              }
+            ].map((process, index) => (
+              <div
+                key={process.step}
+                className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all duration-300"
+              >
+                <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-full flex items-center justify-center text-white font-bold text-lg mb-4">
+                  {process.step}
+                </div>
+                
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  {process.title}
+                </h3>
+                
+                <p className="text-gray-600 mb-4">
+                  {process.description}
+                </p>
+                
+                <AnimatedFeatureList features={process.features} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Jumiami Value Proposition - Brand Colors */}
+      <section className="py-20 bg-gradient-to-r from-orange-500 to-yellow-500" aria-labelledby="value-heading">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <div className={`transform transition-all duration-1000 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <h2 id="value-heading" className="text-5xl font-light mb-8 tracking-wide text-white">
+              Transform Your Energy Future
               </h2>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                We're not just installing solar panels - we're building energy independence for Nigeria. Our proven track record speaks for itself.
-              </p>
-              
-              <div className="space-y-8">
-                {[
-                  {
-                    icon: Calculator,
-                    title: "Proven ROI Calculator",
-                    description: "Our proprietary software shows exact savings before installation. Average customer sees 40% ROI in 3 years."
-                  },
-                  {
-                    icon: Truck,
-                    title: "Same-Day Installation",
-                    description: "Professional teams complete installations in one day. Minimal disruption to your business or home."
-                  },
-                  {
-                    icon: Headphones,
-                    title: "24/7 Nigerian Support",
-                    description: "Local support team available round the clock. We speak your language and understand your needs."
-                  }
-                ].map((feature, index) => (
-                  <div key={index} className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <feature.icon className="h-6 w-6 text-white" />
+            <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
+              Join the energy revolution. We don't just install solar panels - we empower Nigerian families to take control of their energy destiny.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <Button 
+                size="lg"
+                className="bg-white text-orange-600 hover:bg-gray-100 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px] group shadow-lg"
+                aria-label="Start your energy transformation with free consultation"
+              >
+                <Calculator className="h-5 w-5 mr-3" aria-hidden="true" />
+                Start Your Transformation
+                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
+              </Button>
+              <Button 
+                variant="outline"
+                size="lg"
+                className="border-2 border-white/30 text-white hover:bg-white hover:text-orange-600 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px]"
+                aria-label="Speak with our energy experts at +234 811 888 7425"
+              >
+                <Phone className="h-5 w-5 mr-3" aria-hidden="true" />
+                Speak with Experts
+              </Button>
                     </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{feature.description}</p>
                     </div>
                   </div>
-                ))}
+      </section>
+
+      {/* Contact Quick Access */}
+      <section className="py-20 bg-gradient-to-br from-orange-50 to-yellow-50" aria-labelledby="contact-heading">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <div className={`transform transition-all duration-1000 delay-400 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <h2 id="contact-heading" className="text-4xl font-light text-gray-900 mb-6">
+              Ready to Get Started?
+            </h2>
+            <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+              Get your free consultation and quote today. Our experts are ready to help you save money and energy.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              <div className="bg-white p-6 rounded-lg shadow-lg">
+                <Phone className="h-12 w-12 text-orange-500 mx-auto mb-4" aria-hidden="true" />
+                <h3 className="text-xl font-light text-gray-900 mb-2">Call Us</h3>
+                <p className="text-gray-600 mb-4">Speak directly with our experts</p>
+                <a 
+                  href="tel:+2348118887425" 
+                  className="text-2xl font-light text-orange-600 hover:text-orange-700 transition-colors"
+                  aria-label="Call +234 811 888 7425"
+                >
+                  +234 811 888 7425
+                </a>
+              </div>
+              
+              <div className="bg-white p-6 rounded-lg shadow-lg">
+                <Mail className="h-12 w-12 text-orange-500 mx-auto mb-4" aria-hidden="true" />
+                <h3 className="text-xl font-light text-gray-900 mb-2">Email Us</h3>
+                <p className="text-gray-600 mb-4">Send us your questions</p>
+                <a 
+                  href="mailto:info@jumiamisolar.com" 
+                  className="text-lg font-light text-orange-600 hover:text-orange-700 transition-colors"
+                  aria-label="Email info@jumiamisolar.com"
+                >
+                  info@jumiamisolar.com
+                </a>
+              </div>
+              
+              <div className="bg-white p-6 rounded-lg shadow-lg">
+                <MapPin className="h-12 w-12 text-orange-500 mx-auto mb-4" aria-hidden="true" />
+                <h3 className="text-xl font-light text-gray-900 mb-2">Visit Us</h3>
+                <p className="text-gray-600 mb-4">Our office location</p>
+                <p className="text-sm font-light text-gray-600">
+                  Ikota Shopping Complex<br />
+                  VGC, Ajah, Lagos
+                </p>
               </div>
             </div>
             
-            <div className="relative">
-              <div className="bg-gradient-to-r from-orange-500 to-yellow-500 rounded-3xl p-8 text-white">
-                <h3 className="text-2xl font-bold mb-6">Our Guarantee</h3>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <Link to="/contact">
+                <Button 
+                  size="lg"
+                  className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white hover:from-orange-600 hover:to-yellow-600 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px] group shadow-lg"
+                  aria-label="Get free quote and consultation"
+                >
+                  <Calculator className="h-5 w-5 mr-3" aria-hidden="true" />
+                  Get Free Quote
+                  <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
+                </Button>
+              </Link>
+              <Button 
+                variant="outline"
+                size="lg"
+                className="border-2 border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px]"
+                aria-label="Schedule a consultation call"
+              >
+                <Phone className="h-5 w-5 mr-3" aria-hidden="true" />
+                Schedule Call
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Jumiami Storytelling - Brand Colors */}
+      <section className="py-20 bg-white" aria-labelledby="stories-heading">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 id="stories-heading" className="text-4xl font-light text-gray-900 mb-6">
+              Real Stories, Real Impact
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              See how we're changing lives across Nigeria
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {[
+              {
+                name: "Adebayo Oke, Lagos",
+                savings: "₦65,000 monthly savings",
+                testimonial: "Before Jumiami Solar, I was spending ₦85,000 monthly on electricity. Now I pay only ₦20,000. The extra ₦65,000 goes to my children's education. This isn't just about saving money - it's about securing our family's future.",
+                ariaLabel: "Success story from Adebayo Oke in Lagos about family savings"
+              },
+              {
+                name: "Fatima Hassan, Ilorin",
+                savings: "70% cost reduction",
+                testimonial: "Our business was struggling with ₦120,000 monthly electricity bills. Jumiami Solar reduced our costs to ₦35,000. That ₦85,000 monthly savings allowed us to hire 3 more employees. We're not just saving money - we're creating jobs.",
+                ariaLabel: "Business transformation story from Fatima Hassan in Ilorin"
+              }
+            ].map((testimonial, index) => (
+              <div 
+                key={index} 
+                className={`bg-gradient-to-br from-orange-50 to-yellow-50 p-8 rounded-lg shadow-lg transform transition-all duration-1000 delay-${index * 200} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                role="article"
+                aria-label={testimonial.ariaLabel}
+              >
+                <blockquote className="text-gray-700 mb-8 italic leading-relaxed text-lg">
+                  "{testimonial.testimonial}"
+                </blockquote>
+                
+                <div className="flex items-center justify-between">
+                    <div className="text-sm text-gray-600">
+                    <span className="font-light text-gray-900">{testimonial.name}</span>
+                  </div>
+                  <div className="text-sm text-orange-600 font-medium">
+                    <span className="font-light">{testimonial.savings}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Jumiami Final CTA - Brand Colors */}
+      <section className="py-16 bg-gradient-to-r from-orange-500 to-yellow-500" aria-labelledby="journey-heading">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <div className={`transform transition-all duration-1000 delay-400 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <h3 id="journey-heading" className="text-2xl font-light text-white mb-6">
+              Ready to Join the Energy Revolution?
+            </h3>
+            <p className="text-white/90 mb-8 text-lg">
+              Be part of Nigeria's sustainable energy future. 500+ families have already transformed their lives.
+            </p>
+            <Button 
+              size="lg"
+              className="bg-white text-orange-600 hover:bg-gray-100 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px] group shadow-lg"
+              aria-label="Join the energy revolution and start your transformation today"
+            >
+              Join the Revolution
+              <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Solar Calculator Section */}
+      <section className="py-20 bg-gradient-to-br from-orange-50 to-yellow-50" aria-labelledby="calculator-heading">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 id="calculator-heading" className="text-4xl font-light text-gray-900 mb-6">
+              Calculate Your Solar Savings
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              See how much you can save with solar energy
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <SolarCalculator />
+            
+            <div className="space-y-8">
+              <div className="bg-white p-6 rounded-lg border border-gray-200">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Why Choose Solar?</h3>
                 <div className="space-y-4">
-                  {[
-                    "25-Year Panel Performance Warranty",
-                    "5-Year Inverter Warranty",
-                    "2-Year Free Maintenance",
-                    "40% ROI Guarantee",
-                    "₦50K Monthly Savings Promise"
-                  ].map((guarantee, index) => (
-                    <div key={index} className="flex items-center space-x-3">
-                      <Shield className="h-5 w-5 text-white" />
-                      <span className="font-medium">{guarantee}</span>
+                  <div className="flex items-start space-x-3">
+                    <DollarSign className="h-6 w-6 text-green-500 mt-1 flex-shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-gray-900">Reduce Electricity Bills</h4>
+                      <p className="text-gray-600 text-sm">Save up to 85% on your monthly electricity costs</p>
                     </div>
-                  ))}
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <Shield className="h-6 w-6 text-blue-500 mt-1 flex-shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-gray-900">Energy Independence</h4>
+                      <p className="text-gray-600 text-sm">Generate your own power and reduce grid dependency</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <TrendingUp className="h-6 w-6 text-orange-500 mt-1 flex-shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-gray-900">Increase Property Value</h4>
+                      <p className="text-gray-600 text-sm">Solar installations can increase home value by 15-20%</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white p-6 rounded-lg border border-gray-200">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Quick Facts</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-orange-600">5+</div>
+                    <div className="text-sm text-gray-600">Years Experience</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-green-600">500+</div>
+                    <div className="text-sm text-gray-600">Happy Customers</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-blue-600">95%</div>
+                    <div className="text-sm text-gray-600">Success Rate</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-purple-600">24/7</div>
+                    <div className="text-sm text-gray-600">Support Available</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -309,107 +538,51 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Location Coverage */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4">
+      {/* Solar System Simulator */}
+      <section className="py-20 bg-white" aria-labelledby="simulator-heading">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Serving Major Nigerian Cities
+            <h2 id="simulator-heading" className="text-4xl font-light text-gray-900 mb-6">
+              Experience Solar Technology
             </h2>
-            <p className="text-xl text-gray-600">
-              Professional solar installation services across Nigeria
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              See how solar systems work in real-time
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                city: "Lagos",
-                customers: "250+",
-                avgSavings: "₦60K/month",
-                services: ["Residential", "Commercial", "Industrial"]
-              },
-              {
-                city: "Ilorin",
-                customers: "120+",
-                avgSavings: "₦45K/month",
-                services: ["Residential", "Commercial"]
-              },
-              {
-                city: "Abeokuta",
-                customers: "80+",
-                avgSavings: "₦50K/month",
-                services: ["Residential", "Commercial"]
-              }
-            ].map((location, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-all duration-300 border-0 bg-white">
-                <CardContent className="p-8">
-                  <MapPin className="h-12 w-12 text-orange-500 mx-auto mb-4" />
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{location.city}</h3>
-                  <div className="space-y-3 mb-6">
-                    <div className="text-sm text-gray-600">
-                      <span className="font-semibold text-gray-900">{location.customers}</span> customers
-                    </div>
-                    <div className="text-sm text-gray-600">
-                      <span className="font-semibold text-green-600">{location.avgSavings}</span> average savings
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    {location.services.map((service, idx) => (
-                      <div key={idx} className="text-sm text-gray-600 bg-gray-50 rounded-full px-3 py-1">
-                        {service}
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <SolarSystemSimulator />
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 bg-gray-900 text-white">
-        <div className="max-w-4xl mx-auto text-center px-4">
-          <h2 className="text-4xl font-bold mb-4">
-            Ready to Start Saving?
-          </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Join 500+ satisfied customers already saving ₦50,000+ monthly. Get your free consultation and custom quote today.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
-            <Button 
-              size="lg"
-              className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-yellow-500 hover:to-orange-500 text-white px-8 py-4 text-lg font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 rounded-xl"
-            >
-              <Calculator className="h-5 w-5 mr-3" />
-              Get Free Quote + ROI Calculator
-            </Button>
-            <Button 
-              variant="outline"
-              size="lg"
-              className="border-2 border-white/30 text-white hover:bg-white hover:text-gray-900 px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 rounded-xl"
-            >
-              <Phone className="h-5 w-5 mr-3" />
-              Call +234 811 888 7425
-            </Button>
+      {/* Interactive Testimonials */}
+      <section className="py-20 bg-gray-50" aria-labelledby="testimonials-heading">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 id="testimonials-heading" className="text-4xl font-light text-gray-900 mb-6">
+              What Our Customers Say
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Real stories from satisfied customers across Nigeria
+            </p>
           </div>
           
-          <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-400">
-            <div className="flex items-center space-x-2">
-              <ThumbsUp className="h-4 w-4 text-green-400" />
-              <span>500+ Successful Installations</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Shield className="h-4 w-4 text-blue-400" />
-              <span>25-Year Warranty</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <TrendingUp className="h-4 w-4 text-yellow-400" />
-              <span>40% ROI Guarantee</span>
-            </div>
+          <InteractiveTestimonialCarousel />
+        </div>
+      </section>
+
+      {/* Live Energy Monitor */}
+      <section className="py-20 bg-white" aria-labelledby="monitor-heading">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 id="monitor-heading" className="text-4xl font-light text-gray-900 mb-6">
+              Live Energy Monitoring
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Real-time data from our solar installations
+            </p>
           </div>
+          
+          <LiveEnergyMonitor />
         </div>
       </section>
     </div>

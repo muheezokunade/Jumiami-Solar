@@ -1,20 +1,33 @@
 import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useMicroInteractions } from "@/hooks/use-micro-interactions";
 
 export default function FloatingActionButton() {
+  const { useFloatingAnimation, usePulseAnimation, handleHover, handleClick: handleMicroClick } = useMicroInteractions();
+  const floatingOffset = useFloatingAnimation(8, 2000);
+  const isPulsing = usePulseAnimation(4000);
+  
   const handleClick = () => {
+    handleMicroClick('whatsapp-fab');
     // Open WhatsApp directly with the phone number
-    const phoneNumber = "08118887425";
+    const phoneNumber = "2348118887425"; // Nigeria country code +234, remove leading 0
     const whatsappUrl = `https://wa.me/${phoneNumber}`;
     window.open(whatsappUrl, '_blank');
   };
 
   return (
-    <div className="fixed bottom-8 right-8 z-50">
+    <div 
+      className="fixed bottom-8 right-8 z-50"
+      style={{ transform: `translateY(${floatingOffset}px)` }}
+    >
       <Button
         onClick={handleClick}
         size="icon"
-        className="w-16 h-16 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] hover:from-[hsl(47,100%,63%)] hover:to-[hsl(19,100%,58%)] rounded-full shadow-2xl animate-float hover:scale-110 transition-all duration-300"
+        className={`w-16 h-16 bg-green-500 hover:bg-green-600 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 ${
+          isPulsing ? 'animate-pulse shadow-green-400' : ''
+        }`}
+        onMouseEnter={() => handleHover('whatsapp-fab', true)}
+        onMouseLeave={() => handleHover('whatsapp-fab', false)}
       >
         <svg 
           className="h-6 w-6 text-white" 

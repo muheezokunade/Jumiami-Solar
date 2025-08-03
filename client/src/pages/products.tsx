@@ -1,292 +1,450 @@
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  Zap, 
-  Battery, 
-  CloudSun, 
-  Settings, 
-  Shield, 
+import { Link } from "wouter";
+import OptimizedImage from "@/components/ui/optimized-image";
+import { ProductCardSkeleton } from "@/components/ui/skeleton";
+import { useMicroInteractions } from "@/hooks/use-micro-interactions";
+import {
+  Zap,
+  Battery,
+  CloudSun,
+  Settings,
+  Shield,
   Star,
   ArrowRight,
   CheckCircle,
-  Package,
-  Truck,
-  Headphones,
-  Award
+  ShoppingCart,
+  Hammer,
+  Wrench,
+  Users,
+  Clock,
+  Award,
+  TrendingUp
 } from "lucide-react";
-import ProductCard from "@/components/product-card";
+import { SolarCalculator, LiveEnergyMonitor } from "@/components/interactive-elements";
 
-// Enhanced product data without pricing
-  const products = [
-    {
+// Products Data
+const products = [
+  {
     id: 1,
     name: "Premium Solar Panels",
     category: "panels",
     description: "High-efficiency monocrystalline solar panels with advanced anti-reflective coating for maximum energy production.",
-      imageUrl: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-    icon: <CloudSun className="h-8 w-8 text-white" />,
-    features: ["25-year warranty", "High efficiency", "Anti-PID technology", "Corrosion resistant"],
+    imageUrl: "https://images.pexels.com/photos/371917/pexels-photo-371917.jpeg",
+    icon: CloudSun,
+    features: ["5-year warranty", "High efficiency", "Anti-PID technology", "Corrosion resistant"],
     specifications: {
       power: "400W - 550W",
       efficiency: "21.5%",
       dimensions: "1765 x 1048 x 35mm",
       weight: "20.5kg"
-    },
-    benefits: ["Maximum energy output", "Durable construction", "Low maintenance", "Long lifespan"]
+    }
   },
   {
     id: 2,
     name: "Hybrid Inverters",
     category: "inverters",
     description: "Advanced hybrid inverters with smart grid integration and battery backup capabilities for reliable power supply.",
-    imageUrl: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-    icon: <Zap className="h-8 w-8 text-white" />,
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGdhHXSe4zey3vJ8Shzf7b535FElelgAKGUQ&s",
+    icon: Zap,
     features: ["Grid-tied operation", "Battery backup", "Smart monitoring", "MPPT technology"],
     specifications: {
       power: "3kW - 10kW",
       efficiency: "96.5%",
       input: "DC 200-500V",
       output: "AC 220/240V"
-    },
-    benefits: ["Seamless grid integration", "Backup power capability", "Real-time monitoring", "Energy optimization"]
+    }
   },
   {
     id: 3,
     name: "Lithium Battery Systems",
     category: "batteries",
     description: "High-performance lithium-ion battery systems with intelligent BMS for optimal performance and safety.",
-    imageUrl: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-    icon: <Battery className="h-8 w-8 text-white" />,
+    imageUrl: "https://www.energy.gov/sites/default/files/2021-11/35974719113_24cfb03c24_o.jpg",
+    icon: Battery,
     features: ["Long cycle life", "Deep discharge capability", "Smart BMS", "Modular design"],
     specifications: {
       capacity: "5kWh - 20kWh",
       voltage: "48V",
       cycles: "6000+",
       warranty: "10 years"
-    },
-    benefits: ["Extended backup time", "High reliability", "Scalable capacity", "Low maintenance"]
+    }
   },
   {
     id: 4,
     name: "Solar Mounting Systems",
     category: "accessories",
     description: "Professional-grade mounting systems designed for various roof types and ground installations.",
-    imageUrl: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-    icon: <Settings className="h-8 w-8 text-white" />,
+    imageUrl: "https://images.pexels.com/photos/17489152/pexels-photo-17489152.jpeg",
+    icon: Settings,
     features: ["Aluminum construction", "Adjustable tilt", "Easy installation", "Weather resistant"],
     specifications: {
       material: "Aluminum 6063-T5",
       coating: "Anodized finish",
       load: "Up to 5400N",
       compatibility: "All panel types"
-    },
-    benefits: ["Secure installation", "Optimal positioning", "Durable construction", "Easy maintenance"]
-  },
-  {
-    id: 5,
-    name: "Solar Charge Controllers",
-    category: "accessories",
-    description: "Advanced MPPT charge controllers with LCD display and comprehensive protection features.",
-    imageUrl: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-    icon: <Shield className="h-8 w-8 text-white" />,
-    features: ["MPPT technology", "LCD display", "Multiple protections", "Temperature compensation"],
-    specifications: {
-      current: "60A - 100A",
-      voltage: "12V/24V/48V",
-      efficiency: "98%",
-      protection: "Overcharge, over-discharge, short circuit"
-    },
-    benefits: ["Maximum power tracking", "Battery protection", "Real-time monitoring", "Reliable operation"]
-  },
-  {
-    id: 6,
-    name: "Solar Monitoring Systems",
-    category: "accessories",
-    description: "Smart monitoring solutions with mobile app integration for real-time system performance tracking.",
-    imageUrl: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-    icon: <Star className="h-8 w-8 text-white" />,
-    features: ["Real-time monitoring", "Mobile app", "Data logging", "Alert system"],
-    specifications: {
-      connectivity: "WiFi/4G",
-      display: "7-inch touchscreen",
-      storage: "1 year data",
-      compatibility: "All major brands"
-    },
-    benefits: ["Performance tracking", "Remote monitoring", "Fault detection", "Energy optimization"]
+    }
   }
 ];
 
-const categories = [
-  { id: "all", label: "All Products", icon: Package },
-  { id: "panels", label: "Solar Panels", icon: CloudSun },
-  { id: "inverters", label: "Inverters", icon: Zap },
-  { id: "batteries", label: "Batteries", icon: Battery },
-  { id: "accessories", label: "Accessories", icon: Settings }
-];
-
+// Services Data
 const services = [
   {
-    icon: <Truck className="h-6 w-6" />,
-    title: "Free Delivery",
-    description: "Free delivery to your location across Nigeria"
+    icon: ShoppingCart,
+    title: "Solar Sales & Consultation",
+    description: "Premium solar products at competitive prices with flexible payment options and expert consultation.",
+    features: [
+      "Wide range of premium solar products",
+      "Competitive pricing with transparent quotes",
+      "Flexible payment plans available",
+      "Expert product consultation",
+      "Free site assessment and energy audit",
+      "Custom system design and sizing"
+    ]
   },
   {
-    icon: <Headphones className="h-6 w-6" />,
-    title: "24/7 Support",
-    description: "Round-the-clock technical support and assistance"
+    icon: Hammer,
+    title: "Professional Installation",
+    description: "Professional installation by certified technicians with comprehensive warranty coverage and safety compliance.",
+    features: [
+      "Certified and experienced technicians",
+      "Safe and code-compliant installations",
+      "Comprehensive warranty coverage",
+      "Post-installation system testing",
+      "Grid connection and approval assistance",
+      "Quality assurance and inspection"
+    ]
   },
   {
-    icon: <Award className="h-6 w-6" />,
-    title: "Warranty",
-    description: "Comprehensive warranty coverage on all products"
+    icon: Wrench,
+    title: "Repair & Maintenance",
+    description: "Quick diagnosis and repair services to minimize downtime and maximize system efficiency and performance.",
+    features: [
+      "Rapid response emergency repairs",
+      "Advanced diagnostic equipment",
+      "Genuine replacement parts only",
+      "Performance optimization included",
+      "24/7 emergency support",
+      "Preventive maintenance programs"
+    ]
   },
   {
-    icon: <CheckCircle className="h-6 w-6" />,
-    title: "Installation",
-    description: "Professional installation by certified technicians"
+    icon: Settings,
+    title: "System Maintenance",
+    description: "Regular maintenance programs to ensure optimal performance, longevity, and maximum energy output.",
+    features: [
+      "Scheduled preventive maintenance",
+      "Performance monitoring and analysis",
+      "Cleaning and component inspection",
+      "Extended system lifespan guarantee",
+      "Remote monitoring and alerts",
+      "Annual system health reports"
+    ]
   }
 ];
 
-export default function ProductsPage() {
-  const [selectedCategory, setSelectedCategory] = useState("all");
+export default function ProductsAndServices() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [activeTab, setActiveTab] = useState("products");
+  const [isLoading, setIsLoading] = useState(true);
+  
+  const { useMagneticEffect, useFloatingAnimation, handleHover, handleClick } = useMicroInteractions();
+  const floatingOffset = useFloatingAnimation(5, 4000);
 
-  const filteredProducts = selectedCategory === "all" 
-    ? products 
-    : products.filter(product => product.category === selectedCategory);
+  useEffect(() => {
+    setIsVisible(true);
+    // Simulate loading time for better UX
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-[hsl(0,0%,10%)] mb-4">
-            Premium Solar Products
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover our comprehensive range of high-quality solar products designed for optimal performance, 
-            durability, and energy efficiency across Nigeria.
-          </p>
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="py-20 bg-gradient-to-br from-orange-500 via-orange-400 to-yellow-400 text-white" aria-labelledby="hero-heading">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <div className={`transform transition-all duration-1000 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <h1 id="hero-heading" className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light mb-8 tracking-wide">
+              Products & Services
+            </h1>
+            <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-2xl mx-auto">
+              Premium solar products and comprehensive services for your energy transformation
+            </p>
+          </div>
         </div>
+      </section>
 
-        {/* Services Banner */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          {services.map((service, index) => (
-            <div key={index} className="bg-white rounded-xl p-4 shadow-lg text-center">
-              <div className="text-[hsl(19,100%,58%)] mb-2 flex justify-center">
-                {service.icon}
-              </div>
-              <h3 className="font-semibold text-[hsl(0,0%,10%)] mb-1">{service.title}</h3>
-              <p className="text-sm text-gray-600">{service.description}</p>
+      {/* Tab Navigation */}
+      <section className="py-8 bg-white border-b border-gray-200">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="flex justify-center space-x-8">
+            {[
+              { id: "products", label: "Products" },
+              { id: "services", label: "Services" }
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`text-lg font-light transition-all duration-300 ${
+                  activeTab === tab.id
+                    ? "text-orange-600 border-b-2 border-orange-600"
+                    : "text-gray-500 hover:text-gray-700"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Products Section */}
+      {activeTab === "products" && (
+        <section className="py-20 bg-white" aria-labelledby="products-heading">
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <h2 id="products-heading" className="text-4xl font-light text-gray-900 mb-6">
+                Premium Solar Products
+              </h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                High-quality solar equipment designed for Nigerian homes and businesses
+              </p>
             </div>
-          ))}
-        </div>
-
-        {/* Category Filter */}
-        <div className="mb-8">
-          <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
-            <TabsList className="grid w-full grid-cols-5 bg-white shadow-lg">
-              {categories.map((category) => {
-                const IconComponent = category.icon;
-                return (
-                  <TabsTrigger 
-                    key={category.id} 
-                    value={category.id}
-                    className="flex items-center space-x-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[hsl(19,100%,58%)] data-[state=active]:to-[hsl(47,100%,63%)] data-[state=active]:text-white"
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {isLoading ? (
+                // Show skeleton loaders while loading
+                Array.from({ length: 4 }).map((_, index) => (
+                  <ProductCardSkeleton key={index} />
+                ))
+              ) : (
+                products.map((product, index) => (
+                  <div
+                    key={product.id}
+                    className={`border border-gray-200 rounded-lg overflow-hidden transform transition-all duration-1000 delay-${index * 200} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                    role="article"
+                    aria-labelledby={`product-${product.id}-title`}
                   >
-                    <IconComponent className="h-4 w-4" />
-                    <span className="hidden sm:inline">{category.label}</span>
-                  </TabsTrigger>
-                );
-              })}
-            </TabsList>
-          </Tabs>
-        </div>
+                    <div className="relative h-48 overflow-hidden">
+                      <OptimizedImage
+                        src={product.imageUrl}
+                        alt={product.name}
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                        width={400}
+                        height={300}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                      <div className="absolute bottom-4 left-4">
+                        <product.icon className="h-8 w-8 text-white" aria-hidden="true" />
+                      </div>
+                    </div>
+                    
+                    <div className="p-6">
+                      <h3 id={`product-${product.id}-title`} className="text-xl font-light text-gray-900 mb-3">
+                        {product.name}
+                      </h3>
+                      <p className="text-gray-600 mb-4">{product.description}</p>
+                      
+                      <div className="space-y-4">
+                        <div>
+                          <h4 className="text-sm font-medium text-gray-900 mb-2">Key Features</h4>
+                          <ul className="space-y-1">
+                            {product.features.map((feature, idx) => (
+                              <li key={idx} className="text-sm text-gray-600 flex items-center">
+                                <CheckCircle className="h-4 w-4 text-orange-500 mr-2" aria-hidden="true" />
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        
+                        <div>
+                          <h4 className="text-sm font-medium text-gray-900 mb-2">Specifications</h4>
+                          <div className="grid grid-cols-2 gap-2 text-sm">
+                            {Object.entries(product.specifications).map(([key, value]) => (
+                              <div key={key} className="text-gray-600">
+                                <span className="font-medium">{key}:</span> {value}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </section>
+      )}
 
-      {/* Products Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {filteredProducts.map((product) => (
-            <ProductCard 
-              key={product.id} 
-              title={product.name}
-              description={product.description}
-              imageUrl={product.imageUrl}
-              icon={product.icon}
-              features={product.features}
-              specifications={product.specifications}
-              benefits={product.benefits}
-            />
-          ))}
-        </div>
-
-        {/* Product Features Section */}
-        <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 mb-12">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-[hsl(0,0%,10%)] mb-4">
-              Why Choose Our Products?
+      {/* Interactive Product Comparison */}
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-50" aria-labelledby="comparison-heading">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 id="comparison-heading" className="text-4xl font-light text-gray-900 mb-6">
+              Compare Solar Solutions
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We partner with world-leading manufacturers to provide you with the highest quality solar products
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Find the perfect solar system for your needs
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <Award className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-4">Premium Quality</h3>
-              <p className="text-gray-600">All products meet international standards and come with comprehensive warranties</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <CheckCircle className="h-8 w-8 text-white" />
-            </div>
-              <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-4">Certified Products</h3>
-              <p className="text-gray-600">ISO certified products with proven performance and reliability</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <Headphones className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-4">Expert Support</h3>
-              <p className="text-gray-600">Technical support and guidance from our experienced solar specialists</p>
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <SolarCalculator />
+            <LiveEnergyMonitor />
           </div>
         </div>
+      </section>
+
+      {/* Interactive Product Features */}
+      <section className="py-20 bg-white" aria-labelledby="features-heading">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 id="features-heading" className="text-4xl font-light text-gray-900 mb-6">
+              Advanced Features
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Cutting-edge technology for maximum efficiency
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: Zap,
+                title: "Smart Inverter Technology",
+                description: "Advanced inverters that optimize power conversion efficiency",
+                features: ["95% efficiency", "Grid-tie capability", "Battery backup"]
+              },
+              {
+                icon: Battery,
+                title: "Lithium Battery Storage",
+                description: "High-capacity batteries for reliable energy storage",
+                features: ["10-year warranty", "Deep cycle capability", "Fast charging"]
+              },
+              {
+                icon: Shield,
+                title: "Weather Protection",
+                description: "Durable components designed for Nigerian climate",
+                features: ["UV resistant", "Corrosion proof", "Impact resistant"]
+              }
+            ].map((feature, index) => (
+              <div
+                key={index}
+                className="bg-white border border-gray-200 rounded-lg p-8 hover:shadow-lg transition-all duration-300 interactive-card"
+              >
+                <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-lg flex items-center justify-center mb-6">
+                  <feature.icon className="h-8 w-8 text-white" />
+                </div>
+                
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                  {feature.title}
+                </h3>
+                
+                <p className="text-gray-600 mb-6">
+                  {feature.description}
+                </p>
+                
+                <ul className="space-y-2">
+                  {feature.features.map((item, idx) => (
+                    <li key={idx} className="text-sm text-gray-600 flex items-center">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      {activeTab === "services" && (
+        <section className="py-20 bg-gray-50" aria-labelledby="services-heading">
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <h2 id="services-heading" className="text-4xl font-light text-gray-900 mb-6">
+                Comprehensive Services
+              </h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                From consultation to ongoing maintenance, we provide complete solar solutions
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {services.map((service, index) => (
+                <div 
+                  key={index}
+                  className={`bg-white border border-gray-200 rounded-lg p-8 transform transition-all duration-1000 delay-${index * 200} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                  role="article"
+                  aria-labelledby={`service-${index}-title`}
+                >
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-lg flex items-center justify-center mr-4">
+                      <service.icon className="h-8 w-8 text-white" aria-hidden="true" />
+                    </div>
+                    <h3 id={`service-${index}-title`} className="text-xl font-light text-gray-900">
+                      {service.title}
+                    </h3>
+                  </div>
+                  
+                  <p className="text-gray-600 mb-6">{service.description}</p>
+                  
+                  <ul className="space-y-2">
+                    {service.features.map((feature, idx) => (
+                      <li key={idx} className="text-sm text-gray-600 flex items-start">
+                        <CheckCircle className="h-4 w-4 text-orange-500 mr-2 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* CTA Section */}
-        <div className="text-center bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] rounded-3xl p-8 md:p-12">
-          <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to Go Solar?
-          </h3>
-          <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
-            Get a free consultation and quote for your solar installation. 
-            Our experts will help you choose the perfect products for your needs.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg"
-              className="bg-white text-[hsl(19,100%,58%)] hover:bg-gray-100 font-semibold px-8 py-3 rounded-full"
-            >
-              <Package className="h-5 w-5 mr-2" />
-              Get Free Quote
-            </Button>
-            <Button 
-              variant="outline"
-              size="lg"
-              className="border-white text-white hover:bg-white/10 font-semibold px-8 py-3 rounded-full"
-            >
-              <ArrowRight className="h-5 w-5 mr-2" />
-              View Services
-            </Button>
+      <section className="py-16 bg-black text-white" aria-labelledby="cta-heading">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <div className={`transform transition-all duration-1000 delay-800 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <h3 id="cta-heading" className="text-2xl font-light mb-6">
+              Ready to Start Your Solar Journey?
+            </h3>
+            <p className="text-gray-400 mb-8 text-lg">
+              Get a free consultation and custom quote for your energy needs
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <Link to="/contact">
+                <Button 
+                  size="lg"
+                  className="bg-white text-black hover:bg-gray-100 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px] group"
+                  aria-label="Get free consultation and quote"
+                >
+                  <ShoppingCart className="h-5 w-5 mr-3" aria-hidden="true" />
+                  Get Free Quote
+                  <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
+                </Button>
+              </Link>
+              <Button 
+                variant="outline"
+                size="lg"
+                className="border-2 border-white/30 text-white hover:bg-white hover:text-black px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px]"
+                aria-label="Speak with our experts"
+              >
+                <Users className="h-5 w-5 mr-3" aria-hidden="true" />
+                Speak with Experts
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

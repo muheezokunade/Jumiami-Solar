@@ -3,6 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { PerformanceWarning } from "@/components/ui/performance-monitor";
 import Navigation from "@/components/layout/navigation";
 import Footer from "@/components/layout/footer";
 import FloatingActionButton from "@/components/floating-action-button";
@@ -10,9 +11,8 @@ import SEO, { seoConfigs } from "@/components/seo";
 import Home from "@/pages/home";
 import About from "@/pages/about";
 import Products from "@/pages/products";
-import Services from "@/pages/services";
 import Projects from "@/pages/projects";
-import Testimonials from "@/pages/testimonials";
+import Blog from "@/pages/blog";
 import Contact from "@/pages/contact";
 import Analytics from "@/pages/analytics";
 import PrivacyPolicy from "@/pages/privacy-policy";
@@ -30,14 +30,25 @@ function Router() {
         return seoConfigs.home;
       case '/about':
         return seoConfigs.about;
-      case '/services':
-        return seoConfigs.services;
+
       case '/products':
         return seoConfigs.products;
       case '/projects':
         return seoConfigs.projects;
-      case '/testimonials':
-        return seoConfigs.testimonials;
+      case '/blog':
+        return {
+          title: "Solar Energy Blog | Jumiami Solar - Tips, News & Industry Insights",
+          description: "Expert solar energy insights, tips, and industry news from Jumiami Solar. Learn about solar panels, installation, maintenance, and renewable energy trends in Nigeria.",
+          keywords: "solar energy blog, solar tips, solar news, solar installation tips, renewable energy blog, solar energy Nigeria, solar panels blog",
+          url: "https://jumiamisolar.com/blog",
+          structuredData: {
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "name": "Jumiami Solar Blog",
+            "description": "Expert solar energy insights and tips"
+          }
+        };
+
       case '/contact':
         return seoConfigs.contact;
       case '/analytics':
@@ -89,9 +100,8 @@ function Router() {
           <Route path="/" component={Home} />
           <Route path="/about" component={About} />
           <Route path="/products" component={Products} />
-          <Route path="/services" component={Services} />
           <Route path="/projects" component={Projects} />
-          <Route path="/testimonials" component={Testimonials} />
+          <Route path="/blog" component={Blog} />
           <Route path="/contact" component={Contact} />
           <Route path="/analytics" component={Analytics} />
           <Route path="/privacy-policy" component={PrivacyPolicy} />
@@ -102,6 +112,7 @@ function Router() {
       </main>
       <Footer />
       <FloatingActionButton />
+      <PerformanceWarning />
     </div>
   );
 }

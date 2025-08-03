@@ -1,8 +1,7 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://jumiamisolar.com/sitemap.xml
+Sitemap: https://jumiami-solar.netlify.app/sitemap.xml
 
 # Disallow admin and private areas
 Disallow: /admin/

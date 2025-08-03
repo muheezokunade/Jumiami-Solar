@@ -98,7 +98,7 @@ export default function TermsOfService() {
                 We provide warranties on our products and services as follows:
               </p>
               <ul className="list-disc pl-6 text-gray-600 mb-6 space-y-2">
-                <li><strong>Solar Panels:</strong> 25-year manufacturer warranty</li>
+                <li><strong>Solar Panels:</strong> 5-year manufacturer warranty</li>
                 <li><strong>Inverters:</strong> 10-15 year warranty</li>
                 <li><strong>Batteries:</strong> 5-10 year warranty</li>
                 <li><strong>Workmanship:</strong> 5-year installation warranty</li>

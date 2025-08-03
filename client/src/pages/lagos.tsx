@@ -20,7 +20,7 @@ export default function LagosPage() {
             Solar Installation in <span className="text-[hsl(19,100%,58%)]">Lagos</span>
           </h1>
           <p className={`text-xl text-gray-300 mb-8 max-w-3xl mx-auto ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-            Trusted solar energy solutions for Lagos homes and businesses. Save ₦50,000+ monthly on electricity bills with professional installation and 25-year warranty.
+            Trusted solar energy solutions for Lagos homes and businesses. Save ₦50,000+ monthly on electricity bills with professional installation and 5-year warranty.
           </p>
           <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
             <Link href="/contact" aria-label="Get free quote for Lagos solar installation">

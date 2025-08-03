@@ -1,14 +1,21 @@
 import ContactForm from "@/components/contact-form";
-import InteractiveMap from "@/components/interactive-map";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter, ExternalLink } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter, ExternalLink, ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+
+const contactInfo = {
+  phone: "+234 811 888 7425",
+  email: "info@jumiamisolar.com",
+  address: "Lagos, Nigeria"
+};
 
 const officeLocations = [
   {
-    title: "Head Office",
-    address: "Ikota shopping complex, Road 3, opp. Union Bank, Suite E167, 150/151, VGC Ajah Lagos.",
-    phone: "08118887425"
+    city: "Lagos",
+    address: "Victoria Island, Lagos",
+    phone: "+234 811 888 7425",
+    email: "lagos@jumiamisolar.com"
   },
   {
     title: "Ilorin Branch Office",
@@ -46,80 +53,90 @@ const socialMediaLinks = [
 ];
 
 export default function Contact() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   return (
-    <div className="pt-16">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] text-white">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 font-serif animate-fade-in">
-            Contact Us
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 animate-slide-up">
-            Ready to go solar? Get in touch with our experts for a free consultation
-          </p>
+      <section className="py-20 bg-gradient-to-br from-orange-500 via-orange-400 to-yellow-400 text-white" aria-labelledby="contact-hero-heading">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <div className={`transform transition-all duration-1000 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <h1 id="contact-hero-heading" className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light mb-8 tracking-wide">
+              Contact Us
+            </h1>
+            <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-2xl mx-auto">
+              Ready to go solar? Get in touch with our experts for a free consultation
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-20 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Contact Form Section */}
+      <section className="py-20 bg-white" aria-labelledby="contact-form-heading">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 font-serif">
-              Ready to Go <span className="text-[hsl(19,100%,58%)]">Solar?</span>
+            <h2 id="contact-form-heading" className="text-4xl font-light text-gray-900 mb-6">
+              Get Your Free Consultation
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Get in touch with our solar experts today for a free consultation and custom quote for your energy needs.
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Tell us about your energy needs and we'll design the perfect solar solution for you
             </p>
           </div>
           
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Form */}
-            <ContactForm />
+            <div className={`transform transition-all duration-1000 delay-400 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+              <ContactForm />
+            </div>
             
             {/* Contact Information */}
-            <div className="space-y-8">
+            <div className={`space-y-8 transform transition-all duration-1000 delay-600 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
               {/* Office Locations */}
-              <div className="glass-morphism rounded-2xl p-8">
-                <h3 className="text-2xl font-bold mb-6">Our Office Locations</h3>
+              <div className="border border-gray-200 rounded-lg p-8">
+                <h3 className="text-2xl font-light text-gray-900 mb-6">Our Office Locations</h3>
                 
                 <div className="space-y-6">
                   {officeLocations.map((office, index) => (
-                    <div key={index} className="border-b border-white/10 pb-6 last:border-b-0 last:pb-0">
-                      <h4 className="text-lg font-bold text-[hsl(19,100%,58%)] mb-3">{office.title}</h4>
+                    <div key={index} className="border-b border-gray-100 pb-6 last:border-b-0 last:pb-0">
+                      <h4 className="text-lg font-light text-gray-900 mb-3">{office.title}</h4>
                       
                       <div className="space-y-3">
                         <div className="flex items-start space-x-3">
-                          <MapPin className="h-5 w-5 text-[hsl(19,100%,58%)] mt-1 flex-shrink-0" />
-                          <p className="text-gray-300 text-sm leading-relaxed">{office.address}</p>
-                  </div>
-                  
+                          <MapPin className="h-5 w-5 text-orange-500 mt-1 flex-shrink-0" />
+                          <p className="text-gray-600 text-sm leading-relaxed">{office.address}</p>
+                        </div>
+                        
                         <div className="flex items-center space-x-3">
-                          <Phone className="h-5 w-5 text-[hsl(19,100%,58%)]" />
+                          <Phone className="h-5 w-5 text-orange-500" />
                           <a 
                             href={`tel:${office.phone}`}
-                            className="text-gray-300 hover:text-[hsl(19,100%,58%)] transition-colors text-sm"
+                            className="text-gray-600 hover:text-orange-500 transition-colors text-sm"
                           >
                             {office.phone}
                           </a>
-                    </div>
-                  </div>
+                        </div>
+                      </div>
                     </div>
                   ))}
                   
-                  <div className="pt-4 border-t border-white/10">
+                  <div className="pt-4 border-t border-gray-100">
                     <div className="flex items-center space-x-3">
-                      <Mail className="h-5 w-5 text-[hsl(19,100%,58%)]" />
+                      <Mail className="h-5 w-5 text-orange-500" />
                       <a 
                         href="mailto:info@jumiamisolar.com"
-                        className="text-gray-300 hover:text-[hsl(19,100%,58%)] transition-colors"
+                        className="text-gray-600 hover:text-orange-500 transition-colors"
                       >
                         info@jumiamisolar.com
                       </a>
                     </div>
                     
                     <div className="flex items-center space-x-3 mt-3">
-                      <Clock className="h-5 w-5 text-[hsl(19,100%,58%)]" />
-                      <div className="text-gray-300 text-sm">
+                      <Clock className="h-5 w-5 text-orange-500" />
+                      <div className="text-gray-600 text-sm">
                         <p>Mon - Fri: 8:00AM - 6:00PM</p>
                         <p>Sat: 9:00AM - 4:00PM</p>
                       </div>
@@ -129,23 +146,23 @@ export default function Contact() {
               </div>
               
               {/* Social Media */}
-              <div className="glass-morphism rounded-2xl p-8">
-                <h3 className="text-2xl font-bold mb-6">Follow Us</h3>
+              <div className="border border-gray-200 rounded-lg p-8">
+                <h3 className="text-2xl font-light text-gray-900 mb-6">Follow Us</h3>
                 
                 <div className="grid grid-cols-2 gap-4">
                   {socialMediaLinks.map((social) => {
                     const IconComponent = social.icon;
                     return (
-                  <a 
+                      <a 
                         key={social.name}
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                    className="flex items-center space-x-3 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-300"
-                  >
-                        <IconComponent className="h-5 w-5 text-[hsl(19,100%,58%)]" />
-                        <span>{social.name}</span>
-                  </a>
+                        className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:border-orange-500 hover:bg-orange-50 transition-all duration-300"
+                      >
+                        <IconComponent className="h-5 w-5 text-orange-500" />
+                        <span className="text-gray-700">{social.name}</span>
+                      </a>
                     );
                   })}
                 </div>
@@ -155,80 +172,14 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-[hsl(0,0%,10%)] mb-6 font-serif">
-              Find <span className="text-[hsl(19,100%,58%)]">Our Locations</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Visit any of our office locations to see our products firsthand and speak with our solar experts
-            </p>
-          </div>
-          
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Location Details */}
-            <div className="lg:col-span-1">
-              <Card className="floating-card p-8 shadow-lg h-full">
-                <CardContent className="p-0 space-y-6">
-                  <div>
-                    <h3 className="text-2xl font-bold text-[hsl(0,0%,10%)] mb-4">Office Features</h3>
-                    <div className="space-y-3">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-2 h-2 bg-[hsl(19,100%,58%)] rounded-full"></div>
-                        <span>Live product demonstrations</span>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <div className="w-2 h-2 bg-[hsl(19,100%,58%)] rounded-full"></div>
-                        <span>Expert consultations</span>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <div className="w-2 h-2 bg-[hsl(19,100%,58%)] rounded-full"></div>
-                        <span>Free parking available</span>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <div className="w-2 h-2 bg-[hsl(19,100%,58%)] rounded-full"></div>
-                        <span>Custom quote generation</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h4 className="text-lg font-bold text-[hsl(0,0%,10%)] mb-3">Getting Here</h4>
-                    <div className="space-y-2 text-gray-600">
-                      <p>• Easy access from major roads</p>
-                      <p>• Well-marked locations for easy identification</p>
-                      <p>• Public transport and ride-sharing available</p>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h4 className="text-lg font-bold text-[hsl(0,0%,10%)] mb-3">What to Bring</h4>
-                    <div className="space-y-2 text-gray-600">
-                      <p>• Recent electricity bills</p>
-                      <p>• Property dimensions (if available)</p>
-                      <p>• Questions about your energy needs</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-            
-            {/* Interactive Map */}
-            <div className="lg:col-span-2">
-              <InteractiveMap />
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* FAQ Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-white" aria-labelledby="faq-heading">
+        <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-[hsl(0,0%,10%)] mb-6 font-serif">
-              Frequently Asked <span className="text-[hsl(19,100%,58%)]">Questions</span>
+            <h2 id="faq-heading" className="text-4xl font-light text-gray-900 mb-6">
+              Frequently Asked Questions
             </h2>
             <p className="text-xl text-gray-600">
               Quick answers to common questions about our solar solutions
@@ -236,59 +187,92 @@ export default function Contact() {
           </div>
           
           <div className="space-y-6">
-            <Card className="floating-card shadow-lg">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-bold text-[hsl(0,0%,10%)] mb-3">How long does installation take?</h3>
-                <p className="text-gray-600">Most residential installations take 1-3 days, while commercial projects may take 1-2 weeks depending on system size and complexity.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="floating-card shadow-lg">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-bold text-[hsl(0,0%,10%)] mb-3">What maintenance is required?</h3>
-                <p className="text-gray-600">Solar systems require minimal maintenance. We recommend annual inspections and cleaning, which we provide as part of our maintenance service.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="floating-card shadow-lg">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-bold text-[hsl(0,0%,10%)] mb-3">Do you offer financing options?</h3>
-                <p className="text-gray-600">Yes, we offer flexible payment plans and financing options to make solar energy accessible. Contact us to discuss available options.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="floating-card shadow-lg">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-bold text-[hsl(0,0%,10%)] mb-3">What warranty do you provide?</h3>
-                <p className="text-gray-600">We provide comprehensive warranties: 25 years on solar panels, 10-15 years on inverters, and 5-10 years on batteries, plus workmanship warranty.</p>
-              </CardContent>
-            </Card>
+            {[
+              {
+                question: "How long does installation take?",
+                answer: "Most residential installations take 1-3 days, while commercial projects may take 1-2 weeks depending on system size and complexity."
+              },
+              {
+                question: "What maintenance is required?",
+                answer: "Solar systems require minimal maintenance. We recommend annual inspections and cleaning, which we provide as part of our maintenance service."
+              },
+              {
+                question: "Do you offer financing options?",
+                answer: "Yes, we offer flexible payment plans and financing options to make solar energy accessible. Contact us to discuss available options."
+              },
+              {
+                question: "What warranty do you provide?",
+                answer: "We provide comprehensive warranties: 25 years on solar panels, 10-15 years on inverters, and 5-10 years on batteries, plus workmanship warranty."
+              }
+            ].map((faq, index) => (
+              <div 
+                key={index}
+                className={`border border-gray-200 rounded-lg p-6 transform transition-all duration-1000 delay-${index * 200} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+              >
+                <h3 className="text-lg font-light text-gray-900 mb-3">{faq.question}</h3>
+                <p className="text-gray-600">{faq.answer}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Emergency Contact */}
-      <section className="py-20 bg-[hsl(0,0%,10%)] text-white">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 font-serif">
-            Need <span className="text-[hsl(19,100%,58%)]">Emergency</span> Service?
-          </h2>
-          <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
-            We provide 24/7 emergency support for critical solar system issues. Don't let power outages disrupt your operations.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+      <section className="py-20 bg-gradient-to-br from-orange-500 via-orange-400 to-yellow-400 text-white" aria-labelledby="emergency-heading">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <div className={`transform transition-all duration-1000 delay-800 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <h2 id="emergency-heading" className="text-4xl font-light mb-8">
+              Need Emergency Service?
+            </h2>
+            <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
+              We provide 24/7 emergency support for critical solar system issues. Don't let power outages disrupt your operations.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <Button 
+                size="lg"
+                className="bg-white text-orange-600 hover:bg-gray-100 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px] group"
+                aria-label="Call emergency support line"
+              >
+                <Phone className="h-5 w-5 mr-3" aria-hidden="true" />
+                Emergency Line
+                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
+              </Button>
+              <Button 
+                variant="outline"
+                size="lg"
+                className="border-2 border-white/30 text-white hover:bg-white hover:text-orange-600 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px]"
+                aria-label="Contact us via WhatsApp"
+                onClick={() => {
+                  const phoneNumber = "2348118887425"; // Nigeria country code +234, remove leading 0
+                  const whatsappUrl = `https://wa.me/${phoneNumber}`;
+                  window.open(whatsappUrl, '_blank');
+                }}
+              >
+                WhatsApp Support
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-gradient-to-r from-orange-500 to-yellow-500" aria-labelledby="cta-heading">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <div className={`transform transition-all duration-1000 delay-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <h3 id="cta-heading" className="text-2xl font-light text-white mb-6">
+              Ready to Start Your Solar Journey?
+            </h3>
+            <p className="text-white/90 mb-8 text-lg">
+              Join thousands of Nigerian families who have already transformed their energy future with Jumiami Solar.
+            </p>
             <Button 
               size="lg"
-              className="bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] text-white px-10 py-4 text-lg font-semibold hover:from-[hsl(47,100%,63%)] hover:to-[hsl(19,100%,58%)] transition-all duration-300 transform hover:scale-105"
+              className="bg-white text-orange-600 hover:bg-gray-100 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px] group shadow-lg"
+              aria-label="Start your solar transformation today"
             >
-              Call Emergency Line
-            </Button>
-            <Button 
-              variant="outline"
-              size="lg"
-              className="border-white text-white px-10 py-4 text-lg font-semibold hover:bg-white hover:text-[hsl(0,0%,10%)] transition-all duration-300"
-            >
-              WhatsApp Support
+              Start Your Transformation
+              <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
             </Button>
           </div>
         </div>

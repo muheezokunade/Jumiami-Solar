@@ -55,10 +55,9 @@ export default function AnalyticsDashboard() {
         uniqueVisitors: 8234,
         bounceRate: 42.3,
         avgSessionDuration: 185,
-        topPages: [
-          { page: '/', views: 5234 },
-          { page: '/services', views: 3120 },
-          { page: '/products', views: 2890 },
+                  topPages: [
+            { page: '/', views: 5234 },
+            { page: '/products', views: 2890 },
           { page: '/contact', views: 2156 },
           { page: '/testimonials', views: 2020 }
         ],
@@ -320,8 +319,23 @@ export default function AnalyticsDashboard() {
 }
 
 // Google Search Console Component
+interface SearchQuery {
+  query: string;
+  clicks: number;
+  impressions: number;
+  position: number;
+}
+
+interface SearchData {
+  totalClicks: number;
+  totalImpressions: number;
+  averageCTR: number;
+  averagePosition: number;
+  topQueries: SearchQuery[];
+}
+
 export function SearchConsoleMetrics() {
-  const [searchData, setSearchData] = useState({
+  const [searchData, setSearchData] = useState<SearchData>({
     totalClicks: 0,
     totalImpressions: 0,
     averageCTR: 0,

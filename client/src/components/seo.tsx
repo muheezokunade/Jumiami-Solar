@@ -101,48 +101,123 @@ export default function SEO({
   return null;
 }
 
-// Predefined SEO configurations for each page
+// Predefined SEO configurations for each page with enhanced local SEO and schema markup
 export const seoConfigs = {
   home: {
-    title: "Jumiami Solar - #1 Solar Energy Company in Nigeria | Solar Panels, Inverters & Installation",
-    description: "Jumiami Solar is Nigeria's leading solar energy company. Expert solar panel installation, inverters, batteries & maintenance in Lagos, Ilorin & Abeokuta. 100% completion rate, 4.9/5 rating. Free consultation available.",
-    keywords: "solar energy Nigeria, solar panels Lagos, solar installation Ilorin, solar company Abeokuta, solar inverters Nigeria, solar batteries, solar maintenance, renewable energy Nigeria, solar power installation, solar experts Nigeria, Jumiami Solar",
-    url: "https://jumiamisolar.com/"
+    title: "Jumiami Solar - Premium Solar Energy Solutions in Nigeria | Save ₦50K+ Monthly",
+    description: "Leading solar energy company in Nigeria. Premium solar panels, inverters, batteries & installation services. Save ₦50K+ monthly on electricity bills. Free consultation available. Serving Lagos, Ilorin, Abeokuta & nationwide.",
+    keywords: "solar energy Nigeria, solar panels Lagos, solar installation, solar company Nigeria, solar power, renewable energy Nigeria, solar panels Ilorin, solar Abeokuta, solar installation Lagos, solar company near me, solar installation cost Nigeria",
+    url: "https://jumiamisolar.com/",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Jumiami Solar",
+      "description": "Premium solar energy solutions in Nigeria",
+      "url": "https://jumiamisolar.com",
+      "logo": "https://jumiamisolar.com/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+2348118887425",
+        "contactType": "customer service",
+        "areaServed": "Nigeria",
+        "availableLanguage": "English"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "Nigeria",
+        "addressRegion": "Lagos"
+      },
+      "sameAs": [
+        "https://facebook.com/jumiamisolar",
+        "https://instagram.com/jumiamisolar",
+        "https://twitter.com/jumiamisolar"
+      ]
+    }
   },
   about: {
-    title: "About Jumiami Solar - Nigeria's Leading Solar Energy Company | Our Story & Mission",
-    description: "Learn about Jumiami Solar's journey as Nigeria's premier solar energy company. Discover our mission to provide sustainable energy solutions across Lagos, Ilorin, and Abeokuta.",
-    keywords: "about Jumiami Solar, solar company Nigeria, solar energy mission, sustainable energy Nigeria, solar experts Lagos, solar installation company",
-    url: "https://jumiamisolar.com/about"
-  },
-  services: {
-    title: "Solar Energy Services in Nigeria | Jumiami Solar - Installation, Maintenance & Support",
-    description: "Comprehensive solar energy services in Nigeria. Solar panel installation, inverter setup, battery systems, maintenance, and 24/7 support. Serving Lagos, Ilorin, and Abeokuta.",
-    keywords: "solar services Nigeria, solar installation services, solar maintenance, solar support, solar panel installation Lagos, solar inverter installation",
-    url: "https://jumiamisolar.com/services"
+    title: "About Jumiami Solar - Leading Solar Energy Company in Nigeria | 10+ Years Experience",
+    description: "Jumiami Solar is Nigeria's premier solar energy company with 10+ years experience in solar installation, maintenance & support. Serving Lagos, Ilorin, Abeokuta & nationwide. Expert solar solutions for homes and businesses.",
+    keywords: "about Jumiami Solar, solar company Nigeria, solar installation experience, solar energy experts, solar maintenance Nigeria, solar company Lagos, solar company Ilorin, solar company Abeokuta",
+    url: "https://jumiamisolar.com/about",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "name": "About Jumiami Solar",
+      "description": "Nigeria's premier solar energy company with 10+ years experience",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "Jumiami Solar",
+        "foundingDate": "2014",
+        "description": "Leading solar energy solutions provider in Nigeria"
+      }
+    }
   },
   products: {
-    title: "Solar Products Nigeria | Jumiami Solar - Premium Solar Panels, Inverters & Batteries",
-    description: "Premium solar products in Nigeria. High-quality solar panels, inverters, batteries, and accessories. Best brands with warranty. Free consultation and installation.",
-    keywords: "solar products Nigeria, solar panels Nigeria, solar inverters, solar batteries, solar accessories, premium solar equipment",
-    url: "https://jumiamisolar.com/products"
+    title: "Solar Products & Services Nigeria | Jumiami Solar - Premium Panels, Inverters & Installation",
+    description: "Premium solar products and comprehensive services in Nigeria. High-quality solar panels, inverters, batteries, installation, and maintenance. Best brands with warranty. Free consultation available. Serving Lagos, Ilorin, Abeokuta.",
+    keywords: "solar products Nigeria, solar services Nigeria, solar panels Nigeria, solar inverters, solar batteries, solar installation, solar maintenance, premium solar equipment, solar panels Lagos, solar installation Ilorin, solar installation Abeokuta",
+    url: "https://jumiamisolar.com/products",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Solar Products & Services",
+      "description": "Premium solar products and installation services",
+      "itemListElement": [
+        {
+          "@type": "Product",
+          "name": "Premium Solar Panels",
+          "description": "High-efficiency monocrystalline solar panels"
+        },
+        {
+          "@type": "Product", 
+          "name": "Hybrid Inverters",
+          "description": "Advanced hybrid inverters with smart grid integration"
+        },
+        {
+          "@type": "Product",
+          "name": "Lithium Battery Systems", 
+          "description": "High-performance lithium-ion battery systems"
+        },
+        {
+          "@type": "Service",
+          "name": "Solar Installation",
+          "description": "Professional solar panel installation services"
+        }
+      ]
+    }
   },
   projects: {
-    title: "Solar Projects Nigeria | Jumiami Solar - Residential & Commercial Installations",
-    description: "View our completed solar projects across Nigeria. Residential and commercial installations in Lagos, Ilorin, and Abeokuta. Real case studies and success stories.",
-    keywords: "solar projects Nigeria, solar installations Lagos, commercial solar projects, residential solar installations, solar case studies",
-    url: "https://jumiamisolar.com/projects"
-  },
-  testimonials: {
-    title: "Customer Testimonials | Jumiami Solar - 4.9/5 Rating from Satisfied Clients",
-    description: "Read authentic customer testimonials and reviews for Jumiami Solar. 4.9/5 rating from satisfied clients across Nigeria. Real success stories and feedback.",
-    keywords: "Jumiami Solar reviews, solar company testimonials, customer feedback Nigeria, solar installation reviews, solar company ratings",
-    url: "https://jumiamisolar.com/testimonials"
+    title: "Solar Projects Nigeria | Jumiami Solar - Residential & Commercial Installations | Case Studies",
+    description: "View our completed solar projects across Nigeria. Residential and commercial installations in Lagos, Ilorin, and Abeokuta. Real case studies, success stories, and energy savings examples.",
+    keywords: "solar projects Nigeria, solar installations Lagos, commercial solar projects, residential solar installations, solar case studies, solar projects Ilorin, solar projects Abeokuta",
+    url: "https://jumiamisolar.com/projects",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Solar Projects Portfolio",
+      "description": "Completed solar installations across Nigeria"
+    }
   },
   contact: {
-    title: "Contact Jumiami Solar | Free Consultation - Lagos, Ilorin & Abeokuta Offices",
-    description: "Contact Jumiami Solar for free consultation. Offices in Lagos, Ilorin, and Abeokuta. Call 08118887425 or visit our locations. Expert solar advice and quotes.",
-    keywords: "contact Jumiami Solar, solar consultation Nigeria, solar company contact, solar experts Lagos, solar installation quote",
-    url: "https://jumiamisolar.com/contact"
+    title: "Contact Jumiami Solar | Free Consultation - Lagos, Ilorin & Abeokuta Offices | Call +234 811 888 7425",
+    description: "Contact Jumiami Solar for free consultation. Offices in Lagos, Ilorin, and Abeokuta. Call +234 811 888 7425 or visit our locations. Expert solar advice and quotes. WhatsApp support available.",
+    keywords: "contact Jumiami Solar, solar consultation Nigeria, solar quote, solar installation Lagos, solar company contact, solar consultation Ilorin, solar consultation Abeokuta, WhatsApp solar consultation",
+    url: "https://jumiamisolar.com/contact",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contact Jumiami Solar",
+      "description": "Get in touch for solar consultation and quotes",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "Jumiami Solar",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+2348118887425",
+          "contactType": "customer service",
+          "areaServed": "Nigeria"
+        }
+      }
+    }
   }
 }; 

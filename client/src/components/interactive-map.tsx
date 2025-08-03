@@ -14,21 +14,21 @@ const officeLocations: OfficeLocation[] = [
     id: 'head-office',
     title: 'Head Office',
     address: 'Ikota shopping complex, Road 3, opp. Union Bank, Suite E167, 150/151, VGC Ajah Lagos.',
-    phone: '08118887425',
+    phone: '+234 811 888 7425',
     coordinates: [6.5244, 3.3792] // Lagos coordinates
   },
   {
     id: 'ilorin-branch',
     title: 'Ilorin Branch Office',
     address: 'Shop 4B samtosh plaza, No. 171, Ibrahim Taiwo Rd. Opp. access Bank, Ilorin',
-    phone: '09156082923',
+    phone: '+234 811 888 7425',
     coordinates: [8.4961, 4.5521] // Ilorin coordinates
   },
   {
     id: 'abeokuta-branch',
     title: 'Abeokuta Branch Office',
     address: 'Alhaji Mulikat sonekan (oosele) House, Opposite NNPC Filling Station, Somorin Obantoko Abeokuta, Ogun state.',
-    phone: '08118887425',
+    phone: '+234 811 888 7425',
     coordinates: [7.1557, 3.3451] // Abeokuta coordinates
   }
 ];

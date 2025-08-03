@@ -2,17 +2,17 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, X, Phone, Mail, ChevronRight, Home, Info, Package, Wrench, FolderOpen, MessageSquare, PhoneCall, Instagram, Facebook, Twitter, ExternalLink } from "lucide-react";
+import { Menu, X, Phone, Mail, ChevronRight, Home, Info, Package, Wrench, FolderOpen, MessageSquare, PhoneCall, Instagram, Facebook, Twitter, ExternalLink, BookOpen } from "lucide-react";
+import { useMicroInteractions } from "@/hooks/use-micro-interactions";
 import logoImage from "@assets/FB_IMG_1753880100791 - Faridah Sulaimon_1753982843756.jpg";
 
 // Flat navigation structure
 const navItems = [
   { href: "/", label: "Home", icon: Home },
   { href: "/about", label: "About", icon: Info },
-  { href: "/products", label: "Products", icon: Package },
-  { href: "/services", label: "Services", icon: Wrench },
+  { href: "/products", label: "Products & Services", icon: Package },
   { href: "/projects", label: "Projects", icon: FolderOpen },
-  { href: "/testimonials", label: "Testimonials", icon: MessageSquare },
+  { href: "/blog", label: "Blog", icon: BookOpen },
   { href: "/contact", label: "Contact", icon: PhoneCall },
 ];
 
@@ -44,6 +44,9 @@ export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  
+  const { usePulseAnimation, handleHover, handleClick } = useMicroInteractions();
+  const isPulsing = usePulseAnimation(3000);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,10 +73,10 @@ export default function Navigation() {
       <div className="bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] text-white py-1 px-4 hidden sm:block">
         <div className="max-w-7xl mx-auto flex justify-between items-center text-xs">
           <div className="flex items-center space-x-6">
-            <div className="flex items-center space-x-2">
-              <Phone className="h-3 w-3" />
-              <span className="hidden md:inline">08118887425</span>
-              <span className="md:hidden">08118887425</span>
+            <div className="flex items-center space-x-2 text-sm">
+              <Phone className="h-4 w-4 text-[hsl(19,100%,58%)]" />
+              <span className="hidden md:inline">+234 811 888 7425</span>
+              <span className="md:hidden">+234 811 888 7425</span>
             </div>
             <div className="flex items-center space-x-2">
               <Mail className="h-3 w-3" />
@@ -100,12 +103,18 @@ export default function Navigation() {
           <div className="flex justify-between items-center h-12 sm:h-14">
             {/* Logo - Smaller */}
             <Link href="/" className="flex items-center space-x-3 group">
-              <div className="relative">
-            <img 
-              src={logoImage}
-              alt="Jumiami Solar Shop Logo" 
+              <div 
+                className={`relative transition-all duration-300 ${
+                  isPulsing ? 'scale-110 shadow-lg' : 'scale-100'
+                }`}
+                onMouseEnter={() => handleHover('logo', true)}
+                onMouseLeave={() => handleHover('logo', false)}
+              >
+                <img 
+                  src={logoImage}
+                  alt="Jumiami Solar Shop Logo" 
                   className="h-8 w-auto sm:h-10 transition-all duration-300 group-hover:scale-110"
-            />
+                />
               </div>
               <div>
                 <h1 className="text-base sm:text-lg font-bold text-[hsl(0,0%,10%)]">Jumiami Solar</h1>
@@ -136,6 +145,11 @@ export default function Navigation() {
             {/* CTA Button - Smaller */}
             <div className="hidden md:flex items-center space-x-4">
               <Button 
+                onClick={() => {
+                  const phoneNumber = "2348118887425"; // Nigeria country code +234, remove leading 0
+                  const whatsappUrl = `https://wa.me/${phoneNumber}`;
+                  window.open(whatsappUrl, '_blank');
+                }}
                 className="bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] hover:from-[hsl(47,100%,63%)] hover:to-[hsl(19,100%,58%)] text-white font-semibold px-4 py-1.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm"
               >
                 Get Quote
@@ -219,10 +233,15 @@ export default function Navigation() {
                         <h3 className="font-semibold text-[hsl(0,0%,10%)] mb-3 text-sm">Quick Actions</h3>
                         <div className="space-y-2">
                           <Button 
+                            onClick={() => {
+                              const phoneNumber = "2348118887425"; // Nigeria country code +234, remove leading 0
+                              const whatsappUrl = `https://wa.me/${phoneNumber}`;
+                              window.open(whatsappUrl, '_blank');
+                            }}
                             className="w-full bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] hover:from-[hsl(47,100%,63%)] hover:to-[hsl(19,100%,58%)] text-white font-semibold py-2 rounded-xl shadow-lg touch-manipulation text-sm"
                           >
                             <PhoneCall className="h-3 w-3 mr-2" />
-                            Call Now
+                            WhatsApp
                           </Button>
                           <Button 
                             variant="outline"
@@ -265,7 +284,7 @@ export default function Navigation() {
                     <div className="space-y-2">
                       <div className="flex items-center space-x-2 text-xs text-gray-600">
                         <Phone className="h-3 w-3" />
-                        <span>08118887425</span>
+                        <span>+234 811 888 7425</span>
                       </div>
                       <div className="flex items-center space-x-2 text-xs text-gray-600">
                         <Mail className="h-3 w-3" />

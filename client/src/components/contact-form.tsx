@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { insertContactSchema, type InsertContact } from "@shared/schema";
+import { insertContactSchema, type InsertContact } from "@/lib/schema";
 
 export default function ContactForm() {
   const { toast } = useToast();
@@ -54,8 +54,8 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="glass-morphism rounded-2xl p-8">
-      <h3 className="text-2xl font-bold mb-6 text-white">Get Your Free Consultation</h3>
+    <div className="bg-white border border-gray-200 rounded-lg p-8 shadow-lg">
+      <h3 className="text-2xl font-light text-gray-900 mb-6">Get Your Free Consultation</h3>
       
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -65,15 +65,15 @@ export default function ContactForm() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-white">Full Name</FormLabel>
+                  <FormLabel className="text-gray-900 font-medium">Full Name</FormLabel>
                   <FormControl>
                     <Input 
                       {...field}
                       placeholder="Your full name"
-                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-[hsl(19,100%,58%)]"
+                      className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-orange-500 focus:ring-orange-500"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-600" />
                 </FormItem>
               )}
             />
@@ -83,16 +83,16 @@ export default function ContactForm() {
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-white">Phone Number</FormLabel>
+                  <FormLabel className="text-gray-900 font-medium">Phone Number</FormLabel>
                   <FormControl>
                     <Input 
                       {...field}
                       type="tel"
                       placeholder="+234 xxx xxx xxxx"
-                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-[hsl(19,100%,58%)]"
+                      className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-orange-500 focus:ring-orange-500"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-600" />
                 </FormItem>
               )}
             />
@@ -103,16 +103,16 @@ export default function ContactForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-white">Email Address</FormLabel>
+                <FormLabel className="text-gray-900 font-medium">Email Address</FormLabel>
                 <FormControl>
                   <Input 
                     {...field}
                     type="email"
                     placeholder="your.email@example.com"
-                    className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-[hsl(19,100%,58%)]"
+                    className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-orange-500 focus:ring-orange-500"
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-red-600" />
               </FormItem>
             )}
           />
@@ -122,10 +122,10 @@ export default function ContactForm() {
             name="propertyType"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-white">Property Type</FormLabel>
+                <FormLabel className="text-gray-900 font-medium">Property Type</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
-                    <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-[hsl(19,100%,58%)]">
+                    <SelectTrigger className="bg-white border-gray-300 text-gray-900 focus:border-orange-500 focus:ring-orange-500">
                       <SelectValue placeholder="Select property type" />
                     </SelectTrigger>
                   </FormControl>
@@ -135,7 +135,7 @@ export default function ContactForm() {
                     <SelectItem value="industrial">Industrial</SelectItem>
                   </SelectContent>
                 </Select>
-                <FormMessage />
+                <FormMessage className="text-red-600" />
               </FormItem>
             )}
           />
@@ -145,16 +145,16 @@ export default function ContactForm() {
             name="message"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-white">Message</FormLabel>
+                <FormLabel className="text-gray-900 font-medium">Message</FormLabel>
                 <FormControl>
                   <Textarea 
                     {...field}
                     rows={4}
                     placeholder="Tell us about your energy needs..."
-                    className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-[hsl(19,100%,58%)]"
+                    className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-orange-500 focus:ring-orange-500"
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-red-600" />
               </FormItem>
             )}
           />
@@ -162,7 +162,7 @@ export default function ContactForm() {
           <Button 
             type="submit" 
             disabled={contactMutation.isPending}
-            className="w-full bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] text-white py-4 font-semibold hover:from-[hsl(47,100%,63%)] hover:to-[hsl(19,100%,58%)] transition-all duration-300 transform hover:scale-105"
+            className="w-full bg-gradient-to-r from-orange-500 to-yellow-500 text-white py-4 font-medium hover:from-orange-600 hover:to-yellow-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             {contactMutation.isPending ? "Submitting..." : "Get Free Consultation"}
           </Button>

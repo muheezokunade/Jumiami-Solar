@@ -5,37 +5,36 @@ import logoImage from "@assets/FB_IMG_1753880100791 - Faridah Sulaimon_175398284
 const quickLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Us" },
-  { href: "/products", label: "Products" },
-  { href: "/services", label: "Services" },
+  { href: "/products", label: "Products & Services" },
   { href: "/projects", label: "Projects" },
-  { href: "/testimonials", label: "Testimonials" },
+  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];
 
-const services = [
-  "Solar Panel Sales",
-  "System Installation", 
-  "Inverter Repair",
-  "Maintenance Service",
-  "Battery Replacement",
-  "System Monitoring"
-];
+const contactInfo = {
+  phone: "+234 811 888 7425",
+  email: "info@jumiamisolar.com",
+  address: "Lagos, Nigeria"
+};
 
 const officeLocations = [
   {
-    title: "Head Office",
-    address: "Ikota shopping complex, Road 3, opp. Union Bank, Suite E167, 150/151, VGC Ajah Lagos.",
-    phone: "08118887425"
+    city: "Lagos",
+    address: "Victoria Island, Lagos",
+    phone: "+234 811 888 7425",
+    email: "lagos@jumiamisolar.com"
   },
   {
-    title: "Ilorin Branch Office",
+    city: "Ilorin",
     address: "Shop 4B samtosh plaza, No. 171, Ibrahim Taiwo Rd. Opp. access Bank, Ilorin",
-    phone: "09156082923"
+    phone: "09156082923",
+    email: "ilorin@jumiamisolar.com"
   },
   {
-    title: "Abeokuta Branch Office",
+    city: "Abeokuta",
     address: "Alhaji Mulikat sonekan (oosele) House, Opposite NNPC Filling Station, Somorin Obantoko Abeokuta, Ogun state.",
-    phone: "08118887425"
+    phone: "08118887425",
+    email: "abeokuta@jumiamisolar.com"
   }
 ];
 
@@ -119,22 +118,7 @@ export default function Footer() {
             </ul>
           </div>
           
-          {/* Services */}
-          <div>
-            <h3 className="text-xl font-bold mb-6">Our Services</h3>
-            <ul className="space-y-3">
-              {services.map((service) => (
-                <li key={service}>
-                  <a 
-                    href="#" 
-                    className="text-gray-400 hover:text-[hsl(19,100%,58%)] transition-colors"
-                  >
-                    {service}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+
           </div>
           
         {/* Office Locations */}
@@ -143,7 +127,7 @@ export default function Footer() {
           <div className="grid md:grid-cols-3 gap-8">
             {officeLocations.map((office, index) => (
               <div key={index} className="bg-gray-800/50 rounded-lg p-6 hover:bg-gray-800/70 transition-colors">
-                <h4 className="text-lg font-bold text-[hsl(19,100%,58%)] mb-4">{office.title}</h4>
+                <h4 className="text-lg font-bold text-[hsl(19,100%,58%)] mb-4">{office.city}</h4>
                 <div className="space-y-3">
               <div className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 text-[hsl(19,100%,58%)] mt-1 flex-shrink-0" />
