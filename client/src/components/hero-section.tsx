@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { ChevronDown, Play, Star, Zap, Sun, Shield, Award } from "lucide-react";
+import { ChevronDown, Play, Star, Zap, Sun, Shield, Award, Phone, Mail } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function HeroSection() {
@@ -47,11 +47,25 @@ export default function HeroSection() {
         </h1>
         
         {/* Subtitle - Clear Value Proposition */}
-        <p className={`text-lg sm:text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <p className={`text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           Save ₦50,000+ monthly on electricity bills.
           <br />
           <span className="text-[hsl(19,100%,58%)] font-semibold">Get 25-year warranty + 40% ROI in 3 years</span>
         </p>
+        
+        {/* Contact Info - Prominent Display */}
+        <div className={`mb-8 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-white">
+            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+              <Phone className="h-4 w-4 text-[hsl(19,100%,58%)]" />
+              <span className="text-sm font-medium">Call Now: +234 811 888 7425</span>
+            </div>
+            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+              <Mail className="h-4 w-4 text-[hsl(19,100%,58%)]" />
+              <span className="text-sm font-medium">info@jumiamisolar.com</span>
+            </div>
+          </div>
+        </div>
         
         {/* Stats - Clean Grid */}
         <div className={`grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 max-w-4xl mx-auto ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
