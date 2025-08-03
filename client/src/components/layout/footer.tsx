@@ -96,7 +96,7 @@ export default function Footer() {
                     title={social.name}
                   >
                     <IconComponent className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                  </a>
+              </a>
                 );
               })}
             </div>
@@ -135,8 +135,8 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-        </div>
-
+          </div>
+          
         {/* Office Locations */}
         <div className="mt-12 pt-8 border-t border-gray-800">
           <h3 className="text-2xl font-bold mb-8 text-center">Our Office Locations</h3>
@@ -145,21 +145,21 @@ export default function Footer() {
               <div key={index} className="bg-gray-800/50 rounded-lg p-6 hover:bg-gray-800/70 transition-colors">
                 <h4 className="text-lg font-bold text-[hsl(19,100%,58%)] mb-4">{office.title}</h4>
                 <div className="space-y-3">
-                  <div className="flex items-start space-x-3">
-                    <MapPin className="h-5 w-5 text-[hsl(19,100%,58%)] mt-1 flex-shrink-0" />
+              <div className="flex items-start space-x-3">
+                <MapPin className="h-5 w-5 text-[hsl(19,100%,58%)] mt-1 flex-shrink-0" />
                     <p className="text-gray-300 text-sm leading-relaxed">
                       {office.address}
-                    </p>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <Phone className="h-5 w-5 text-[hsl(19,100%,58%)]" />
+                </p>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Phone className="h-5 w-5 text-[hsl(19,100%,58%)]" />
                     <a 
                       href={`tel:${office.phone}`}
                       className="text-gray-300 hover:text-[hsl(19,100%,58%)] transition-colors"
                     >
                       {office.phone}
                     </a>
-                  </div>
+              </div>
                 </div>
               </div>
             ))}

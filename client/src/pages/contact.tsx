@@ -91,8 +91,8 @@ export default function Contact() {
                         <div className="flex items-start space-x-3">
                           <MapPin className="h-5 w-5 text-[hsl(19,100%,58%)] mt-1 flex-shrink-0" />
                           <p className="text-gray-300 text-sm leading-relaxed">{office.address}</p>
-                        </div>
-                        
+                  </div>
+                  
                         <div className="flex items-center space-x-3">
                           <Phone className="h-5 w-5 text-[hsl(19,100%,58%)]" />
                           <a 
@@ -101,8 +101,8 @@ export default function Contact() {
                           >
                             {office.phone}
                           </a>
-                        </div>
-                      </div>
+                    </div>
+                  </div>
                     </div>
                   ))}
                   
@@ -136,16 +136,16 @@ export default function Contact() {
                   {socialMediaLinks.map((social) => {
                     const IconComponent = social.icon;
                     return (
-                      <a 
+                  <a 
                         key={social.name}
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center space-x-3 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-300"
-                      >
+                    className="flex items-center space-x-3 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-300"
+                  >
                         <IconComponent className="h-5 w-5 text-[hsl(19,100%,58%)]" />
                         <span>{social.name}</span>
-                      </a>
+                  </a>
                     );
                   })}
                 </div>

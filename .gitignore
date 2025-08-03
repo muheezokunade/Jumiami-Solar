@@ -86,3 +86,5 @@ jspm_packages/
 
 # Node.js binary (local installation)
 node-v20.18.0-darwin-x64/
+# Local Netlify folder
+.netlify
