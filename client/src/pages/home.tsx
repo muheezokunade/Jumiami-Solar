@@ -22,7 +22,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className={`transform transition-all duration-1000 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[hsl(0,0%,10%)] mb-6 lg:mb-8 font-serif">
-                Nigeria's #1 Solar Energy Company
+                Trusted Solar Energy Company
                 <span className="text-[hsl(19,100%,58%)]"> Since 2020</span>
               </h2>
               
@@ -80,12 +80,12 @@ export default function Home() {
               />
               
               <div className="absolute -bottom-6 -left-6 glass-morphism rounded-2xl p-4 sm:p-6 text-white backdrop-blur-sm">
-                <div className="text-2xl sm:text-3xl font-bold text-[hsl(19,100%,58%)] font-serif">1000+</div>
-                <div className="text-xs sm:text-sm">Happy Customers</div>
+                <div className="text-2xl sm:text-3xl font-bold text-[hsl(19,100%,58%)] font-serif">500+</div>
+                <div className="text-xs sm:text-sm">Successful Installations</div>
               </div>
               
               <div className="absolute -top-6 -right-6 glass-morphism rounded-2xl p-4 sm:p-6 text-white backdrop-blur-sm">
-                <div className="text-2xl sm:text-3xl font-bold text-[hsl(47,100%,63%)] font-serif">5+</div>
+                <div className="text-2xl sm:text-3xl font-bold text-[hsl(47,100%,63%)] font-serif">4+</div>
                 <div className="text-xs sm:text-sm">Years Experience</div>
               </div>
             </div>
@@ -109,7 +109,7 @@ export default function Home() {
             {[
               { icon: Award, title: "Quality Products", desc: "Premium solar panels, inverters, and batteries from world-class manufacturers with proven track records.", delay: 0 },
               { icon: Settings, title: "Professional Installation", desc: "Certified technicians with extensive experience in Nigerian conditions ensure safe, efficient installations.", delay: 200 },
-              { icon: Calendar, title: "5+ Years Expertise", desc: "Half a decade of experience serving Lagos and surrounding areas with consistent excellence.", delay: 400 },
+              { icon: Calendar, title: "4+ Years Expertise", desc: "Four years of experience serving Lagos, Ilorin, and Abeokuta with consistent excellence.", delay: 400 },
               { icon: Wrench, title: "Comprehensive Maintenance", desc: "Complete after-sales support including regular maintenance, repairs, and system optimization.", delay: 600 }
             ].map((item, index) => (
               <div key={index} className={`text-center group transform transition-all duration-1000 delay-${item.delay} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
@@ -152,7 +152,7 @@ export default function Home() {
             Ready to Go <span className="text-[hsl(19,100%,58%)]">Solar?</span>
           </h2>
           <p className={`text-lg sm:text-xl text-gray-300 mb-8 sm:mb-12 max-w-3xl mx-auto transform transition-all duration-1000 delay-400 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            Join thousands of satisfied customers who have made the switch to clean, reliable solar energy. Get your free consultation today.
+            Join hundreds of satisfied customers who have made the switch to clean, reliable solar energy. Get your free consultation today.
           </p>
           <div className={`flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center transform transition-all duration-1000 delay-600 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <Link href="/contact">

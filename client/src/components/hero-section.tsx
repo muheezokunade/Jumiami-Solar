@@ -66,16 +66,16 @@ export default function HeroSection() {
         <div className={`mb-6 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-[hsl(19,100%,58%)]/20 to-[hsl(47,100%,63%)]/20 backdrop-blur-sm border border-[hsl(19,100%,58%)]/30 rounded-full px-4 py-2 text-[hsl(19,100%,58%)]">
             <Star className="h-4 w-4" />
-            <span className="text-sm font-medium">Leading Solar Solutions in Nigeria</span>
+            <span className="text-sm font-medium">Certified Solar Installers in Lagos, Ilorin & Abeokuta</span>
           </div>
         </div>
 
         {/* Main Heading - Cleaner */}
         <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight transform transition-all duration-1000 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          Powering Nigeria's
+          Trusted Solar Solutions
           <br />
           <span className="bg-gradient-to-r from-[hsl(19,100%,58%)] to-[hsl(47,100%,63%)] bg-clip-text text-transparent">
-            Solar Revolution
+            Since 2020
           </span>
         </h1>
         
@@ -89,20 +89,20 @@ export default function HeroSection() {
         {/* Stats - Cleaner Grid */}
         <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 max-w-3xl mx-auto transform transition-all duration-1000 delay-600 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <div className="text-center p-3">
-            <div className="text-2xl md:text-3xl font-bold text-[hsl(19,100%,58%)] mb-1">1000+</div>
-            <div className="text-xs text-gray-400">Happy Customers</div>
+            <div className="text-2xl md:text-3xl font-bold text-[hsl(19,100%,58%)] mb-1">500+</div>
+            <div className="text-xs text-gray-400">Successful Installations</div>
           </div>
           <div className="text-center p-3">
-            <div className="text-2xl md:text-3xl font-bold text-[hsl(19,100%,58%)] mb-1">5+</div>
+            <div className="text-2xl md:text-3xl font-bold text-[hsl(19,100%,58%)] mb-1">4+</div>
             <div className="text-xs text-gray-400">Years Experience</div>
           </div>
           <div className="text-center p-3">
-            <div className="text-2xl md:text-3xl font-bold text-[hsl(19,100%,58%)] mb-1">24/7</div>
-            <div className="text-xs text-gray-400">Support Available</div>
+            <div className="text-2xl md:text-3xl font-bold text-[hsl(19,100%,58%)] mb-1">4.8/5</div>
+            <div className="text-xs text-gray-400">Google Rating</div>
           </div>
           <div className="text-center p-3">
-            <div className="text-2xl md:text-3xl font-bold text-[hsl(19,100%,58%)] mb-1">100%</div>
-            <div className="text-xs text-gray-400">Quality Guaranteed</div>
+            <div className="text-2xl md:text-3xl font-bold text-[hsl(19,100%,58%)] mb-1">25yr</div>
+            <div className="text-xs text-gray-400">Panel Warranty</div>
           </div>
         </div>
         
