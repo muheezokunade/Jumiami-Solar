@@ -3,7 +3,7 @@
 ## 🔑 Your Cloudinary Credentials
 
 ```
-Cloud Name: root
+Cloud Name: dhdjzw88p
 API Key: 896315254897449
 API Secret: 76DuTs2pAXaBgfkTpqBfC80iN7o
 ```
@@ -23,7 +23,7 @@ const cloudinary = require('cloudinary').v2;
 
 // Configure with your credentials
 cloudinary.config({
-  cloud_name: 'root',
+  cloud_name: 'dhdjzw88p',
   api_key: '896315254897449',
   api_secret: '76DuTs2pAXaBgfkTpqBfC80iN7o'
 });
@@ -66,16 +66,16 @@ node upload-video.js
 
 ## 🎯 Optimized Video URLs
 
-### **Hero Video URL (After Upload):**
+### **Current Hero Video URL:**
 ```
-https://res.cloudinary.com/root/video/upload/f_auto,q_auto,w_1920,h_1080/v1/jumiami-solar/hero-video
+https://res.cloudinary.com/dhdjzw88p/video/upload/f_auto,q_auto,w_1920,h_1080/v1/8853485-hd_1920_1080_24fps_iyheid
 ```
 
 ### **Responsive Video URLs:**
 ```
-Desktop (1920x1080): https://res.cloudinary.com/root/video/upload/f_auto,q_auto,w_1920,h_1080/v1/jumiami-solar/hero-video
-Tablet (1280x720): https://res.cloudinary.com/root/video/upload/f_auto,q_auto,w_1280,h_720/v1/jumiami-solar/hero-video
-Mobile (854x480): https://res.cloudinary.com/root/video/upload/f_auto,q_auto,w_854,h_480/v1/jumiami-solar/hero-video
+Desktop (1920x1080): https://res.cloudinary.com/dhdjzw88p/video/upload/f_auto,q_auto,w_1920,h_1080/v1/8853485-hd_1920_1080_24fps_iyheid
+Tablet (1280x720): https://res.cloudinary.com/dhdjzw88p/video/upload/f_auto,q_auto,w_1280,h_720/v1/8853485-hd_1920_1080_24fps_iyheid
+Mobile (854x480): https://res.cloudinary.com/dhdjzw88p/video/upload/f_auto,q_auto,w_854,h_480/v1/8853485-hd_1920_1080_24fps_iyheid
 ```
 
 ## 📱 Video Specifications
@@ -98,7 +98,7 @@ Mobile (854x480): https://res.cloudinary.com/root/video/upload/f_auto,q_auto,w_8
 ```jsx
 const videoSources = [
   {
-    src: "https://res.cloudinary.com/root/video/upload/f_auto,q_auto,w_1920,h_1080/v1/jumiami-solar/hero-video",
+    src: "https://res.cloudinary.com/dhdjzw88p/video/upload/f_auto,q_auto,w_1920,h_1080/v1/8853485-hd_1920_1080_24fps_iyheid",
     type: "video/mp4",
     fallback: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80"
   }
@@ -167,7 +167,7 @@ const videoSources = [
 - Community: https://support.cloudinary.com
 
 ### **Your Account Details:**
-- **Cloud Name**: root
+- **Cloud Name**: dhdjzw88p
 - **API Key**: 896315254897449
 - **API Secret**: 76DuTs2pAXaBgfkTpqBfC80iN7o
 - **Dashboard**: https://cloudinary.com/console

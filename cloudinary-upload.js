@@ -2,7 +2,7 @@ const cloudinary = require('cloudinary').v2;
 
 // Configure Cloudinary with your credentials
 cloudinary.config({
-  cloud_name: 'root',
+  cloud_name: 'dhdjzw88p',
   api_key: '896315254897449',
   api_secret: '76DuTs2pAXaBgfkTpqBfC80iN7o'
 });
@@ -39,7 +39,7 @@ async function uploadSolarVideo() {
 
 // Function to get optimized video URL
 function getOptimizedVideoUrl(publicId) {
-  return `https://res.cloudinary.com/root/video/upload/f_auto,q_auto,w_1920,h_1080/v1/jumiami-solar/${publicId}`;
+  return `https://res.cloudinary.com/dhdjzw88p/video/upload/f_auto,q_auto,w_1920,h_1080/v1/${publicId}`;
 }
 
 // Example usage

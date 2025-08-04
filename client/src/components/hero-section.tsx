@@ -28,12 +28,12 @@ export default function HeroSection() {
   // Production-ready video sources with Cloudinary CDN
   const videoSources = [
     {
-      src: "https://res.cloudinary.com/root/video/upload/f_auto,q_auto,w_1920,h_1080/v1/samples/elephants.mp4",
+      src: "https://res.cloudinary.com/dhdjzw88p/video/upload/f_auto,q_auto,w_1920,h_1080/v1/8853485-hd_1920_1080_24fps_iyheid",
       type: "video/mp4",
       fallback: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80"
     },
     {
-      src: "https://res.cloudinary.com/root/video/upload/f_auto,q_auto,w_1920,h_1080/v1/samples/bike.mp4",
+      src: "https://res.cloudinary.com/dhdjzw88p/video/upload/f_auto,q_auto,w_1280,h_720/v1/8853485-hd_1920_1080_24fps_iyheid",
       type: "video/mp4", 
       fallback: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80"
     }
