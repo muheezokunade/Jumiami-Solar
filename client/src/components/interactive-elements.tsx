@@ -139,21 +139,24 @@ export function SolarSystemSimulator() {
     if (isActive) {
       console.log('Solar System Simulator: Starting simulation...');
       intervalRef.current = setInterval(() => {
-        setTimeOfDay(prev => (prev + 1) % 24);
-        
-        // Simulate solar power based on time of day
-        const solarPower = Math.max(0, Math.sin((timeOfDay - 6) * Math.PI / 12) * 100);
-        const newPower = Math.floor(solarPower);
-        setCurrentPower(newPower);
-        
-        // Simulate battery charging/discharging
-        if (solarPower > 20) {
-          setBatteryLevel(prev => Math.min(100, prev + 2));
-        } else {
-          setBatteryLevel(prev => Math.max(0, prev - 1));
-        }
-        
-        console.log('Solar System Simulator: Time:', timeOfDay, 'Power:', newPower, 'Battery:', batteryLevel);
+        setTimeOfDay(prev => {
+          const newTime = (prev + 1) % 24;
+          
+          // Simulate solar power based on new time
+          const solarPower = Math.max(0, Math.sin((newTime - 6) * Math.PI / 12) * 100);
+          const newPower = Math.floor(solarPower);
+          setCurrentPower(newPower);
+          
+          // Simulate battery charging/discharging
+          if (solarPower > 20) {
+            setBatteryLevel(prev => Math.min(100, prev + 2));
+          } else {
+            setBatteryLevel(prev => Math.max(0, prev - 1));
+          }
+          
+          console.log('Solar System Simulator: Time:', newTime, 'Power:', newPower);
+          return newTime;
+        });
       }, 1000);
     } else {
       if (intervalRef.current) {
@@ -166,7 +169,7 @@ export function SolarSystemSimulator() {
         clearInterval(intervalRef.current);
       }
     };
-  }, [isActive, timeOfDay]);
+  }, [isActive]); // Remove timeOfDay from dependencies
 
   return (
     <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-lg border border-blue-200">
