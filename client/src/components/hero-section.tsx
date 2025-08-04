@@ -42,13 +42,16 @@ export default function HeroSection() {
   useEffect(() => {
     setIsVisible(true);
     
-    // Production-ready video play strategy with Cloudinary
+    // Enhanced video play strategy with better debugging
     const attemptVideoPlay = async () => {
       if (videoRef.current) {
         try {
+          console.log('Attempting to play video...');
+          
           // Ensure video is muted for autoplay compliance
           videoRef.current.muted = true;
           videoRef.current.playsInline = true;
+          videoRef.current.preload = 'auto';
           
           // Strategy 1: Try autoplay with proper attributes
           const playPromise = videoRef.current.play();
@@ -56,28 +59,31 @@ export default function HeroSection() {
             await playPromise;
             setIsVideoPlaying(true);
             setShowPlayButton(false);
-            console.log('Cloudinary video autoplay successful');
+            console.log('✅ Cloudinary video autoplay successful');
           }
         } catch (error) {
-          console.log('Autoplay failed, showing play button:', error);
+          console.log('❌ Autoplay failed, showing play button:', error);
           setShowPlayButton(true);
           
           // Strategy 2: Try with user interaction simulation
           setTimeout(async () => {
             try {
               if (videoRef.current) {
+                console.log('🔄 Attempting secondary play...');
                 videoRef.current.muted = true;
                 await videoRef.current.play();
                 setIsVideoPlaying(true);
                 setShowPlayButton(false);
-                console.log('Secondary Cloudinary play attempt successful');
+                console.log('✅ Secondary Cloudinary play attempt successful');
               }
             } catch (error) {
-              console.log('Secondary play attempt failed:', error);
+              console.log('❌ Secondary play attempt failed:', error);
               setVideoError(true);
             }
           }, 1000);
         }
+      } else {
+        console.log('❌ Video ref not available');
       }
     };
 
@@ -87,11 +93,11 @@ export default function HeroSection() {
 
   const handleVideoLoad = () => {
     setVideoLoaded(true);
-    console.log('Video loaded successfully');
+    console.log('✅ Video loaded successfully');
   };
 
-  const handleVideoError = () => {
-    console.log('Video failed to load, using fallback');
+  const handleVideoError = (event: any) => {
+    console.log('❌ Video failed to load, using fallback:', event);
     setVideoError(true);
   };
 
@@ -154,7 +160,7 @@ export default function HeroSection() {
           </div>
         )}
 
-        {/* Production-Ready Video Element */}
+        {/* Enhanced Video Element with Better Error Handling */}
         {!videoError && (
           <div className="relative">
             <video
@@ -167,16 +173,26 @@ export default function HeroSection() {
               loop
               playsInline
               preload="auto"
+              controls={false}
+              disablePictureInPicture
+              disableRemotePlayback
               poster="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
               aria-label="Solar installation video background"
               onLoadedData={handleVideoLoad}
               onError={handleVideoError}
               onPlay={handleVideoPlay}
               onPause={handleVideoPause}
+              onLoadStart={() => console.log('🎬 Video load started')}
+              onCanPlay={() => console.log('🎬 Video can play')}
+              onCanPlayThrough={() => console.log('🎬 Video can play through')}
             >
               <source 
                 src={videoSources[0].src} 
                 type={videoSources[0].type} 
+              />
+              <source 
+                src={videoSources[1].src} 
+                type={videoSources[1].type} 
               />
               {/* Fallback image for browsers that don't support video */}
               <img
