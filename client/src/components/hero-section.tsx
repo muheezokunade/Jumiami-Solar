@@ -25,16 +25,16 @@ export default function HeroSection() {
   const { magneticOffset, handleMouseMove, handleMouseLeave } = useMagneticEffect(0.2);
   const { ripples, createRipple } = useRippleEffect();
 
-  // Production-ready video sources with proper CDN hosting
+  // Production-ready video sources with Cloudinary CDN
   const videoSources = [
     {
-      src: "/videos/hero-video.mp4", // Local video file
+      src: "https://res.cloudinary.com/root/video/upload/f_auto,q_auto,w_1920,h_1080/v1/samples/elephants.mp4",
       type: "video/mp4",
       fallback: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80"
     },
     {
-      src: "https://res.cloudinary.com/demo/video/upload/f_auto,q_auto/v1/samples/elephants.mp4", // Cloudinary fallback
-      type: "video/mp4",
+      src: "https://res.cloudinary.com/root/video/upload/f_auto,q_auto,w_1920,h_1080/v1/samples/bike.mp4",
+      type: "video/mp4", 
       fallback: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80"
     }
   ];
@@ -42,7 +42,7 @@ export default function HeroSection() {
   useEffect(() => {
     setIsVisible(true);
     
-    // Production-ready video play strategy
+    // Production-ready video play strategy with Cloudinary
     const attemptVideoPlay = async () => {
       if (videoRef.current) {
         try {
@@ -56,7 +56,7 @@ export default function HeroSection() {
             await playPromise;
             setIsVideoPlaying(true);
             setShowPlayButton(false);
-            console.log('Video autoplay successful');
+            console.log('Cloudinary video autoplay successful');
           }
         } catch (error) {
           console.log('Autoplay failed, showing play button:', error);
@@ -70,7 +70,7 @@ export default function HeroSection() {
                 await videoRef.current.play();
                 setIsVideoPlaying(true);
                 setShowPlayButton(false);
-                console.log('Secondary play attempt successful');
+                console.log('Secondary Cloudinary play attempt successful');
               }
             } catch (error) {
               console.log('Secondary play attempt failed:', error);
