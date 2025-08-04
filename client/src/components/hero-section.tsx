@@ -25,17 +25,17 @@ export default function HeroSection() {
   const { magneticOffset, handleMouseMove, handleMouseLeave } = useMagneticEffect(0.2);
   const { ripples, createRipple } = useRippleEffect();
 
-  // Production-ready video sources with Cloudinary CDN
+  // Optimized video sources for better performance
   const videoSources = [
     {
-      src: "https://res.cloudinary.com/dhdjzw88p/video/upload/f_auto,q_auto,w_1920,h_1080/v1/8853485-hd_1920_1080_24fps_iyheid",
+      src: "https://res.cloudinary.com/dhdjzw88p/video/upload/f_auto,q_auto,w_854,h_480/v1/8853485-hd_1920_1080_24fps_iyheid",
       type: "video/mp4",
-      fallback: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80"
+      fallback: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=854&q=60"
     },
     {
       src: "https://res.cloudinary.com/dhdjzw88p/video/upload/f_auto,q_auto,w_1280,h_720/v1/8853485-hd_1920_1080_24fps_iyheid",
       type: "video/mp4", 
-      fallback: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80"
+      fallback: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=1280&q=70"
     }
   ];
 
@@ -51,7 +51,7 @@ export default function HeroSection() {
           // Ensure video is muted for autoplay compliance
           videoRef.current.muted = true;
           videoRef.current.playsInline = true;
-          videoRef.current.preload = 'auto';
+          videoRef.current.preload = 'metadata';
           
           // Strategy 1: Try autoplay with proper attributes
           const playPromise = videoRef.current.play();
@@ -127,11 +127,11 @@ export default function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* Video Background with Production-Ready Implementation */}
       <div className="absolute inset-0 z-0">
-        {/* Fallback Image - Always visible as poster */}
+        {/* Optimized Fallback Image - Always visible as poster */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80')`
+            backgroundImage: `url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=854&q=60')`
           }}
           role="img"
           aria-label="Solar panels on a modern home"
@@ -172,11 +172,11 @@ export default function HeroSection() {
               muted
               loop
               playsInline
-              preload="auto"
+              preload="metadata"
               controls={false}
               disablePictureInPicture
               disableRemotePlayback
-              poster="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
+              poster="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=854&q=60"
               aria-label="Solar installation video background"
               onLoadedData={handleVideoLoad}
               onError={handleVideoError}
@@ -194,11 +194,12 @@ export default function HeroSection() {
                 src={videoSources[1].src} 
                 type={videoSources[1].type} 
               />
-              {/* Fallback image for browsers that don't support video */}
+              {/* Optimized fallback image for browsers that don't support video */}
               <img
-                src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
+                src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=854&q=60"
                 alt="Solar panels on a modern home"
                 className="absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
               />
             </video>
             
