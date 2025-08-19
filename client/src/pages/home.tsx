@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import { InteractiveProgress, AnimatedFeatureList } from "@/components/dynamic-content";
 import { SolarCalculator, SolarSystemSimulator, InteractiveTestimonialCarousel, LiveEnergyMonitor } from "@/components/interactive-elements";
 import { METRIC_SETS, COMPANY_METRICS } from "@/lib/metrics";
+import Section from "@/components/ui/section";
+import Heading from "@/components/ui/heading";
 
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,50 +21,55 @@ export default function HomePage() {
       <HeroSection />
       
       {/* Consolidated Trust Signals & Statistics */}
-      <section className="py-20 bg-gradient-to-br from-orange-500 via-orange-400 to-yellow-400" aria-labelledby="trust-heading">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 id="trust-heading" className="text-4xl font-light text-white mb-6">
-              Nigeria's Most Trusted Solar Company
-            </h2>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              The only solar company with NERC certification and ISO 9001:2015 standards
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            {METRIC_SETS.heroStats.map((stat, index) => {
-              const iconMap = { Award, Users, Star, Clock };
-              const IconComponent = iconMap[stat.icon as keyof typeof iconMap];
-              
-              return (
-                <div 
-                  key={index} 
-                  className={`text-center transform transition-all duration-1000 delay-${index * 200} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                  role="region"
-                  aria-labelledby={`stat-${index}-title`}
-                >
-                  <div 
-                    className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-8"
-                    aria-label={`${stat.number} ${stat.label}`}
-                  >
-                    <IconComponent className="h-12 w-12 text-white" aria-hidden="true" />
-                  </div>
-                  <div className="text-4xl font-light text-white mb-4" aria-label={`${stat.number} ${stat.label}`}>
-                    {stat.number}
-                  </div>
-                  <h3 id={`stat-${index}-title`} className="text-xl font-light text-white mb-4">
-                    {stat.label}
-                  </h3>
-                  <p className="text-white/90 text-base">
-                    {stat.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
+      <Section aria-labelledby="trust-heading">
+        <div className="text-center mb-12">
+          <Heading level={2} className="text-gray-900 mb-4" >Nigeria's Most Trusted Solar Company</Heading>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            NERC certified, ISO 9001:2015 standards, and customer-first service
+          </p>
         </div>
-      </section>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {METRIC_SETS.heroStats.map((stat, index) => {
+            const iconMap = { Award, Users, Star, Clock };
+            const IconComponent = iconMap[stat.icon as keyof typeof iconMap];
+            return (
+              <div key={index} className="text-center">
+                <div className="w-16 h-16 bg-orange-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-orange-100">
+                  <IconComponent className="h-8 w-8 text-orange-500" />
+                </div>
+                <div className="text-2xl font-light text-gray-900">{stat.number}</div>
+                <div className="text-sm text-gray-600">{stat.label}</div>
+              </div>
+            );
+          })}
+        </div>
+      </Section>
+
+      {/* Why Jumiami */}
+      <Section aria-labelledby="why-heading" className="bg-white">
+        <div className="text-center mb-12">
+          <Heading level={2} className="text-gray-900 mb-4">Why Jumiami</Heading>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">Premium products, professional installation, and dedicated support.</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            { icon: Shield, title: 'Quality & Safety', text: 'Top-tier components and certified installers' },
+            { icon: Zap, title: 'Performance', text: 'Optimized systems for Nigerian conditions' },
+            { icon: Wrench, title: 'Support', text: 'Reliable maintenance and after‑sales service' },
+          ].map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <div key={i} className="text-center border border-gray-200 rounded-lg p-6">
+                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-orange-50 flex items-center justify-center">
+                  <Icon className="h-6 w-6 text-orange-500" />
+                </div>
+                <div className="text-lg font-medium text-gray-900 mb-1">{item.title}</div>
+                <div className="text-sm text-gray-600">{item.text}</div>
+              </div>
+            );
+          })}
+        </div>
+      </Section>
       
       {/* Quick Product Preview */}
       <section className="py-20 bg-white" aria-labelledby="products-heading">

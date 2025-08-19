@@ -1,5 +1,6 @@
 import { Award, Users, MapPin, ArrowRight, CheckCircle, Star, Calendar, Trophy, Shield, Zap, Clock, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Hero from "@/components/hero";
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
 import { COMPANY_METRICS, METRIC_SETS } from "@/lib/metrics";
@@ -101,30 +102,11 @@ export default function About() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative py-20 text-white overflow-hidden" aria-labelledby="about-hero-heading">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg"
-            alt="Solar panels installation background"
-            className="w-full h-full object-cover"
-            loading="eager"
-          />
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/90 via-orange-400/85 to-yellow-400/80"></div>
-        </div>
-        
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
-          <div className={`transform transition-all duration-1000 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <h1 id="about-hero-heading" className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light mb-8 tracking-wide">
-              About Jumiami
-            </h1>
-            <p className="text-xl md:text-2xl text-white/95 mb-12 max-w-2xl mx-auto">
-              Pioneering Nigeria's renewable energy revolution with premium solar solutions
-            </p>
-          </div>
-        </div>
-      </section>
+      <Hero
+        title={<>About Jumiami</>}
+        subtitle={<>Pioneering Nigeria's renewable energy revolution with premium solar solutions</>}
+        image="https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg"
+      />
 
       {/* Story Section with Enhanced Visuals */}
       <section className="py-20 bg-white" aria-labelledby="story-heading">

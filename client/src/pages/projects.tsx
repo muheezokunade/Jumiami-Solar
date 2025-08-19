@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Hero from "@/components/hero";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { COMPANY_METRICS, METRIC_SETS } from "@/lib/metrics";
@@ -211,47 +212,11 @@ export default function ProjectsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative py-20 text-white overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg"
-            alt="Solar projects and installations portfolio background"
-            className="w-full h-full object-cover"
-            loading="eager"
-          />
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/90 via-orange-400/85 to-yellow-400/80"></div>
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className={`text-center transform transition-all duration-1000 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <h1 className="text-5xl md:text-7xl font-light mb-6">
-              Our Solar Projects
-            </h1>
-            <p className="text-xl md:text-2xl text-white/95 mb-8 max-w-3xl mx-auto">
-              Transforming Nigeria's energy landscape with innovative solar solutions
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg"
-                className="bg-white text-orange-600 hover:bg-gray-100 px-8 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-full"
-              >
-                <Phone className="h-5 w-5 mr-2" />
-                Get Free Quote
-              </Button>
-              <Button 
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white/10 px-8 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-full"
-              >
-                <MessageCircle className="h-5 w-5 mr-2" />
-                Schedule Consultation
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero
+        title={<>Our Solar Projects</>}
+        subtitle={<>Transforming Nigeria's energy landscape with innovative solar solutions</>}
+        image="https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg"
+      />
 
       {/* Statistics Section */}
       <section className="py-16 bg-gray-50">

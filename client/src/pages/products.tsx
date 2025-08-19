@@ -22,6 +22,7 @@ import {
   TrendingUp
 } from "lucide-react";
 import { SolarCalculator, LiveEnergyMonitor } from "@/components/interactive-elements";
+import Hero from "@/components/hero";
 
 // Products Data
 const products = [
@@ -163,30 +164,11 @@ export default function ProductsAndServices() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative py-20 text-white overflow-hidden" aria-labelledby="hero-heading">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.pexels.com/photos/371917/pexels-photo-371917.jpeg"
-            alt="Solar panels and renewable energy products background"
-            className="w-full h-full object-cover"
-            loading="eager"
-          />
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/90 via-orange-400/85 to-yellow-400/80"></div>
-        </div>
-        
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
-          <div className={`transform transition-all duration-1000 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <h1 id="hero-heading" className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light mb-8 tracking-wide">
-              Products & Services
-            </h1>
-            <p className="text-xl md:text-2xl text-white/95 mb-12 max-w-2xl mx-auto">
-              Premium solar products and comprehensive services for your energy transformation
-            </p>
-          </div>
-        </div>
-      </section>
+      <Hero
+        title={<>Products & Services</>}
+        subtitle={<>Premium solar products and comprehensive services for your energy transformation</>}
+        image="https://images.pexels.com/photos/371917/pexels-photo-371917.jpeg"
+      />
 
       {/* Tab Navigation */}
       <section className="py-8 bg-white border-b border-gray-200">

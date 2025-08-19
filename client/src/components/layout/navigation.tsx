@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 
@@ -44,16 +44,21 @@ export default function Navigation() {
       ref={navRef as any}
       style={navStyle}
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm',
-        isScrolled ? 'shadow-lg bg-white/98' : 'shadow-sm'
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-gray-200 shadow-sm',
+        isScrolled ? 'shadow-lg' : 'shadow-sm'
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/">
-            <a className="flex items-center">
-              <span className="text-2xl font-bold text-gray-900 transition-colors duration-300 hover:text-orange-500">
+            <a className="flex items-center space-x-3">
+              <img 
+                src="https://stellar-cucurucho-723bf1.netlify.app/images/FB_IMG_1753880100791%20-%20Faridah%20Sulaimon_1753982843756-EIXfVty_.jpg"
+                alt="Jumiami Solar Logo"
+                className="h-10 w-auto rounded-lg"
+              />
+              <span className="text-xl sm:text-2xl font-bold text-gray-900 transition-colors duration-300 hover:text-orange-500">
                 Jumiami Solar
               </span>
             </a>
@@ -98,7 +103,7 @@ export default function Navigation() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-md text-gray-900 transition-colors duration-300 hover:bg-gray-100"
+              className="p-2 rounded-lg text-gray-900 transition-all duration-300 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
               aria-label="Toggle menu"
             >
               {isOpen ? (
@@ -111,31 +116,60 @@ export default function Navigation() {
         </div>
       </div>
 
+      {/* Mobile menu overlay */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/20 z-40 md:hidden"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
       {/* Mobile menu */}
       <div
         className={cn(
-          'fixed inset-0 bg-white z-40 transition-transform duration-300 ease-in-out md:hidden',
+          'fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-out md:hidden',
           isOpen ? 'translate-x-0' : 'translate-x-full'
         )}
-        style={{ top: '64px' }}
       >
-        <div className="px-4 pt-2 pb-3 space-y-1">
-          {navItems.map((item) => (
-            <Link key={item.href} href={item.href}>
-              <a
-                className={cn(
-                  'block px-3 py-4 text-base font-medium border-b border-gray-100 transition-colors duration-300',
-                  location === item.href
-                    ? 'text-orange-500 bg-orange-50 border-orange-200'
-                    : 'text-gray-900 hover:text-orange-500 hover:bg-gray-50'
-                )}
-                onClick={() => setIsOpen(false)}
-              >
-                {item.label}
-              </a>
-            </Link>
-          ))}
-          <div className="px-3 py-4">
+        <div className="flex flex-col h-full">
+          {/* Header */}
+          <div className="flex items-center justify-between p-6 border-b border-gray-100">
+            <span className="text-lg font-semibold text-gray-900">Menu</span>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+
+          {/* Navigation items */}
+          <div className="flex-1 px-4 py-6">
+            <nav className="space-y-2">
+              {navItems.map((item, index) => (
+                <Link key={item.href} href={item.href}>
+                  <a
+                    className={cn(
+                      'flex items-center justify-between px-4 py-4 rounded-xl text-base font-medium transition-all duration-200',
+                      location === item.href
+                        ? 'text-orange-600 bg-orange-50 border border-orange-200'
+                        : 'text-gray-700 hover:text-orange-600 hover:bg-gray-50'
+                    )}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <span>{item.label}</span>
+                    <ChevronRight className={cn(
+                      'h-4 w-4 transition-transform duration-200',
+                      location === item.href ? 'text-orange-600' : 'text-gray-400'
+                    )} />
+                  </a>
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* CTA Section */}
+          <div className="p-6 border-t border-gray-100">
             <a 
               href="https://wa.me/2348118887425"
               target="_blank"
@@ -144,12 +178,15 @@ export default function Navigation() {
               onClick={() => setIsOpen(false)}
             >
               <Button 
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white border-0 rounded-full"
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white border-0 rounded-xl py-4 text-base font-medium transition-all duration-200 transform hover:scale-[1.02]"
               >
-                <Phone className="h-5 w-5 mr-2" />
-                Get Quote on WhatsApp
+                <Phone className="h-5 w-5 mr-3" />
+                Get Free Quote
               </Button>
             </a>
+            <p className="text-xs text-gray-500 text-center mt-3">
+              Quick response via WhatsApp
+            </p>
           </div>
         </div>
       </div>
