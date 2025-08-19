@@ -8,6 +8,7 @@ import { SolarCalculator, SolarSystemSimulator, InteractiveTestimonialCarousel, 
 import { METRIC_SETS, COMPANY_METRICS } from "@/lib/metrics";
 import Section from "@/components/ui/section";
 import Heading from "@/components/ui/heading";
+import OptimizedImage from "@/components/ui/optimized-image";
 
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -121,11 +122,13 @@ export default function HomePage() {
                 aria-label={`${product.name} product preview`}
               >
                 <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={product.image} 
+                  <OptimizedImage
+                    src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                    loading="lazy"
+                    width={400}
+                    height={192}
+                    className="transition-transform duration-300 hover:scale-110"
+                    quality={90}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                   <div className="absolute bottom-4 left-4">
@@ -525,11 +528,12 @@ export default function HomePage() {
                 className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
               >
                 <div className="relative h-48">
-                  <img 
-                    src={post.image} 
+                  <OptimizedImage
+                    src={post.image}
                     alt={post.title}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
+                    width={400}
+                    height={192}
+                    quality={90}
                   />
                   <div className="absolute top-4 left-4">
                     <span className="bg-orange-500 text-white px-3 py-1 text-sm rounded-full">

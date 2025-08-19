@@ -1,6 +1,7 @@
 import { Award, Users, MapPin, ArrowRight, CheckCircle, Star, Calendar, Trophy, Shield, Zap, Clock, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Hero from "@/components/hero";
+import OptimizedImage from "@/components/ui/optimized-image";
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
 import { COMPANY_METRICS, METRIC_SETS } from "@/lib/metrics";
