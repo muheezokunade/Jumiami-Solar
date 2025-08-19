@@ -5,6 +5,7 @@ import Hero from "@/components/hero";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { COMPANY_METRICS, METRIC_SETS } from "@/lib/metrics";
+import OptimizedImage from "@/components/ui/optimized-image";
 import { 
   MapPin, 
   Zap, 
@@ -31,7 +32,9 @@ import {
   Phone,
   Mail,
   MessageCircle,
-  X
+  X,
+  Battery,
+  Settings
 } from "lucide-react";
 import { Link } from "wouter";
 import ProjectCard from "@/components/project-card";
@@ -63,119 +66,177 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "Greenfield Estate Solar Installation",
-    type: "Residential",
-    category: "residential",
-    location: "VGC, Ajah, Lagos",
-    capacity: "120kW",
-    savings: "₦850,000",
-    duration: "1 month",
-    description: "Complete solar installation for 12 luxury homes in Greenfield Estate with advanced monitoring and battery backup systems.",
+    title: "MRS Filling Station - Victoria Island",
+    type: "Commercial",
+    category: "commercial",
+    location: "Victoria Island, Lagos",
+    capacity: "75kW",
+    savings: "₦450,000/month",
+    duration: "3 weeks",
+    description: "Complete solar power system for MRS Filling Station ensuring 24/7 operations with backup power for fuel pumps and lighting systems.",
     image: "https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg",
     beforeImage: "https://images.pexels.com/photos/433309/pexels-photo-433309.jpeg",
     afterImage: "https://images.pexels.com/photos/433310/pexels-photo-433310.jpeg",
     features: [
-      "120kW hybrid solar system",
-      "Battery backup system",
-      "Smart monitoring",
+      "75kW hybrid solar system",
+      "Battery backup for fuel pumps",
+      "LED lighting upgrade",
+      "Smart monitoring system",
       "Grid integration",
-      "Load balancing",
-      "24/7 support"
+      "24/7 operations support"
     ],
-    challenges: "High energy demand from multiple homes with varying consumption patterns and limited roof space for optimal panel placement.",
-    solution: "Custom system design with load balancing, smart distribution, and innovative mounting solutions to maximize energy production.",
-    results: "95% reduction in electricity bills, 24/7 power availability, and increased property values for all residents.",
-    client: "Greenfield Estate Management",
+    challenges: "Critical need for uninterrupted power supply for fuel dispensing operations and security lighting during frequent power outages.",
+    solution: "Hybrid system with battery backup specifically designed for fuel station operations, ensuring continuous service even during grid failures.",
+    results: "100% uptime for fuel dispensing operations, 85% reduction in diesel generator costs, and improved customer satisfaction with reliable service.",
+    client: "MRS Oil Nigeria Plc",
     completionDate: "March 2024",
     rating: 5,
-    testimonial: "The system has been running flawlessly. We haven't experienced any power outages since installation. The monitoring system gives us complete visibility into our energy consumption."
+    testimonial: "Since installing the solar system, we've never had to close due to power issues. Our customers appreciate the reliable service and our operational costs have dropped significantly."
   },
   {
     id: 2,
-    title: "Sunshine Plaza Commercial Complex",
+    title: "Adebayo Shopping Complex - Ikeja",
     type: "Commercial",
     category: "commercial",
     location: "Ikeja, Lagos",
-    capacity: "200kW",
-    savings: "₦1.2M",
-    duration: "6 weeks",
-    description: "Comprehensive solar power system for a 4-story office complex with advanced battery backup and energy management.",
+    capacity: "120kW",
+    savings: "₦680,000/month",
+    duration: "4 weeks",
+    description: "Solar power installation for a 3-story shopping complex housing 25 retail shops, restaurants, and office spaces.",
     image: "https://images.pexels.com/photos/433311/pexels-photo-433311.jpeg",
     beforeImage: "https://images.pexels.com/photos/433312/pexels-photo-433312.jpeg",
     afterImage: "https://images.pexels.com/photos/433313/pexels-photo-433313.jpeg",
     features: [
-      "200kW commercial system",
-      "Battery backup",
-      "Energy monitoring",
-      "Load optimization",
-      "Peak demand management",
-      "Remote monitoring"
+      "120kW commercial system",
+      "Individual tenant metering",
+      "Common area lighting",
+      "Air conditioning backup",
+      "Security system power",
+      "Energy cost sharing"
     ],
-    challenges: "High peak demand during office hours, complex electrical infrastructure, and need for uninterrupted power supply.",
-    solution: "Peak load management with smart battery deployment, redundant systems, and integration with existing electrical infrastructure.",
-    results: "80% reduction in energy costs, improved equipment reliability, and enhanced tenant satisfaction with consistent power supply.",
-    client: "Sunshine Plaza Management",
+    challenges: "Multiple tenants with varying power needs, high air conditioning loads, and need for fair energy cost distribution among tenants.",
+    solution: "Smart metering system with individual tenant billing, load balancing for air conditioning, and automated energy cost allocation.",
+    results: "70% reduction in overall energy costs, improved tenant satisfaction, and increased property value with sustainable energy solution.",
+    client: "Adebayo Properties Ltd",
     completionDate: "February 2024",
     rating: 5,
-    testimonial: "Our energy bills have dropped significantly while maintaining 100% uptime. The system pays for itself and our tenants love the reliable power."
+    testimonial: "Our tenants are happy with the stable power supply and reduced utility costs. The solar system has made our property more attractive to quality tenants."
   },
   {
     id: 3,
-    title: "TechVision Office Complex",
-    type: "Commercial",
-    category: "commercial",
-    location: "Lekki, Lagos",
-    capacity: "150kW",
-    savings: "₦950,000",
-    duration: "2 months",
-    description: "Hybrid solar system with grid integration for tech company headquarters with critical power requirements.",
+    title: "Alhaji Bello's Residence - VGC",
+    type: "Residential",
+    category: "residential",
+    location: "VGC, Ajah, Lagos",
+    capacity: "25kW",
+    savings: "₦180,000/month",
+    duration: "2 weeks",
+    description: "Premium residential solar installation for a 5-bedroom mansion with swimming pool, home theater, and smart home systems.",
     image: "https://images.pexels.com/photos/433314/pexels-photo-433314.jpeg",
     beforeImage: "https://images.pexels.com/photos/433315/pexels-photo-433315.jpeg",
     afterImage: "https://images.pexels.com/photos/433316/pexels-photo-433316.jpeg",
     features: [
-      "150kW hybrid system",
-      "UPS integration",
-      "Real-time monitoring",
-      "Smart grid connection",
-      "Server room backup",
-      "Energy analytics"
+      "25kW residential system",
+      "Swimming pool pump power",
+      "Home theater backup",
+      "Smart home integration",
+      "Security system power",
+      "Remote monitoring"
     ],
-    challenges: "Critical power requirements for server rooms, sensitive equipment, and need for 99.9% uptime guarantee.",
-    solution: "Redundant system with UPS integration, isolated power circuits for critical equipment, and comprehensive monitoring.",
-    results: "99.9% uptime guarantee, 70% energy cost reduction, and enhanced data center reliability with zero downtime.",
-    client: "TechVision Ltd",
+    challenges: "High-end lifestyle requirements with multiple entertainment systems, swimming pool, and need for luxury-level power reliability.",
+    solution: "Premium system with dedicated circuits for entertainment areas, pool equipment, and smart home integration for seamless operation.",
+    results: "90% reduction in electricity bills, enhanced lifestyle with reliable power for all amenities, and increased property value.",
+    client: "Alhaji Bello Family",
     completionDate: "January 2024",
     rating: 5,
-    testimonial: "The system has exceeded our expectations. Our operations run smoothly with significant cost savings and our server uptime has improved dramatically."
+    testimonial: "The solar system has transformed our home. We enjoy uninterrupted power for all our amenities and the savings are incredible. Best investment we've made."
   },
   {
     id: 4,
-    title: "Lagos Industrial Park",
-    type: "Industrial",
-    category: "industrial",
-    location: "Ikorodu, Lagos",
-    capacity: "500kW",
-    savings: "₦3.5M",
-    duration: "3 months",
-    description: "Large-scale industrial solar installation for manufacturing facility with heavy machinery and continuous operations.",
+    title: "Oluwaseun Bakery - Surulere",
+    type: "Commercial",
+    category: "commercial",
+    location: "Surulere, Lagos",
+    capacity: "40kW",
+    savings: "₦250,000/month",
+    duration: "2 weeks",
+    description: "Solar power system for commercial bakery with industrial ovens, refrigeration units, and air conditioning systems.",
     image: "https://images.pexels.com/photos/433317/pexels-photo-433317.jpeg",
     beforeImage: "https://images.pexels.com/photos/433318/pexels-photo-433318.jpeg",
     afterImage: "https://images.pexels.com/photos/433319/pexels-photo-433319.jpeg",
     features: [
-      "500kW industrial system",
-      "Heavy machinery support",
-      "Continuous operation",
-      "Advanced monitoring",
-      "Predictive maintenance",
-      "Energy optimization"
+      "40kW commercial system",
+      "Industrial oven power",
+      "Refrigeration backup",
+      "Air conditioning support",
+      "Production line power",
+      "Energy monitoring"
     ],
-    challenges: "Heavy machinery with high power requirements, continuous 24/7 operations, and need for stable power supply.",
-    solution: "Industrial-grade system with multiple inverters, load balancing, and predictive maintenance capabilities.",
-    results: "75% reduction in energy costs, improved production efficiency, and enhanced equipment lifespan with stable power.",
-    client: "Lagos Industrial Park",
+    challenges: "High power demand from industrial ovens and refrigeration units, need for consistent production without power interruptions.",
+    solution: "Dedicated power circuits for production equipment, smart load management, and backup systems for critical refrigeration units.",
+    results: "80% reduction in energy costs, improved production efficiency, and enhanced product quality with stable power supply.",
+    client: "Oluwaseun Bakery & Confectionery",
     completionDate: "December 2023",
     rating: 5,
-    testimonial: "The solar system has transformed our operations. We've seen significant cost savings and our production efficiency has improved due to stable power supply."
+    testimonial: "Our production has improved significantly since installing the solar system. We no longer worry about power cuts affecting our baking schedule."
+  },
+  {
+    id: 5,
+    title: "Grace Hospital - Ilorin",
+    type: "Healthcare",
+    category: "commercial",
+    location: "Ilorin, Kwara State",
+    capacity: "100kW",
+    savings: "₦550,000/month",
+    duration: "5 weeks",
+    description: "Critical solar power system for private hospital ensuring uninterrupted power for medical equipment, lighting, and air conditioning.",
+    image: "https://images.pexels.com/photos/371917/pexels-photo-371917.jpeg",
+    beforeImage: "https://images.pexels.com/photos/433309/pexels-photo-433309.jpeg",
+    afterImage: "https://images.pexels.com/photos/433310/pexels-photo-433310.jpeg",
+    features: [
+      "100kW healthcare system",
+      "Medical equipment backup",
+      "Emergency lighting",
+      "HVAC system power",
+      "24/7 monitoring",
+      "Redundant systems"
+    ],
+    challenges: "Critical need for uninterrupted power for life-saving medical equipment, emergency lighting, and patient comfort systems.",
+    solution: "Redundant system with multiple backup layers, isolated circuits for critical medical equipment, and comprehensive monitoring.",
+    results: "100% uptime for medical equipment, 75% reduction in generator costs, and improved patient care with reliable power.",
+    client: "Grace Medical Center",
+    completionDate: "November 2023",
+    rating: 5,
+    testimonial: "The solar system has been a game-changer for our hospital. We can now focus on patient care without worrying about power issues."
+  },
+  {
+    id: 6,
+    title: "Chief Adebayo's Farm - Abeokuta",
+    type: "Agricultural",
+    category: "industrial",
+    location: "Abeokuta, Ogun State",
+    capacity: "60kW",
+    savings: "₦320,000/month",
+    duration: "3 weeks",
+    description: "Solar power system for large-scale poultry farm with automated feeding systems, climate control, and processing facilities.",
+    image: "https://images.pexels.com/photos/17489152/pexels-photo-17489152.jpeg",
+    beforeImage: "https://images.pexels.com/photos/433312/pexels-photo-433312.jpeg",
+    afterImage: "https://images.pexels.com/photos/433313/pexels-photo-433313.jpeg",
+    features: [
+      "60kW agricultural system",
+      "Automated feeding systems",
+      "Climate control units",
+      "Processing equipment",
+      "Security lighting",
+      "Water pumping systems"
+    ],
+    challenges: "Remote location with unreliable grid power, need for continuous operation of automated systems and climate control for optimal production.",
+    solution: "Off-grid capable system with battery backup, automated load management, and remote monitoring for farm operations.",
+    results: "90% reduction in energy costs, improved production efficiency, and enhanced animal welfare with consistent climate control.",
+    client: "Chief Adebayo Farms Ltd",
+    completionDate: "October 2023",
+    rating: 5,
+    testimonial: "Our farm productivity has increased significantly with the reliable power supply. The automated systems work perfectly and our operational costs have dropped dramatically."
   }
 ];
 
@@ -421,10 +482,14 @@ export default function ProjectsPage() {
 
               {/* Project Images */}
               <div className="relative h-64 md:h-96">
-                <img 
-                  src={selectedProject.image} 
+                <OptimizedImage
+                  src={selectedProject.image}
                   alt={selectedProject.title}
+                  width={800}
+                  height={400}
                   className="w-full h-full object-cover"
+                  quality={90}
+                  priority={true}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 <div className="absolute bottom-6 left-6 right-6">

@@ -45,26 +45,7 @@ export default function About() {
     }
   ];
 
-  const teamMembers = [
-    {
-      name: "Faridah Sulaimon",
-      role: "Founder & CEO",
-      image: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg",
-      description: "Leading Nigeria's solar revolution with 8+ years of renewable energy experience."
-    },
-    {
-      name: "Bukky Sulyman", 
-      role: "Technical Director",
-      image: "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg",
-      description: "Expert in solar system design and installation with 100+ successful projects."
-    },
-    {
-      name: "Olori Ejires",
-      role: "Operations Manager",
-      image: "https://images.pexels.com/photos/1181685/pexels-photo-1181685.jpeg", 
-      description: "Ensuring seamless project delivery and customer satisfaction across all locations."
-    }
-  ];
+
 
   const awards = [
     {
@@ -134,32 +115,15 @@ export default function About() {
             </div>
             
             <div className={`transform transition-all duration-1000 delay-600 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-              <div className="grid grid-cols-2 gap-4">
-              <img 
-                src="https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg" 
-                alt="Solar panels installation on rooftop" 
-                  className="w-full h-48 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-300" 
-                  loading="lazy"
-                />
-                <img 
-                  src="https://images.pexels.com/photos/433309/pexels-photo-433309.jpeg" 
-                  alt="Solar installation team at work" 
-                  className="w-full h-48 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-300" 
-                  loading="lazy"
-                />
-                <img 
-                  src="https://images.pexels.com/photos/433310/pexels-photo-433310.jpeg" 
-                  alt="Before and after solar installation" 
-                  className="w-full h-48 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-300" 
-                  loading="lazy"
-                />
-                <img 
-                  src="https://images.pexels.com/photos/433311/pexels-photo-433311.jpeg" 
-                  alt="Commercial solar installation" 
-                  className="w-full h-48 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-300" 
-                loading="lazy"
+              <OptimizedImage
+                src="https://images.pexels.com/photos/207896/pexels-photo-207896.jpeg"
+                alt="Solar panels installation on rooftop"
+                width={600}
+                height={400}
+                className="w-full h-96 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
+                quality={90}
+                priority={true}
               />
-              </div>
             </div>
           </div>
         </div>
@@ -284,41 +248,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100" aria-labelledby="team-heading">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 id="team-heading" className="text-4xl font-light text-gray-900 mb-6">
-              Meet Our Team
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              The passionate professionals driving Nigeria's solar revolution
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {teamMembers.map((member, index) => (
-              <div 
-                key={index}
-                className={`bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-                style={{ transitionDelay: `${index * 200}ms` }}
-              >
-                <img 
-                  src={member.image} 
-                  alt={member.name}
-                  className="w-full h-64 object-cover"
-                  loading="lazy"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-medium text-gray-900 mb-2">{member.name}</h3>
-                  <p className="text-orange-500 font-medium mb-3">{member.role}</p>
-                  <p className="text-gray-600">{member.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* Awards & Certifications */}
       <section className="py-20 bg-white" aria-labelledby="awards-heading">
