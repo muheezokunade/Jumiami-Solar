@@ -2,19 +2,81 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { ArrowRight, Calendar, Clock, User, Tag } from "lucide-react";
+import OptimizedImage from "@/components/ui/optimized-image";
 
 // Blog posts data with SEO-optimized content
 const blogPosts = [
   {
     id: 1,
     title: "How to Choose the Right Solar Panel System for Your Home in Nigeria",
-    excerpt: "Learn the essential factors to consider when selecting a solar panel system for your Nigerian home. From panel efficiency to installation costs, we cover everything you need to know.",
-    content: "Choosing the right solar panel system for your home in Nigeria requires careful consideration of several factors. First, assess your energy consumption by reviewing your monthly electricity bills. This will help determine the system size you need. Consider the available roof space and orientation - south-facing roofs typically receive the most sunlight. Panel efficiency is crucial; higher efficiency panels may cost more but require less space. Don't forget to factor in local weather conditions and potential shading from trees or buildings. Finally, consider your budget and available financing options. Many Nigerian homeowners are surprised to learn that solar systems can pay for themselves within 3-5 years through energy savings.",
+    excerpt: "Nigeria's energy landscape is changing. With the national grid often unreliable and the cost of fossil fuels on the rise, solar power is no longer a luxury—it's a smart, sustainable solution for homes across the country.",
+    content: `Nigeria's energy landscape is changing. With the national grid often unreliable and the cost of fossil fuels on the rise, solar power is no longer a luxury—it's a smart, sustainable solution for homes across the country. But with so many options, how do you choose the right solar panel system for your needs?
+
+This guide breaks down the essential factors to consider, from assessing your energy needs to understanding the costs, so you can make a confident and informed decision.
+
+## 1. Know Your Power Needs
+
+This is the most critical first step. You can't choose a system without knowing what you need to power.
+
+Start by listing every appliance you want to run on solar energy. Think about everything from your fridge and television to your fans, lights, and phone chargers.
+
+Next, find the wattage for each of these appliances and estimate how many hours a day you'll use them. You can usually find the wattage on the appliance's label or in its manual.
+
+For example, a 100-watt fan used for 5 hours a day consumes 100W×5h=500Wh of energy.
+
+Add up the total daily consumption for all your appliances to get your final daily energy need in kilowatt-hours (kWh). It's a good idea to add a 10-20% buffer to this number to account for extra usage or future appliances.
+
+## 2. Understand the Key Components
+
+A solar system is more than just panels. It's a complete setup with a few key parts that work together.
+
+**Solar Panels**: These are the heart of the system, capturing sunlight and converting it into DC electricity.
+
+**Inverter**: This is the brain of the system, converting the DC electricity from the panels into AC electricity, which is what your home appliances use.
+
+**Batteries**: Given Nigeria's frequent power outages, batteries are essential. They store the energy generated during the day for use at night or when the sun isn't shining. Lithium-ion batteries are a popular choice because they last longer and require less maintenance than traditional lead-acid batteries.
+
+**Charge Controller**: This device protects your batteries by regulating the flow of power from the solar panels and preventing them from overcharging.
+
+## 3. Choose the Right Panel Type
+
+Solar panels are not all the same. There are three main types, and knowing the difference can save you money and space.
+
+**Monocrystalline Panels**: These are the most efficient panels (15-22% efficiency) and are perfect for homes with limited roof space. They perform well in high temperatures, making them a great fit for Nigeria's climate, but they are also the most expensive.
+
+**Polycrystalline Panels**: A slightly less efficient but more affordable option (13-16% efficiency), these are a common choice for residential installations where cost is a major factor.
+
+**Thin-Film Panels**: These are the least efficient and not typically used for residential installations because they require a much larger area to generate the same amount of power.
+
+## 4. Consider the Cost and Your Budget
+
+The initial investment for a solar system can seem high, but it's crucial to see it as a long-term investment that will save you money on electricity and fuel for years to come.
+
+The cost depends on:
+
+**System Size**: The larger the system, the higher the cost. A small system (1kVA) for basic needs can cost around ₦500,000, while a larger system (5kVA+) can run into millions of naira.
+
+**Panel and Battery Type**: High-quality, efficient panels and long-lasting batteries will increase the upfront cost.
+
+**Installation**: Labor costs vary depending on the installer and the complexity of your home's setup.
+
+While the initial cost is significant, many homeowners find the system pays for itself in just a few years by eliminating reliance on the national grid and noisy, expensive generators.
+
+## 5. Find a Reputable Installer
+
+Your solar system is only as good as its installation. Make sure you choose a reliable and experienced installer who will:
+
+- Do a thorough analysis of your energy needs to recommend the perfect system size.
+- Provide a clear, itemized breakdown of all costs.
+- Offer strong warranties on their work and the equipment.
+- Provide references from previous customers.
+
+By taking the time to assess your needs, understand the components, and choose the right partner for the job, you can ensure a seamless transition to a more reliable, cost-effective, and sustainable source of power for your home.`,
     author: "Jumiami Solar Team",
     date: "2024-01-15",
-    readTime: "5 min read",
+    readTime: "8 min read",
     category: "Solar Tips",
-    tags: ["solar panels", "home installation", "energy savings", "Nigeria"],
+    tags: ["solar panels", "home installation", "energy savings", "Nigeria", "solar system", "batteries", "inverters"],
     image: "https://images.pexels.com/photos/371917/pexels-photo-371917.jpeg",
     slug: "choose-right-solar-panel-system-nigeria"
   },
@@ -159,11 +221,13 @@ export default function BlogPage() {
                 >
                   {/* Post Image */}
                   <div className="relative h-48 overflow-hidden">
-                    <img
+                    <OptimizedImage
                       src={post.image}
                       alt={post.title}
+                      width={400}
+                      height={192}
                       className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                      loading="lazy"
+                      quality={90}
                     />
                     <div className="absolute top-4 left-4">
                       <span className="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-medium">

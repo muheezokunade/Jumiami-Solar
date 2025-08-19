@@ -13,6 +13,7 @@ import About from "@/pages/about";
 import Products from "@/pages/products";
 import Projects from "@/pages/projects";
 import Blog from "@/pages/blog";
+import BlogPost from "@/pages/blog-post";
 import Contact from "@/pages/contact";
 import Analytics from "@/pages/analytics";
 import PrivacyPolicy from "@/pages/privacy-policy";
@@ -102,6 +103,7 @@ function Router() {
           <Route path="/products" component={Products} />
           <Route path="/projects" component={Projects} />
           <Route path="/blog" component={Blog} />
+          <Route path="/blog/:slug" component={BlogPost} />
           <Route path="/contact" component={Contact} />
           <Route path="/analytics" component={Analytics} />
           <Route path="/privacy-policy" component={PrivacyPolicy} />
