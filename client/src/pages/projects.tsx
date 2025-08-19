@@ -72,9 +72,9 @@ const projects: Project[] = [
     capacity: "75kW",
     duration: "3 weeks",
     description: "Complete solar power system for MRS Filling Station ensuring 24/7 operations with backup power for fuel pumps and lighting systems.",
-    image: "https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg",
-    beforeImage: "https://images.pexels.com/photos/433309/pexels-photo-433309.jpeg",
-    afterImage: "https://images.pexels.com/photos/433310/pexels-photo-433310.jpeg",
+    image: "https://images.pexels.com/photos/207896/pexels-photo-207896.jpeg",
+    beforeImage: "https://images.pexels.com/photos/371917/pexels-photo-371917.jpeg",
+    afterImage: "https://images.pexels.com/photos/17489152/pexels-photo-17489152.jpeg",
     features: [
       "75kW hybrid solar system",
       "Battery backup for fuel pumps",
@@ -100,9 +100,9 @@ const projects: Project[] = [
     capacity: "120kW",
     duration: "4 weeks",
     description: "Solar power installation for a 3-story shopping complex housing 25 retail shops, restaurants, and office spaces.",
-    image: "https://images.pexels.com/photos/433311/pexels-photo-433311.jpeg",
-    beforeImage: "https://images.pexels.com/photos/433312/pexels-photo-433312.jpeg",
-    afterImage: "https://images.pexels.com/photos/433313/pexels-photo-433313.jpeg",
+    image: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg",
+    beforeImage: "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg",
+    afterImage: "https://images.pexels.com/photos/1181685/pexels-photo-1181685.jpeg",
     features: [
       "120kW commercial system",
       "Individual tenant metering",
@@ -128,9 +128,9 @@ const projects: Project[] = [
     capacity: "25kW",
     duration: "2 weeks",
     description: "Premium residential solar installation for a 5-bedroom mansion with swimming pool, home theater, and smart home systems.",
-    image: "https://images.pexels.com/photos/433314/pexels-photo-433314.jpeg",
-    beforeImage: "https://images.pexels.com/photos/433315/pexels-photo-433315.jpeg",
-    afterImage: "https://images.pexels.com/photos/433316/pexels-photo-433316.jpeg",
+    image: "https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg",
+    beforeImage: "https://images.pexels.com/photos/371917/pexels-photo-371917.jpeg",
+    afterImage: "https://images.pexels.com/photos/17489152/pexels-photo-17489152.jpeg",
     features: [
       "25kW residential system",
       "Swimming pool pump power",
@@ -156,9 +156,9 @@ const projects: Project[] = [
     capacity: "40kW",
     duration: "2 weeks",
     description: "Solar power system for commercial bakery with industrial ovens, refrigeration units, and air conditioning systems.",
-    image: "https://images.pexels.com/photos/433317/pexels-photo-433317.jpeg",
-    beforeImage: "https://images.pexels.com/photos/433318/pexels-photo-433318.jpeg",
-    afterImage: "https://images.pexels.com/photos/433319/pexels-photo-433319.jpeg",
+    image: "https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg",
+    beforeImage: "https://images.pexels.com/photos/433309/pexels-photo-433309.jpeg",
+    afterImage: "https://images.pexels.com/photos/433310/pexels-photo-433310.jpeg",
     features: [
       "40kW commercial system",
       "Industrial oven power",
@@ -184,9 +184,9 @@ const projects: Project[] = [
     capacity: "100kW",
     duration: "5 weeks",
     description: "Critical solar power system for private hospital ensuring uninterrupted power for medical equipment, lighting, and air conditioning.",
-    image: "https://images.pexels.com/photos/371917/pexels-photo-371917.jpeg",
-    beforeImage: "https://images.pexels.com/photos/433309/pexels-photo-433309.jpeg",
-    afterImage: "https://images.pexels.com/photos/433310/pexels-photo-433310.jpeg",
+    image: "https://images.pexels.com/photos/433311/pexels-photo-433311.jpeg",
+    beforeImage: "https://images.pexels.com/photos/433312/pexels-photo-433312.jpeg",
+    afterImage: "https://images.pexels.com/photos/433313/pexels-photo-433313.jpeg",
     features: [
       "100kW healthcare system",
       "Medical equipment backup",
@@ -212,9 +212,9 @@ const projects: Project[] = [
     capacity: "60kW",
     duration: "3 weeks",
     description: "Solar power system for large-scale poultry farm with automated feeding systems, climate control, and processing facilities.",
-    image: "https://images.pexels.com/photos/17489152/pexels-photo-17489152.jpeg",
-    beforeImage: "https://images.pexels.com/photos/433312/pexels-photo-433312.jpeg",
-    afterImage: "https://images.pexels.com/photos/433313/pexels-photo-433313.jpeg",
+    image: "https://images.pexels.com/photos/433314/pexels-photo-433314.jpeg",
+    beforeImage: "https://images.pexels.com/photos/433315/pexels-photo-433315.jpeg",
+    afterImage: "https://images.pexels.com/photos/433316/pexels-photo-433316.jpeg",
     features: [
       "60kW agricultural system",
       "Automated feeding systems",
@@ -356,15 +356,9 @@ export default function ProjectsPage() {
                 </p>
 
                 {/* Project Stats */}
-                <div className="grid grid-cols-2 gap-6 mb-8">
-                  <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-6">
-                    <div className="text-3xl font-bold text-orange-600 mb-1">{featuredProject.savings}</div>
-                    <div className="text-sm text-gray-600">Monthly Savings</div>
-                  </div>
-                  <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-6">
-                    <div className="text-3xl font-bold text-orange-600 mb-1">{featuredProject.duration}</div>
-                    <div className="text-sm text-gray-600">Installation Time</div>
-                  </div>
+                <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-6 mb-8">
+                  <div className="text-3xl font-bold text-orange-600 mb-1">{featuredProject.duration}</div>
+                  <div className="text-sm text-gray-600">Installation Time</div>
                 </div>
 
                 {/* Key Features */}
@@ -495,14 +489,10 @@ export default function ProjectsPage() {
               {/* Project Content */}
               <div className="p-6 md:p-8">
                 {/* Project Stats */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                   <div className="text-center p-4 bg-gray-50 rounded-lg">
                     <div className="text-2xl font-bold text-orange-600">{selectedProject.capacity}</div>
                     <div className="text-sm text-gray-600">System Capacity</div>
-                  </div>
-                  <div className="text-center p-4 bg-gray-50 rounded-lg">
-                    <div className="text-2xl font-bold text-orange-600">{selectedProject.savings}</div>
-                    <div className="text-sm text-gray-600">Monthly Savings</div>
                   </div>
                   <div className="text-center p-4 bg-gray-50 rounded-lg">
                     <div className="text-2xl font-bold text-orange-600">{selectedProject.duration}</div>
