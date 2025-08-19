@@ -1,16 +1,10 @@
 import ContactForm from "@/components/contact-form";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter, ExternalLink, ArrowRight } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter, ExternalLink, ArrowRight, MessageCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import Hero from "@/components/hero";
 import FloatingActionButton from "@/components/floating-action-button";
-
-const contactInfo = {
-  phone: "+234 811 888 7425",
-  email: "info@jumiamisolar.com",
-  address: "Ikota Shopping Complex, VGC, Ajah, Lagos"
-};
 
 const officeLocations = [
   {
@@ -22,13 +16,13 @@ const officeLocations = [
   {
     title: "Ilorin Branch Office",
     address: "Shop 4B samtosh plaza, No. 171, Ibrahim Taiwo Rd. Opp. access Bank, Ilorin",
-    phone: "+234 811 888 7425",
-    whatsapp: "2348118887425"
+    phone: "09156082923",
+    whatsapp: "2349156082923"
   },
   {
     title: "Abeokuta Branch Office",
     address: "Alhaji Mulikat sonekan (oosele) House, Opposite NNPC Filling Station, Somorin Obantoko Abeokuta, Ogun state.",
-    phone: "+234 811 888 7425",
+    phone: "08118887425",
     whatsapp: "2348118887425"
   }
 ];
@@ -72,15 +66,16 @@ export default function Contact() {
         image="https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg"
       />
 
-      {/* Contact Form Section */}
-      <section className="py-20 bg-white" aria-labelledby="contact-form-heading">
+      {/* Main Contact Section */}
+      <section className="py-20 bg-white" aria-labelledby="contact-heading">
         {/* Mobile-only WhatsApp FAB */}
         <div className="md:hidden">
           <FloatingActionButton />
         </div>
+        
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 id="contact-form-heading" className="text-4xl font-light text-gray-900 mb-6">
+            <h2 id="contact-heading" className="text-4xl font-light text-gray-900 mb-6">
               Get Your Free Consultation
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -96,26 +91,69 @@ export default function Contact() {
             
             {/* Contact Information */}
             <div className={`space-y-8 transform transition-all duration-1000 delay-600 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-              {/* Office Locations */}
-              <div className="bg-gray-800 rounded-lg p-8">
-                <h3 className="text-2xl font-light text-white mb-8">Our Office Locations</h3>
+              {/* Quick Contact */}
+              <div className="bg-gradient-to-br from-orange-500 to-yellow-500 rounded-xl p-8 text-white">
+                <h3 className="text-2xl font-light mb-6">Quick Contact</h3>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-3">
+                    <Phone className="h-5 w-5" />
+                    <a href="tel:+2348118887425" className="hover:underline">
+                      +234 811 888 7425
+                    </a>
+                  </div>
+                  
+                  <div className="flex items-center space-x-3">
+                    <Mail className="h-5 w-5" />
+                    <a href="mailto:info@jumiamisolar.com" className="hover:underline">
+                      info@jumiamisolar.com
+                    </a>
+                  </div>
+                  
+                  <div className="flex items-center space-x-3">
+                    <Clock className="h-5 w-5" />
+                    <div className="text-sm">
+                      <p>Mon - Fri: 8:00AM - 6:00PM</p>
+                      <p>Sat: 9:00AM - 4:00PM</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-6 pt-6 border-t border-white/20">
+                  <Button 
+                    size="lg"
+                    className="w-full bg-white text-orange-600 hover:bg-gray-100"
+                    onClick={() => {
+                      const whatsappUrl = `https://wa.me/2348118887425`;
+                      window.open(whatsappUrl, '_blank');
+                    }}
+                  >
+                    <MessageCircle className="h-5 w-5 mr-2" />
+                    WhatsApp Chat
+                  </Button>
+                </div>
+              </div>
+
+              {/* Office Locations */}
+              <div className="bg-gray-50 rounded-xl p-8">
+                <h3 className="text-2xl font-light text-gray-900 mb-6">Our Offices</h3>
+                
+                <div className="space-y-6">
                   {officeLocations.map((office, index) => (
-                    <div key={index} className="text-center">
-                      <h4 className="text-xl font-light text-orange-500 mb-4">{office.title.split(' ')[0]}</h4>
+                    <div key={index} className="border-l-4 border-orange-500 pl-4">
+                      <h4 className="font-medium text-gray-900 mb-2">{office.title}</h4>
                       
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-center space-x-2">
-                          <MapPin className="h-5 w-5 text-orange-500" />
-                          <p className="text-white text-sm leading-relaxed">{office.address}</p>
+                      <div className="space-y-2 text-sm text-gray-600">
+                        <div className="flex items-start space-x-2">
+                          <MapPin className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                          <span>{office.address}</span>
                         </div>
                         
-                        <div className="flex items-center justify-center space-x-2">
-                          <Phone className="h-5 w-5 text-orange-500" />
+                        <div className="flex items-center space-x-2">
+                          <Phone className="h-4 w-4 text-orange-500" />
                           <a 
                             href={`tel:${office.phone}`}
-                            className="text-white hover:text-orange-500 transition-colors text-sm"
+                            className="hover:text-orange-500 transition-colors"
                           >
                             {office.phone}
                           </a>
@@ -124,33 +162,13 @@ export default function Contact() {
                     </div>
                   ))}
                 </div>
-                
-                <div className="mt-8 pt-6 border-t border-gray-700">
-                  <div className="flex items-center justify-center space-x-3 mb-3">
-                    <Mail className="h-5 w-5 text-orange-500" />
-                    <a 
-                      href="mailto:info@jumiamisolar.com"
-                      className="text-white hover:text-orange-500 transition-colors"
-                    >
-                      info@jumiamisolar.com
-                    </a>
-                  </div>
-                  
-                  <div className="flex items-center justify-center space-x-3">
-                    <Clock className="h-5 w-5 text-orange-500" />
-                    <div className="text-white text-sm">
-                      <p>Mon - Fri: 8:00AM - 6:00PM</p>
-                      <p>Sat: 9:00AM - 4:00PM</p>
-                    </div>
-                  </div>
-                </div>
               </div>
-              
+
               {/* Social Media */}
-              <div className="border border-gray-200 rounded-lg p-8">
+              <div className="bg-gray-50 rounded-xl p-8">
                 <h3 className="text-2xl font-light text-gray-900 mb-6">Follow Us</h3>
                 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-3">
                   {socialMediaLinks.map((social) => {
                     const IconComponent = social.icon;
                     return (
@@ -159,10 +177,10 @@ export default function Contact() {
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:border-orange-500 hover:bg-orange-50 transition-all duration-300"
+                        className="flex items-center space-x-3 p-3 bg-white rounded-lg hover:bg-orange-50 hover:border-orange-200 border border-gray-200 transition-all duration-300"
                       >
                         <IconComponent className="h-5 w-5 text-orange-500" />
-                        <span className="text-gray-700">{social.name}</span>
+                        <span className="text-gray-700 text-sm">{social.name}</span>
                       </a>
                     );
                   })}
@@ -173,10 +191,8 @@ export default function Contact() {
         </div>
       </section>
 
-
-
       {/* FAQ Section */}
-      <section className="py-20 bg-white" aria-labelledby="faq-heading">
+      <section className="py-20 bg-gray-50" aria-labelledby="faq-heading">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 id="faq-heading" className="text-4xl font-light text-gray-900 mb-6">
@@ -187,7 +203,7 @@ export default function Contact() {
             </p>
           </div>
           
-          <div className="space-y-6">
+          <div className="grid md:grid-cols-2 gap-6">
             {[
               {
                 question: "How long does installation take?",
@@ -208,10 +224,10 @@ export default function Contact() {
             ].map((faq, index) => (
               <div 
                 key={index}
-                className={`border border-gray-200 rounded-lg p-6 transform transition-all duration-1000 delay-${index * 200} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                className={`bg-white border border-gray-200 rounded-xl p-6 transform transition-all duration-1000 delay-${index * 200} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
               >
-                <h3 className="text-lg font-light text-gray-900 mb-3">{faq.question}</h3>
-                <p className="text-gray-600">{faq.answer}</p>
+                <h3 className="text-lg font-medium text-gray-900 mb-3">{faq.question}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{faq.answer}</p>
               </div>
             ))}
           </div>
@@ -232,49 +248,24 @@ export default function Contact() {
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <Button 
                 size="lg"
-                className="bg-white text-orange-600 hover:bg-gray-100 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px] group"
-                aria-label="Call emergency support line"
+                className="bg-white text-orange-600 hover:bg-gray-100 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-xl"
               >
-                <Phone className="h-5 w-5 mr-3" aria-hidden="true" />
+                <Phone className="h-5 w-5 mr-3" />
                 Emergency Line
-                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
               </Button>
               <Button 
                 variant="outline"
                 size="lg"
-                className="border-2 border-white/30 text-white hover:bg-white hover:text-orange-600 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px]"
-                aria-label="Contact us via WhatsApp"
+                className="border-2 border-white/30 text-white hover:bg-white hover:text-orange-600 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-xl"
                 onClick={() => {
-                  const phoneNumber = "2348118887425"; // Nigeria country code +234, remove leading 0
-                  const whatsappUrl = `https://wa.me/${phoneNumber}`;
+                  const whatsappUrl = `https://wa.me/2348118887425`;
                   window.open(whatsappUrl, '_blank');
                 }}
               >
+                <MessageCircle className="h-5 w-5 mr-3" />
                 WhatsApp Support
               </Button>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-orange-500 to-yellow-500" aria-labelledby="cta-heading">
-        <div className="max-w-4xl mx-auto text-center px-6">
-          <div className={`transform transition-all duration-1000 delay-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <h3 id="cta-heading" className="text-2xl font-light text-white mb-6">
-              Ready to Start Your Solar Journey?
-            </h3>
-            <p className="text-white/90 mb-8 text-lg">
-              Join thousands of Nigerian families who have already transformed their energy future with Jumiami Solar.
-            </p>
-            <Button 
-              size="lg"
-              className="bg-white text-orange-600 hover:bg-gray-100 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px] group shadow-lg"
-              aria-label="Start your solar transformation today"
-            >
-              Start Your Transformation
-              <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
-            </Button>
           </div>
         </div>
       </section>
