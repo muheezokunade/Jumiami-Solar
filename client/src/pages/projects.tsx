@@ -100,7 +100,7 @@ const projects: Project[] = [
     capacity: "120kW",
     duration: "4 weeks",
     description: "Solar power installation for a 3-story shopping complex housing 25 retail shops, restaurants, and office spaces.",
-    image: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg",
+    image: "https://images.pexels.com/photos/2673471/pexels-photo-2673471.jpeg",
     beforeImage: "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg",
     afterImage: "https://images.pexels.com/photos/1181685/pexels-photo-1181685.jpeg",
     features: [
@@ -184,7 +184,7 @@ const projects: Project[] = [
     capacity: "100kW",
     duration: "5 weeks",
     description: "Critical solar power system for private hospital ensuring uninterrupted power for medical equipment, lighting, and air conditioning.",
-    image: "https://images.pexels.com/photos/433311/pexels-photo-433311.jpeg",
+    image: "https://images.pexels.com/photos/207489/pexels-photo-207489.jpeg",
     beforeImage: "https://images.pexels.com/photos/433312/pexels-photo-433312.jpeg",
     afterImage: "https://images.pexels.com/photos/433313/pexels-photo-433313.jpeg",
     features: [
@@ -212,7 +212,7 @@ const projects: Project[] = [
     capacity: "60kW",
     duration: "3 weeks",
     description: "Solar power system for large-scale poultry farm with automated feeding systems, climate control, and processing facilities.",
-    image: "https://images.pexels.com/photos/433314/pexels-photo-433314.jpeg",
+    image: "https://images.pexels.com/photos/46169/twilight-power-lines-evening-evening-sun-46169.jpeg",
     beforeImage: "https://images.pexels.com/photos/433315/pexels-photo-433315.jpeg",
     afterImage: "https://images.pexels.com/photos/433316/pexels-photo-433316.jpeg",
     features: [
