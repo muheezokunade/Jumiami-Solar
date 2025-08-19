@@ -66,10 +66,10 @@ While the initial cost is significant, many homeowners find the system pays for 
 
 Your solar system is only as good as its installation. Make sure you choose a reliable and experienced installer who will:
 
-- Do a thorough analysis of your energy needs to recommend the perfect system size.
-- Provide a clear, itemized breakdown of all costs.
-- Offer strong warranties on their work and the equipment.
-- Provide references from previous customers.
+- Do a thorough analysis of your energy needs to recommend the perfect system size
+- Provide a clear, itemized breakdown of all costs
+- Offer strong warranties on their work and the equipment
+- Provide references from previous customers
 
 By taking the time to assess your needs, understand the components, and choose the right partner for the job, you can ensure a seamless transition to a more reliable, cost-effective, and sustainable source of power for your home.`,
     author: "Jumiami Solar Team",
@@ -147,12 +147,12 @@ This is the most common and traditional type of inverter for residential systems
 
 **Pros**:
 
-- **Cost-Effective**: String inverters are generally the most affordable option, which can lower your initial installation costs.
-- **Simplicity**: With only one unit, it's easier to install and maintain. If there's a problem, a technician doesn't have to climb onto your roof to fix it.
+- **Cost-Effective**: String inverters are generally the most affordable option, which can lower your initial installation costs
+- **Simplicity**: With only one unit, it's easier to install and maintain. If there's a problem, a technician doesn't have to climb onto your roof to fix it
 
 **Cons**:
 
-- **"Weakest Link" Problem**: The biggest drawback is that the performance of the entire string is limited by its lowest-performing panel. If one panel is shaded by a tree branch or covered in dust, the output of every other panel in that string will drop to match it.
+- **"Weakest Link" Problem**: The biggest drawback is that the performance of the entire string is limited by its lowest-performing panel. If one panel is shaded by a tree branch or covered in dust, the output of every other panel in that string will drop to match it
 
 **Best for**: Homes with a simple roof layout that receives consistent, unobstructed sunlight throughout the day.
 
@@ -164,14 +164,14 @@ Microinverters are a more modern and increasingly popular solution.
 
 **Pros**:
 
-- **Maximum Efficiency**: If one panel is shaded, it won't affect the performance of any other panels. Your entire system will continue to generate power at its maximum potential.
-- **Panel-Level Monitoring**: You can monitor the performance of each individual panel, making it easy to spot and troubleshoot issues.
-- **Scalability**: It's very easy to add more panels to your system in the future without needing a new, larger central inverter.
+- **Maximum Efficiency**: If one panel is shaded, it won't affect the performance of any other panels. Your entire system will continue to generate power at its maximum potential
+- **Panel-Level Monitoring**: You can monitor the performance of each individual panel, making it easy to spot and troubleshoot issues
+- **Scalability**: It's very easy to add more panels to your system in the future without needing a new, larger central inverter
 
 **Cons**:
 
-- **Higher Cost**: Microinverters are more expensive than string inverters due to the cost of having one for each panel.
-- **Maintenance**: If a microinverter fails, a technician will need to go onto the roof to replace it.
+- **Higher Cost**: Microinverters are more expensive than string inverters due to the cost of having one for each panel
+- **Maintenance**: If a microinverter fails, a technician will need to go onto the roof to replace it
 
 **Best for**: Systems with complex roof layouts, or roofs that experience partial shading from trees, chimneys, or other obstructions.
 
@@ -183,13 +183,13 @@ A hybrid inverter combines the functions of a traditional inverter and a battery
 
 **Pros**:
 
-- **Backup Power**: This is the most significant advantage. If the grid goes down, your hybrid inverter can seamlessly switch to your battery power, providing backup for your home.
-- **Energy Independence**: You can store excess solar energy to use at night, reducing your reliance on the grid.
-- **Versatility**: It offers the best of both worlds: grid connectivity and backup power capability.
+- **Backup Power**: This is the most significant advantage. If the grid goes down, your hybrid inverter can seamlessly switch to your battery power, providing backup for your home
+- **Energy Independence**: You can store excess solar energy to use at night, reducing your reliance on the grid
+- **Versatility**: It offers the best of both worlds: grid connectivity and backup power capability
 
 **Cons**:
 
-- **Higher Upfront Cost**: A hybrid system is more expensive due to the cost of the inverter and the required batteries.
+- **Higher Upfront Cost**: A hybrid system is more expensive due to the cost of the inverter and the required batteries
 
 **Best for**: Homes and businesses in areas with frequent power outages, or for those who want to be more energy-independent.
 
@@ -222,9 +222,9 @@ Dust, dirt, and bird droppings can accumulate on your solar panels, reducing the
 
 **How to Clean**:
 
-- Use a soft brush or a non-abrasive cloth.
-- Use regular water—avoid harsh detergents or high-pressure washers, which can damage the panels.
-- For hard-to-reach panels, a simple garden hose with a nozzle can do the trick.
+- Use a soft brush or a non-abrasive cloth
+- Use regular water—avoid harsh detergents or high-pressure washers, which can damage the panels
+- For hard-to-reach panels, a simple garden hose with a nozzle can do the trick
 
 ## 2. Monitor Your System's Performance
 
