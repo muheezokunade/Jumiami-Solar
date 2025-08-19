@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { ArrowRight, CheckCircle, Calculator, Phone, TrendingUp, Shield, DollarSign, Award, Users, Star, Zap, Battery, Settings, MapPin, Clock, Wrench, Mail } from "lucide-react";
 import { useState, useEffect } from "react";
-import { AnimatedStats, RealTimeUpdates, InteractiveProgress, AnimatedFeatureList } from "@/components/dynamic-content";
+import { InteractiveProgress, AnimatedFeatureList } from "@/components/dynamic-content";
 import { SolarCalculator, SolarSystemSimulator, InteractiveTestimonialCarousel, LiveEnergyMonitor } from "@/components/interactive-elements";
+import { METRIC_SETS, COMPANY_METRICS } from "@/lib/metrics";
 
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,7 +18,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       <HeroSection />
       
-      {/* Jumiami Trust Signals - Brand Colors */}
+      {/* Consolidated Trust Signals & Statistics */}
       <section className="py-20 bg-gradient-to-br from-orange-500 via-orange-400 to-yellow-400" aria-labelledby="trust-heading">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
@@ -27,55 +28,38 @@ export default function HomePage() {
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
               The only solar company with NERC certification and ISO 9001:2015 standards
             </p>
-            </div>
+          </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {[
-              {
-                title: "NERC Certified",
-                description: "Only solar company approved by Nigerian Electricity Regulatory Commission",
-                icon: Award,
-                number: "1st",
-                ariaLabel: "First NERC certified solar company in Nigeria"
-              },
-              {
-                title: "500+ Families Served",
-                description: "More Nigerian families trust us than any other solar company",
-                icon: Users,
-                number: "500+",
-                ariaLabel: "Over 500 Nigerian families served"
-              },
-              {
-                title: "4.9/5 Customer Rating",
-                description: "Highest customer satisfaction rating in the industry",
-                icon: Star,
-                number: "4.9/5",
-                ariaLabel: "Four point nine out of five customer rating"
-              }
-            ].map((feature, index) => (
-              <div 
-                key={index} 
-                className={`text-center transform transition-all duration-1000 delay-${index * 200} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                role="region"
-                aria-labelledby={`feature-${index}-title`}
-              >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            {METRIC_SETS.heroStats.map((stat, index) => {
+              const iconMap = { Award, Users, Star, Clock };
+              const IconComponent = iconMap[stat.icon as keyof typeof iconMap];
+              
+              return (
                 <div 
-                  className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-8"
-                  aria-label={feature.ariaLabel}
+                  key={index} 
+                  className={`text-center transform transition-all duration-1000 delay-${index * 200} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                  role="region"
+                  aria-labelledby={`stat-${index}-title`}
                 >
-                  <feature.icon className="h-12 w-12 text-white" aria-hidden="true" />
-            </div>
-                <div className="text-4xl font-light text-white mb-4" aria-label={`${feature.number} ${feature.title}`}>
-                  {feature.number}
-            </div>
-                <h3 id={`feature-${index}-title`} className="text-xl font-light text-white mb-4">
-                  {feature.title}
-                </h3>
-                <p className="text-white/90 text-base">
-                  {feature.description}
-                </p>
-            </div>
-            ))}
+                  <div 
+                    className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-8"
+                    aria-label={`${stat.number} ${stat.label}`}
+                  >
+                    <IconComponent className="h-12 w-12 text-white" aria-hidden="true" />
+                  </div>
+                  <div className="text-4xl font-light text-white mb-4" aria-label={`${stat.number} ${stat.label}`}>
+                    {stat.number}
+                  </div>
+                  <h3 id={`stat-${index}-title`} className="text-xl font-light text-white mb-4">
+                    {stat.label}
+                  </h3>
+                  <p className="text-white/90 text-base">
+                    {stat.description}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -172,11 +156,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Dynamic Stats Section */}
-      <AnimatedStats />
-
-      {/* Real-time Updates */}
-      <RealTimeUpdates />
+      {/* Interactive Solar Calculator Section */}
+      <section className="py-20 bg-gradient-to-br from-orange-50 to-yellow-50" aria-labelledby="calculator-heading">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 id="calculator-heading" className="text-4xl font-light text-gray-900 mb-6">
+              Calculate Your Solar Savings
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              See how much you can save with solar energy
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <SolarCalculator />
+            <LiveEnergyMonitor />
+          </div>
+        </div>
+      </section>
 
       {/* Enhanced Service Areas with Progress Bars */}
       <section className="py-20 bg-white" aria-labelledby="service-areas-heading">
@@ -191,11 +188,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { city: "Lagos", coverage: 95, projects: 150, rating: 4.9 },
-              { city: "Ilorin", coverage: 88, projects: 85, rating: 4.8 },
-              { city: "Abeokuta", coverage: 92, projects: 120, rating: 4.9 }
-            ].map((area, index) => (
+            {METRIC_SETS.coverageStats.map((area, index) => (
               <div
                 key={area.city}
                 className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-all duration-300"
@@ -286,57 +279,64 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Jumiami Value Proposition - Brand Colors */}
+      {/* Consolidated Value Proposition */}
       <section className="py-20 bg-gradient-to-r from-orange-500 to-yellow-500" aria-labelledby="value-heading">
-        <div className="max-w-4xl mx-auto text-center px-6">
+        <div className="max-w-6xl mx-auto px-6">
           <div className={`transform transition-all duration-1000 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <h2 id="value-heading" className="text-5xl font-light mb-8 tracking-wide text-white">
-              Transform Your Energy Future
+            <div className="text-center mb-16">
+              <h2 id="value-heading" className="text-5xl font-light mb-8 tracking-wide text-white">
+                Transform Your Energy Future
               </h2>
-            <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
-              Join the energy revolution. We don't just install solar panels - we empower Nigerian families to take control of their energy destiny.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Button 
-                size="lg"
-                className="bg-white text-orange-600 hover:bg-gray-100 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px] group shadow-lg"
-                aria-label="Start your energy transformation with free consultation"
-              >
-                <Calculator className="h-5 w-5 mr-3" aria-hidden="true" />
-                Start Your Transformation
-                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
-              </Button>
-              <Button 
-                variant="outline"
-                size="lg"
-                className="border-2 border-white/30 text-white hover:bg-white hover:text-orange-600 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px]"
-                aria-label="Speak with our energy experts at +234 811 888 7425"
-              >
-                <Phone className="h-5 w-5 mr-3" aria-hidden="true" />
-                Speak with Experts
-              </Button>
-                    </div>
-                    </div>
-                  </div>
+              <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
+                Join the energy revolution. We don't just install solar panels - we empower Nigerian families to take control of their energy destiny.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-white/10 backdrop-blur-sm p-8 rounded-lg">
+                <DollarSign className="h-12 w-12 text-white mb-6" />
+                <h3 className="text-2xl font-light text-white mb-4">Reduce Bills</h3>
+                <p className="text-white/90">
+                  Save up to 85% on your monthly electricity costs. Our customers save an average of ₦65,000 per month.
+                </p>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-sm p-8 rounded-lg">
+                <Shield className="h-12 w-12 text-white mb-6" />
+                <h3 className="text-2xl font-light text-white mb-4">Energy Independence</h3>
+                <p className="text-white/90">
+                  Generate your own power and reduce grid dependency. Never worry about power cuts again.
+                </p>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-sm p-8 rounded-lg">
+                <TrendingUp className="h-12 w-12 text-white mb-6" />
+                <h3 className="text-2xl font-light text-white mb-4">Increase Value</h3>
+                <p className="text-white/90">
+                  Solar installations can increase your property value by 15-20%. A smart investment for the future.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* Contact Quick Access */}
+      {/* Streamlined Contact Section */}
       <section className="py-20 bg-gradient-to-br from-orange-50 to-yellow-50" aria-labelledby="contact-heading">
         <div className="max-w-4xl mx-auto text-center px-6">
           <div className={`transform transition-all duration-1000 delay-400 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <h2 id="contact-heading" className="text-4xl font-light text-gray-900 mb-6">
-              Ready to Get Started?
+              Ready to Transform Your Energy Future?
             </h2>
             <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-              Get your free consultation and quote today. Our experts are ready to help you save money and energy.
+              Join {COMPANY_METRICS.happyCustomers}+ Nigerian families who have already made the switch to clean, reliable solar energy.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-              <div className="bg-white p-6 rounded-lg shadow-lg">
+              <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <Phone className="h-12 w-12 text-orange-500 mx-auto mb-4" aria-hidden="true" />
                 <h3 className="text-xl font-light text-gray-900 mb-2">Call Us</h3>
-                <p className="text-gray-600 mb-4">Speak directly with our experts</p>
+                <p className="text-gray-600 mb-4">24/7 Expert Support</p>
                 <a 
                   href="tel:+2348118887425" 
                   className="text-2xl font-light text-orange-600 hover:text-orange-700 transition-colors"
@@ -346,10 +346,10 @@ export default function HomePage() {
                 </a>
               </div>
               
-              <div className="bg-white p-6 rounded-lg shadow-lg">
+              <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <Mail className="h-12 w-12 text-orange-500 mx-auto mb-4" aria-hidden="true" />
                 <h3 className="text-xl font-light text-gray-900 mb-2">Email Us</h3>
-                <p className="text-gray-600 mb-4">Send us your questions</p>
+                <p className="text-gray-600 mb-4">Quick Response Time</p>
                 <a 
                   href="mailto:info@jumiamisolar.com" 
                   className="text-lg font-light text-orange-600 hover:text-orange-700 transition-colors"
@@ -359,14 +359,14 @@ export default function HomePage() {
                 </a>
               </div>
               
-              <div className="bg-white p-6 rounded-lg shadow-lg">
+              <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <MapPin className="h-12 w-12 text-orange-500 mx-auto mb-4" aria-hidden="true" />
                 <h3 className="text-xl font-light text-gray-900 mb-2">Visit Us</h3>
-                <p className="text-gray-600 mb-4">Our office location</p>
-                <p className="text-sm font-light text-gray-600">
+                <p className="text-gray-600 mb-4">Experience Solar In Person</p>
+                <address className="text-sm font-light text-gray-600 not-italic">
                   Ikota Shopping Complex<br />
                   VGC, Ajah, Lagos
-                </p>
+                </address>
               </div>
             </div>
             
@@ -378,161 +378,25 @@ export default function HomePage() {
                   aria-label="Get free quote and consultation"
                 >
                   <Calculator className="h-5 w-5 mr-3" aria-hidden="true" />
-                  Get Free Quote
+                  Start Your Solar Journey
                   <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
                 </Button>
               </Link>
-              <Button 
-                variant="outline"
-                size="lg"
-                className="border-2 border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px]"
-                aria-label="Schedule a consultation call"
+              <a 
+                href="https://wa.me/2348118887425"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <Phone className="h-5 w-5 mr-3" aria-hidden="true" />
-                Schedule Call
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Jumiami Storytelling - Brand Colors */}
-      <section className="py-20 bg-white" aria-labelledby="stories-heading">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 id="stories-heading" className="text-4xl font-light text-gray-900 mb-6">
-              Real Stories, Real Impact
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              See how we're changing lives across Nigeria
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {[
-              {
-                name: "Adebayo Oke, Lagos",
-                savings: "₦65,000 monthly savings",
-                testimonial: "Before Jumiami Solar, I was spending ₦85,000 monthly on electricity. Now I pay only ₦20,000. The extra ₦65,000 goes to my children's education. This isn't just about saving money - it's about securing our family's future.",
-                ariaLabel: "Success story from Adebayo Oke in Lagos about family savings"
-              },
-              {
-                name: "Fatima Hassan, Ilorin",
-                savings: "70% cost reduction",
-                testimonial: "Our business was struggling with ₦120,000 monthly electricity bills. Jumiami Solar reduced our costs to ₦35,000. That ₦85,000 monthly savings allowed us to hire 3 more employees. We're not just saving money - we're creating jobs.",
-                ariaLabel: "Business transformation story from Fatima Hassan in Ilorin"
-              }
-            ].map((testimonial, index) => (
-              <div 
-                key={index} 
-                className={`bg-gradient-to-br from-orange-50 to-yellow-50 p-8 rounded-lg shadow-lg transform transition-all duration-1000 delay-${index * 200} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                role="article"
-                aria-label={testimonial.ariaLabel}
-              >
-                <blockquote className="text-gray-700 mb-8 italic leading-relaxed text-lg">
-                  "{testimonial.testimonial}"
-                </blockquote>
-                
-                <div className="flex items-center justify-between">
-                    <div className="text-sm text-gray-600">
-                    <span className="font-light text-gray-900">{testimonial.name}</span>
-                  </div>
-                  <div className="text-sm text-orange-600 font-medium">
-                    <span className="font-light">{testimonial.savings}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Jumiami Final CTA - Brand Colors */}
-      <section className="py-16 bg-gradient-to-r from-orange-500 to-yellow-500" aria-labelledby="journey-heading">
-        <div className="max-w-4xl mx-auto text-center px-6">
-          <div className={`transform transition-all duration-1000 delay-400 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <h3 id="journey-heading" className="text-2xl font-light text-white mb-6">
-              Ready to Join the Energy Revolution?
-            </h3>
-            <p className="text-white/90 mb-8 text-lg">
-              Be part of Nigeria's sustainable energy future. 500+ families have already transformed their lives.
-            </p>
-            <Button 
-              size="lg"
-              className="bg-white text-orange-600 hover:bg-gray-100 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px] group shadow-lg"
-              aria-label="Join the energy revolution and start your transformation today"
-            >
-              Join the Revolution
-              <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Interactive Solar Calculator Section */}
-      <section className="py-20 bg-gradient-to-br from-orange-50 to-yellow-50" aria-labelledby="calculator-heading">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 id="calculator-heading" className="text-4xl font-light text-gray-900 mb-6">
-              Calculate Your Solar Savings
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              See how much you can save with solar energy
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <SolarCalculator />
-            
-            <div className="space-y-8">
-              <div className="bg-white p-6 rounded-lg border border-gray-200">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Why Choose Solar?</h3>
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-3">
-                    <DollarSign className="h-6 w-6 text-green-500 mt-1 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Reduce Electricity Bills</h4>
-                      <p className="text-gray-600 text-sm">Save up to 85% on your monthly electricity costs</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <Shield className="h-6 w-6 text-blue-500 mt-1 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Energy Independence</h4>
-                      <p className="text-gray-600 text-sm">Generate your own power and reduce grid dependency</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <TrendingUp className="h-6 w-6 text-orange-500 mt-1 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Increase Property Value</h4>
-                      <p className="text-gray-600 text-sm">Solar installations can increase home value by 15-20%</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-white p-6 rounded-lg border border-gray-200">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Quick Facts</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-orange-600">5+</div>
-                    <div className="text-sm text-gray-600">Years Experience</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-green-600">500+</div>
-                    <div className="text-sm text-gray-600">Happy Customers</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600">95%</div>
-                    <div className="text-sm text-gray-600">Success Rate</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-purple-600">24/7</div>
-                    <div className="text-sm text-gray-600">Support Available</div>
-                  </div>
-                </div>
-              </div>
+                <Button 
+                  variant="outline"
+                  size="lg"
+                  className="border-2 border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px]"
+                  aria-label="Chat with us on WhatsApp"
+                >
+                  <Phone className="h-5 w-5 mr-3" aria-hidden="true" />
+                  Chat on WhatsApp
+                </Button>
+              </a>
             </div>
           </div>
         </div>
@@ -554,6 +418,150 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section className="py-20 bg-gradient-to-br from-orange-50 to-yellow-50" aria-labelledby="faq-heading">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 id="faq-heading" className="text-4xl font-light text-gray-900 mb-6">
+              Common Questions
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Everything you need to know about solar installation
+            </p>
+          </div>
+
+          <div className="space-y-8">
+            {[
+              {
+                question: "How long does installation take?",
+                answer: "Most residential installations are completed within 1-2 days. Commercial projects may take 3-7 days depending on system size."
+              },
+              {
+                question: "What maintenance is required?",
+                answer: "Solar panels need minimal maintenance. We recommend annual cleaning and inspection to ensure optimal performance."
+              },
+              {
+                question: "What happens during power outages?",
+                answer: "Our systems include battery backup, ensuring you have power even during grid outages."
+              },
+              {
+                question: "Do you provide warranty?",
+                answer: "Yes, we provide a 5-year warranty on installation and equipment. Manufacturers' warranties on panels and inverters may extend longer."
+              }
+            ].map((faq, index) => (
+              <div 
+                key={index}
+                className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                  {faq.question}
+                </h3>
+                <p className="text-gray-600">
+                  {faq.answer}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link to="/contact">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white hover:from-orange-600 hover:to-yellow-600 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px] group shadow-lg"
+              >
+                Get More Answers
+                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog Preview */}
+      <section className="py-20 bg-white" aria-labelledby="blog-heading">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 id="blog-heading" className="text-4xl font-light text-gray-900 mb-6">
+              Solar Energy Tips & News
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Stay updated with the latest in solar technology
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Guide: Choosing the Right Solar System",
+                excerpt: "Learn how to select the perfect solar system for your home or business based on your energy needs and budget.",
+                image: "https://images.pexels.com/photos/371917/pexels-photo-371917.jpeg",
+                category: "Guide",
+                readTime: "5 min read"
+              },
+              {
+                title: "Solar Energy in Nigeria: 2024 Update",
+                excerpt: "Latest developments in Nigeria's solar energy sector, including new policies and market trends.",
+                image: "https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg",
+                category: "News",
+                readTime: "4 min read"
+              },
+              {
+                title: "Maintenance Tips for Your Solar Panels",
+                excerpt: "Essential maintenance tips to keep your solar panels performing at their best throughout the year.",
+                image: "https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg",
+                category: "Tips",
+                readTime: "3 min read"
+              }
+            ].map((post, index) => (
+              <div 
+                key={index}
+                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+              >
+                <div className="relative h-48">
+                  <img 
+                    src={post.image} 
+                    alt={post.title}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-orange-500 text-white px-3 py-1 text-sm rounded-full">
+                      {post.category}
+                    </span>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2 line-clamp-2">
+                    {post.title}
+                  </h3>
+                  <p className="text-gray-600 mb-4 line-clamp-2">
+                    {post.excerpt}
+                  </p>
+                  <div className="flex items-center justify-between text-sm text-gray-500">
+                    <span>{post.readTime}</span>
+                    <Link to="/blog" className="text-orange-500 hover:text-orange-600 font-medium">
+                      Read More
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link to="/blog">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white hover:from-orange-600 hover:to-yellow-600 px-12 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 rounded-none min-h-[56px] group shadow-lg"
+              >
+                View All Articles
+                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Interactive Testimonials */}
       <section className="py-20 bg-gray-50" aria-labelledby="testimonials-heading">
         <div className="max-w-6xl mx-auto px-6">
@@ -567,22 +575,6 @@ export default function HomePage() {
           </div>
           
           <InteractiveTestimonialCarousel />
-        </div>
-      </section>
-
-      {/* Live Energy Monitor */}
-      <section className="py-20 bg-white" aria-labelledby="monitor-heading">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 id="monitor-heading" className="text-4xl font-light text-gray-900 mb-6">
-              Live Energy Monitoring
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Real-time data from our solar installations
-            </p>
-          </div>
-          
-          <LiveEnergyMonitor />
         </div>
       </section>
     </div>

@@ -79,10 +79,30 @@ export default {
             height: "0",
           },
         },
+        ripple: {
+          "0%": { transform: "scale(0)", opacity: "0.5" },
+          "100%": { transform: "scale(4)", opacity: "0" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        "solar-pulse": {
+          "0%, 100%": { transform: "scale(1)", opacity: "0.8" },
+          "50%": { transform: "scale(1.1)", opacity: "1" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-200px 0" },
+          "100%": { backgroundPosition: "calc(200px + 100%) 0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        ripple: "ripple 1s cubic-bezier(0, 0, 0.2, 1)",
+        float: "float 3s ease-in-out infinite",
+        "solar-pulse": "solar-pulse 2s ease-in-out infinite",
+        shimmer: "shimmer 1.5s infinite",
       },
     },
   },

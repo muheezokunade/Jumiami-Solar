@@ -173,9 +173,9 @@ export default function TermsOfService() {
               </p>
               <div className="bg-gray-50 rounded-lg p-6">
                 <p className="text-gray-600 mb-2"><strong>Jumiami Solar</strong></p>
-                <p className="text-gray-600 mb-2">Email: legal@jumiamisolar.com</p>
+                <p className="text-gray-600 mb-2">Email: info@jumiamisolar.com</p>
                 <p className="text-gray-600 mb-2">Phone: +234 811 888 7425</p>
-                <p className="text-gray-600">Address: Ikota Shopping Complex, VGC Ajah, Lagos, Nigeria</p>
+                <p className="text-gray-600">Address: Ikota Shopping Complex, VGC, Ajah, Lagos, Nigeria</p>
               </div>
             </div>
           </div>

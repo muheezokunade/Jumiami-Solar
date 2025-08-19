@@ -1,506 +1,207 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Custom animations for dynamic content */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slide-in-left {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(251, 146, 60, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(251, 146, 60, 0.8);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200px 0;
-  }
-  100% {
-    background-position: calc(200px + 100%) 0;
-  }
-}
-
-@keyframes energy-flow {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-}
-
-@keyframes solar-pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-}
-
-@keyframes battery-charge {
-  0% {
-    transform: scaleY(0);
-  }
-  100% {
-    transform: scaleY(1);
-  }
-}
-
-/* Animation classes */
-.animate-fade-in {
-  animation: fade-in 0.6s ease-out forwards;
-}
-
-.animate-slide-in-left {
-  animation: slide-in-left 0.6s ease-out forwards;
-}
-
-.animate-slide-in-right {
-  animation: slide-in-right 0.6s ease-out forwards;
-}
-
-.animate-scale-in {
-  animation: scale-in 0.6s ease-out forwards;
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-.animate-shimmer {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200px 100%;
-  animation: shimmer 1.5s infinite;
-}
-
-.animate-energy-flow {
-  animation: energy-flow 2s ease-in-out infinite;
-}
-
-.animate-solar-pulse {
-  animation: solar-pulse 2s ease-in-out infinite;
-}
-
-.animate-battery-charge {
-  animation: battery-charge 1s ease-out forwards;
-}
-
-/* Interactive slider styles */
-.slider {
-  -webkit-appearance: none;
-  appearance: none;
-  background: #e5e7eb;
-  outline: none;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f97316, #eab308);
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-}
-
-.slider::-webkit-slider-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-.slider::-moz-range-thumb {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f97316, #eab308);
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-}
-
-.slider::-moz-range-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* Interactive card styles */
-.interactive-card {
-  transition: all 0.3s ease;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.interactive-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.interactive-card:hover::before {
-  left: 100%;
-}
-
-.interactive-card:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* Energy monitor styles */
-.energy-bar {
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.energy-bar::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  animation: energy-flow 2s ease-in-out infinite;
-}
-
-/* Solar panel animation */
-.solar-panel {
-  transition: all 0.3s ease;
-}
-
-.solar-panel.active {
-  animation: solar-pulse 2s ease-in-out infinite;
-}
-
-/* Battery animation */
-.battery-level {
-  transition: all 0.3s ease;
-  transform-origin: bottom;
-}
-
-.battery-level.charging {
-  animation: battery-charge 1s ease-out forwards;
-}
-
-/* Calculator result animation */
-.calculator-result {
-  animation: scale-in 0.6s ease-out forwards;
-}
-
-/* Testimonial carousel */
-.testimonial-slide {
-  transition: all 0.5s ease;
-}
-
-.testimonial-slide.active {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-.testimonial-slide.inactive {
-  transform: translateX(100%);
-  opacity: 0;
-}
-
-/* Progress bar animation */
-.progress-bar {
-  transition: width 2s ease-out;
-  position: relative;
-  overflow: hidden;
-}
-
-.progress-bar::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  animation: shimmer 2s ease-in-out infinite;
-}
-
-/* Hover effects */
+/* Base Styles */
 .hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s;
 }
-
 .hover-lift:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
 }
 
 .hover-glow {
-  transition: box-shadow 0.3s ease;
+  transition: all 0.3s;
 }
-
 .hover-glow:hover {
-  box-shadow: 0 0 20px rgba(251, 146, 60, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(251, 146, 60, 0.2);
 }
 
-/* Interactive elements */
-.interactive-card {
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.interactive-card:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* Progress bar animations */
-.progress-bar {
-  transition: width 2s ease-out;
-}
-
-/* Counter animations */
-.counter-animation {
-  transition: all 0.3s ease;
-}
-
-/* Loading states */
-.loading-shimmer {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200px 100%;
-  animation: shimmer 1.5s infinite;
-}
-
-/* Responsive animations */
-@media (prefers-reduced-motion: reduce) {
-  .animate-fade-in,
-  .animate-slide-in-left,
-  .animate-slide-in-right,
-  .animate-scale-in,
-  .animate-float,
-  .animate-pulse-glow,
-  .animate-shimmer,
-  .animate-energy-flow,
-  .animate-solar-pulse,
-  .animate-battery-charge {
-    animation: none;
-  }
-  
-  .hover-lift:hover,
-  .interactive-card:hover {
-    transform: none;
-  }
-}
-
-/* Mobile optimizations */
-@media (max-width: 768px) {
-  .slider::-webkit-slider-thumb {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .slider::-moz-range-thumb {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .interactive-card:hover {
-    transform: none;
-  }
-}
-
-/* Hero Section Animations */
-@keyframes hero-pulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.6; }
-}
-
-@keyframes hero-float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes hero-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(255, 165, 0, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(255, 165, 0, 0.6); }
-}
-
-.hero-animate-pulse {
-  animation: hero-pulse 3s ease-in-out infinite;
-}
-
-.hero-animate-float {
-  animation: hero-float 4s ease-in-out infinite;
-}
-
-.hero-animate-glow {
-  animation: hero-glow 2s ease-in-out infinite;
-}
-
-/* Video fallback animations */
-.video-fallback {
-  background: linear-gradient(45deg, #1e3a8a, #1e40af, #3b82f6, #1e40af, #1e3a8a);
-  background-size: 400% 400%;
-  animation: gradient-shift 8s ease infinite;
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Solar panel animations */
-.solar-panel {
-  animation: solar-pulse 4s ease-in-out infinite;
-}
-
-@keyframes solar-pulse {
-  0%, 100% { 
-    transform: scale(1) rotate(0deg);
-    opacity: 0.7;
-  }
-  50% { 
-    transform: scale(1.1) rotate(5deg);
-    opacity: 1;
-  }
-}
-
-/* Enhanced video loading states */
-.video-loading {
+.hover-underline {
   position: relative;
-  overflow: hidden;
 }
-
-.video-loading::before {
+.hover-underline::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: -100%;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: rgb(251, 146, 60);
+  transition: all 0.3s;
+}
+.hover-underline:hover::after {
   width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  animation: loading-shimmer 2s infinite;
 }
 
-@keyframes loading-shimmer {
-  0% { left: -100%; }
-  100% { left: 100%; }
+.magnetic-button {
+  transition: transform 0.2s ease-out;
+  transform-origin: center;
 }
 
-/* Video-specific styles to prevent conflicts */
+.ripple {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 9999px;
+  animation: ripple 0.6s ease-out;
+  transform-origin: center;
+}
+
+.skeleton {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  background-color: rgb(229, 231, 235);
+  border-radius: 0.25rem;
+}
+
+.skeleton-text {
+  height: 1rem;
+  background-color: rgb(229, 231, 235);
+  border-radius: 0.25rem;
+}
+
+.skeleton-image {
+  aspect-ratio: 16 / 9;
+  background-color: rgb(229, 231, 235);
+  border-radius: 0.25rem;
+}
+
+/* Animations */
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s;
+}
+.fade-in.visible {
+  opacity: 1;
+}
+
+.slide-up {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: all 1s;
+}
+.slide-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-2rem);
+  transition: all 1s;
+}
+.slide-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(2rem);
+  transition: all 1s;
+}
+.slide-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.touch-highlight {
+  transition: all 0.15s;
+}
+.touch-highlight:active {
+  background-color: rgba(251, 146, 60, 0.1);
+  transform: scale(0.95);
+}
+
+/* Keyframe Animations */
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+/* Theme Colors */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --primary: 39 100% 50%; /* #FFA500 */
+  --primary-foreground: 60 9.1% 97.8%;
+  --secondary: 54 100% 50%; /* #FFD700 as HSL approx */
+  --secondary-foreground: 24 9.8% 10%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --accent: 54 100% 50%;
+  --accent-foreground: 24 9.8% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --ring: 39 100% 50%; /* match primary */
+}
+
+.dark {
+  --background: 20 14.3% 4.1%;
+  --foreground: 60 9.1% 97.8%;
+  --card: 20 14.3% 4.1%;
+  --card-foreground: 60 9.1% 97.8%;
+  --popover: 20 14.3% 4.1%;
+  --popover-foreground: 60 9.1% 97.8%;
+  --primary: 20.5 90.2% 48.2%;
+  --primary-foreground: 60 9.1% 97.8%;
+  --secondary: 12 6.5% 15.1%;
+  --secondary-foreground: 60 9.1% 97.8%;
+  --muted: 12 6.5% 15.1%;
+  --muted-foreground: 24 5.4% 63.9%;
+  --accent: 12 6.5% 15.1%;
+  --accent-foreground: 60 9.1% 97.8%;
+  --destructive: 0 72.2% 50.6%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --border: 12 6.5% 15.1%;
+  --input: 12 6.5% 15.1%;
+  --ring: 20.5 90.2% 48.2%;
+}
+
+/* Video Styles */
 video {
   opacity: 1 !important;
   visibility: visible !important;
   display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  z-index: 1 !important;
 }
 
-/* Ensure video elements are not hidden by global styles */
-video[autoplay] {
+video[autoplay],
+video[data-playing="true"] {
   opacity: 1 !important;
+  visibility: visible !important;
 }
 
-/* Video container styles */
-.video-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
-.video-container video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+/* Section utility */
+.section {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
-
-/* Hero video specific styles */
-.hero-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-}
-
-/* Ensure video plays properly on mobile */
-@media (max-width: 768px) {
-  video {
-    object-fit: cover !important;
+@media (max-width: 640px) {
+  .section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { SEO_METRICS } from '@/lib/metrics';
 import { 
   Facebook, 
   Twitter, 
@@ -30,10 +31,10 @@ interface SocialShareProps {
 }
 
 export default function SocialShare({ 
-  title = "Jumiami Solar - #1 Solar Energy Company in Nigeria",
-  description = "Expert solar panel installation, inverters, batteries & maintenance in Lagos, Ilorin & Abeokuta. 100% completion rate, 4.9/5 rating.",
-  url = "https://jumiamisolar.com",
-  image = "https://jumiamisolar.com/og-image.jpg",
+  title = "Jumiami Solar - Nigeria's Premier Solar Energy Solutions",
+  description = SEO_METRICS.description,
+  url = "https://jumiami-solar.com",
+  image = "https://jumiami-solar.com/og-image.jpg",
   hashtags = ["SolarEnergy", "Nigeria", "SolarPower", "JumiamiSolar"]
 }: SocialShareProps) {
   const { toast } = useToast();
@@ -171,7 +172,7 @@ export function SocialFeed() {
     {
       platform: 'Instagram',
       username: '@jumiamisolar1_',
-      content: 'New solar installation completed in Victoria Island! 🌞 Our team delivered another flawless project. #SolarEnergy #Nigeria #JumiamiSolar',
+      content: 'New solar installation completed in VGC, Lagos! 🌞 Our team delivered another flawless project. #SolarEnergy #Nigeria #JumiamiSolar',
       image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400',
       likes: 45,
       comments: 12,

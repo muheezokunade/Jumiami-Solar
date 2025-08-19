@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
 import { MapPin, Phone, Mail, Clock, Award, Shield, DollarSign, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
+import { COMPANY_METRICS } from "@/lib/metrics";
 
 export default function LagosPage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -20,7 +21,7 @@ export default function LagosPage() {
             Solar Installation in <span className="text-[hsl(19,100%,58%)]">Lagos</span>
           </h1>
           <p className={`text-xl text-gray-300 mb-8 max-w-3xl mx-auto ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-            Trusted solar energy solutions for Lagos homes and businesses. Save ₦50,000+ monthly on electricity bills with professional installation and 5-year warranty.
+            Trusted solar energy solutions for Lagos homes and businesses. Save {COMPANY_METRICS.averageMonthlySavings} monthly on electricity bills with professional installation and 5-year warranty.
           </p>
           <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
             <Link href="/contact" aria-label="Get free quote for Lagos solar installation">
@@ -145,7 +146,7 @@ export default function LagosPage() {
             <Card className="bg-white shadow-sm">
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold text-[hsl(0,0%,10%)] mb-3">Proven Results</h3>
-                <p className="text-gray-600">500+ successful installations in Lagos. Average customer saves ₦50,000+ monthly.</p>
+                <p className="text-gray-600">{COMPANY_METRICS.coverageAreas.lagos.projects}+ successful installations in Lagos. Average customer saves {COMPANY_METRICS.averageMonthlySavings} monthly.</p>
               </CardContent>
             </Card>
           </div>

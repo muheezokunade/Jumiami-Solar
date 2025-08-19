@@ -20,7 +20,7 @@ const contactInfo = {
 const officeLocations = [
   {
     city: "Lagos",
-    address: "Victoria Island, Lagos",
+    address: "Ikota Shopping Complex, VGC, Ajah, Lagos",
     phone: "+234 811 888 7425",
     email: "lagos@jumiamisolar.com"
   },
@@ -123,27 +123,25 @@ export default function Footer() {
           
         {/* Office Locations */}
         <div className="mt-12 pt-8 border-t border-gray-800">
-          <h3 className="text-2xl font-bold mb-8 text-center">Our Office Locations</h3>
-          <div className="grid md:grid-cols-3 gap-8">
+          <h3 className="text-xl font-bold text-white mb-6">Our Office Locations</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {officeLocations.map((office, index) => (
-              <div key={index} className="bg-gray-800/50 rounded-lg p-6 hover:bg-gray-800/70 transition-colors">
-                <h4 className="text-lg font-bold text-[hsl(19,100%,58%)] mb-4">{office.city}</h4>
-                <div className="space-y-3">
-              <div className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 text-[hsl(19,100%,58%)] mt-1 flex-shrink-0" />
-                    <p className="text-gray-300 text-sm leading-relaxed">
-                      {office.address}
-                </p>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-[hsl(19,100%,58%)]" />
+              <div key={index} className="text-center">
+                <h4 className="text-lg font-light text-orange-500 mb-3">{office.city}</h4>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-center space-x-2">
+                    <MapPin className="h-4 w-4 text-orange-500" />
+                    <p className="text-gray-400 text-sm">{office.address}</p>
+                  </div>
+                  <div className="flex items-center justify-center space-x-2">
+                    <Phone className="h-4 w-4 text-orange-500" />
                     <a 
                       href={`tel:${office.phone}`}
-                      className="text-gray-300 hover:text-[hsl(19,100%,58%)] transition-colors"
+                      className="text-gray-400 hover:text-orange-500 transition-colors text-sm"
                     >
                       {office.phone}
                     </a>
-              </div>
+                  </div>
                 </div>
               </div>
             ))}

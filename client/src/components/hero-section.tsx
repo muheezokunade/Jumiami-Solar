@@ -25,70 +25,50 @@ export default function HeroSection() {
   const { magneticOffset, handleMouseMove, handleMouseLeave } = useMagneticEffect(0.2);
   const { ripples, createRipple } = useRippleEffect();
 
-  // Optimized video sources for better performance
+  // Multiple sources for robust playback: prefer local MP4, fallback to Cloudinary
   const videoSources = [
-    {
-      src: "https://res.cloudinary.com/dhdjzw88p/video/upload/f_auto,q_auto,w_854,h_480/v1/8853485-hd_1920_1080_24fps_iyheid",
-      type: "video/mp4",
-      fallback: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=854&q=60"
-    },
-    {
-      src: "https://res.cloudinary.com/dhdjzw88p/video/upload/f_auto,q_auto,w_1280,h_720/v1/8853485-hd_1920_1080_24fps_iyheid",
-      type: "video/mp4", 
-      fallback: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=1280&q=70"
-    }
+    "/videos/hero-video.mp4",
+    "https://res.cloudinary.com/dhdjzw88p/video/upload/f_auto,q_auto,w_1280,h_720/v1/8853485-hd_1920_1080_24fps_iyheid"
   ];
 
   useEffect(() => {
     setIsVisible(true);
     
-    // Enhanced video play strategy with better debugging
+    // Simple video play strategy with more debugging
     const attemptVideoPlay = async () => {
       if (videoRef.current) {
         try {
-          console.log('Attempting to play video...');
+          console.log('🎬 Attempting to play video...');
+          console.log('🎬 Video element:', videoRef.current);
+          console.log('🎬 Video sources:', videoSources);
           
-          // Ensure video is muted for autoplay compliance
+          // Set video properties
           videoRef.current.muted = true;
           videoRef.current.playsInline = true;
-          videoRef.current.preload = 'metadata';
+          videoRef.current.loop = true;
+          videoRef.current.preload = 'auto';
           
-          // Strategy 1: Try autoplay with proper attributes
+          console.log('🎬 Video properties set');
+          
+          // Try to play
           const playPromise = videoRef.current.play();
           if (playPromise !== undefined) {
             await playPromise;
             setIsVideoPlaying(true);
             setShowPlayButton(false);
-            console.log('✅ Cloudinary video autoplay successful');
+            console.log('✅ Video playing successfully');
           }
         } catch (error) {
-          console.log('❌ Autoplay failed, showing play button:', error);
+          console.log('❌ Autoplay failed:', error);
           setShowPlayButton(true);
-          
-          // Strategy 2: Try with user interaction simulation
-          setTimeout(async () => {
-            try {
-              if (videoRef.current) {
-                console.log('🔄 Attempting secondary play...');
-                videoRef.current.muted = true;
-                await videoRef.current.play();
-                setIsVideoPlaying(true);
-                setShowPlayButton(false);
-                console.log('✅ Secondary Cloudinary play attempt successful');
-              }
-            } catch (error) {
-              console.log('❌ Secondary play attempt failed:', error);
-              setVideoError(true);
-            }
-          }, 1000);
         }
       } else {
         console.log('❌ Video ref not available');
       }
     };
 
-    // Delay video attempt to ensure DOM is ready
-    setTimeout(attemptVideoPlay, 500);
+    // Delay to ensure DOM is ready
+    setTimeout(attemptVideoPlay, 1000);
   }, []);
 
   const handleVideoLoad = () => {
@@ -97,17 +77,19 @@ export default function HeroSection() {
   };
 
   const handleVideoError = (event: any) => {
-    console.log('❌ Video failed to load, using fallback:', event);
+    console.log('❌ Video error:', event);
     setVideoError(true);
   };
 
   const handleVideoPlay = () => {
     setIsVideoPlaying(true);
     setShowPlayButton(false);
+    console.log('✅ Video started playing');
   };
 
   const handleVideoPause = () => {
     setIsVideoPlaying(false);
+    console.log('⏸️ Video paused');
   };
 
   const handleManualPlay = async () => {
@@ -117,21 +99,22 @@ export default function HeroSection() {
         await videoRef.current.play();
         setIsVideoPlaying(true);
         setShowPlayButton(false);
+        console.log('✅ Manual play successful');
       } catch (error) {
-        console.log('Manual play failed:', error);
+        console.log('❌ Manual play failed:', error);
       }
     }
   };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-      {/* Video Background with Production-Ready Implementation */}
+      {/* Video Background */}
       <div className="absolute inset-0 z-0">
-        {/* Optimized Fallback Image - Always visible as poster */}
+        {/* Fallback Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=854&q=60')`
+            backgroundImage: `url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=854&q=60')`
           }}
           role="img"
           aria-label="Solar panels on a modern home"
@@ -140,7 +123,6 @@ export default function HeroSection() {
         {/* Animated Background Fallback */}
         {videoError && (
           <div className="absolute inset-0 video-fallback">
-            {/* Enhanced animated solar panels */}
             <div className="absolute inset-0 overflow-hidden">
               {[...Array(8)].map((_, i) => (
                 <div
@@ -160,24 +142,25 @@ export default function HeroSection() {
           </div>
         )}
 
-        {/* Enhanced Video Element with Better Error Handling */}
+        {/* Simplified Video Element */}
         {!videoError && (
           <div className="relative">
             <video
               ref={videoRef}
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
                 videoLoaded && isVideoPlaying ? 'opacity-100' : 'opacity-0'
-              } ${!videoLoaded ? 'video-loading' : ''}`}
+              }`}
               autoPlay
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="auto"
               controls={false}
               disablePictureInPicture
               disableRemotePlayback
-              poster="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=854&q=60"
+              poster="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=854&q=60"
               aria-label="Solar installation video background"
+              data-playing={isVideoPlaying}
               onLoadedData={handleVideoLoad}
               onError={handleVideoError}
               onPlay={handleVideoPlay}
@@ -186,24 +169,19 @@ export default function HeroSection() {
               onCanPlay={() => console.log('🎬 Video can play')}
               onCanPlayThrough={() => console.log('🎬 Video can play through')}
             >
-              <source 
-                src={videoSources[0].src} 
-                type={videoSources[0].type} 
-              />
-              <source 
-                src={videoSources[1].src} 
-                type={videoSources[1].type} 
-              />
-              {/* Optimized fallback image for browsers that don't support video */}
+              {videoSources.map((src) => (
+                <source key={src} src={src} type="video/mp4" />
+              ))}
+              {/* Fallback image */}
               <img
-                src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=854&q=60"
+                src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=854&q=60"
                 alt="Solar panels on a modern home"
                 className="absolute inset-0 w-full h-full object-cover"
                 loading="lazy"
               />
             </video>
             
-            {/* Manual Play Button with Enhanced Styling */}
+            {/* Manual Play Button */}
             {showPlayButton && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
                 <Button
@@ -228,7 +206,7 @@ export default function HeroSection() {
           </div>
         )}
         
-        {/* Enhanced overlay with gradient */}
+        {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
       </div>
 

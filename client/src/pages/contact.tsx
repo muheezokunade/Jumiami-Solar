@@ -3,29 +3,32 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter, ExternalLink, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
+import FloatingActionButton from "@/components/floating-action-button";
 
 const contactInfo = {
   phone: "+234 811 888 7425",
   email: "info@jumiamisolar.com",
-  address: "Lagos, Nigeria"
+  address: "Ikota Shopping Complex, VGC, Ajah, Lagos"
 };
 
 const officeLocations = [
   {
-    city: "Lagos",
-    address: "Victoria Island, Lagos",
+    title: "Lagos Head Office",
+    address: "Ikota Shopping Complex, VGC, Ajah, Lagos",
     phone: "+234 811 888 7425",
-    email: "lagos@jumiamisolar.com"
+    whatsapp: "2348118887425"
   },
   {
     title: "Ilorin Branch Office",
     address: "Shop 4B samtosh plaza, No. 171, Ibrahim Taiwo Rd. Opp. access Bank, Ilorin",
-    phone: "09156082923"
+    phone: "+234 811 888 7425",
+    whatsapp: "2348118887425"
   },
   {
     title: "Abeokuta Branch Office",
     address: "Alhaji Mulikat sonekan (oosele) House, Opposite NNPC Filling Station, Somorin Obantoko Abeokuta, Ogun state.",
-    phone: "08118887425"
+    phone: "+234 811 888 7425",
+    whatsapp: "2348118887425"
   }
 ];
 
@@ -62,13 +65,25 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-orange-500 via-orange-400 to-yellow-400 text-white" aria-labelledby="contact-hero-heading">
-        <div className="max-w-4xl mx-auto text-center px-6">
+      <section className="relative py-20 text-white overflow-hidden" aria-labelledby="contact-hero-heading">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg"
+            alt="Solar energy consultation and contact background"
+            className="w-full h-full object-cover"
+            loading="eager"
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/90 via-orange-400/85 to-yellow-400/80"></div>
+        </div>
+        
+        <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
           <div className={`transform transition-all duration-1000 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <h1 id="contact-hero-heading" className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light mb-8 tracking-wide">
               Contact Us
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-white/95 mb-12 max-w-2xl mx-auto">
               Ready to go solar? Get in touch with our experts for a free consultation
             </p>
           </div>
@@ -77,6 +92,10 @@ export default function Contact() {
 
       {/* Contact Form Section */}
       <section className="py-20 bg-white" aria-labelledby="contact-form-heading">
+        {/* Mobile-only WhatsApp FAB */}
+        <div className="md:hidden">
+          <FloatingActionButton />
+        </div>
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 id="contact-form-heading" className="text-4xl font-light text-gray-900 mb-6">
@@ -96,25 +115,25 @@ export default function Contact() {
             {/* Contact Information */}
             <div className={`space-y-8 transform transition-all duration-1000 delay-600 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
               {/* Office Locations */}
-              <div className="border border-gray-200 rounded-lg p-8">
-                <h3 className="text-2xl font-light text-gray-900 mb-6">Our Office Locations</h3>
+              <div className="bg-gray-800 rounded-lg p-8">
+                <h3 className="text-2xl font-light text-white mb-8">Our Office Locations</h3>
                 
-                <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {officeLocations.map((office, index) => (
-                    <div key={index} className="border-b border-gray-100 pb-6 last:border-b-0 last:pb-0">
-                      <h4 className="text-lg font-light text-gray-900 mb-3">{office.title}</h4>
+                    <div key={index} className="text-center">
+                      <h4 className="text-xl font-light text-orange-500 mb-4">{office.title.split(' ')[0]}</h4>
                       
-                      <div className="space-y-3">
-                        <div className="flex items-start space-x-3">
-                          <MapPin className="h-5 w-5 text-orange-500 mt-1 flex-shrink-0" />
-                          <p className="text-gray-600 text-sm leading-relaxed">{office.address}</p>
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-center space-x-2">
+                          <MapPin className="h-5 w-5 text-orange-500" />
+                          <p className="text-white text-sm leading-relaxed">{office.address}</p>
                         </div>
                         
-                        <div className="flex items-center space-x-3">
+                        <div className="flex items-center justify-center space-x-2">
                           <Phone className="h-5 w-5 text-orange-500" />
                           <a 
                             href={`tel:${office.phone}`}
-                            className="text-gray-600 hover:text-orange-500 transition-colors text-sm"
+                            className="text-white hover:text-orange-500 transition-colors text-sm"
                           >
                             {office.phone}
                           </a>
@@ -122,24 +141,24 @@ export default function Contact() {
                       </div>
                     </div>
                   ))}
+                </div>
+                
+                <div className="mt-8 pt-6 border-t border-gray-700">
+                  <div className="flex items-center justify-center space-x-3 mb-3">
+                    <Mail className="h-5 w-5 text-orange-500" />
+                    <a 
+                      href="mailto:info@jumiamisolar.com"
+                      className="text-white hover:text-orange-500 transition-colors"
+                    >
+                      info@jumiamisolar.com
+                    </a>
+                  </div>
                   
-                  <div className="pt-4 border-t border-gray-100">
-                    <div className="flex items-center space-x-3">
-                      <Mail className="h-5 w-5 text-orange-500" />
-                      <a 
-                        href="mailto:info@jumiamisolar.com"
-                        className="text-gray-600 hover:text-orange-500 transition-colors"
-                      >
-                        info@jumiamisolar.com
-                      </a>
-                    </div>
-                    
-                    <div className="flex items-center space-x-3 mt-3">
-                      <Clock className="h-5 w-5 text-orange-500" />
-                      <div className="text-gray-600 text-sm">
-                        <p>Mon - Fri: 8:00AM - 6:00PM</p>
-                        <p>Sat: 9:00AM - 4:00PM</p>
-                      </div>
+                  <div className="flex items-center justify-center space-x-3">
+                    <Clock className="h-5 w-5 text-orange-500" />
+                    <div className="text-white text-sm">
+                      <p>Mon - Fri: 8:00AM - 6:00PM</p>
+                      <p>Sat: 9:00AM - 4:00PM</p>
                     </div>
                   </div>
                 </div>
