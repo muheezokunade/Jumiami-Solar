@@ -154,7 +154,7 @@ This is the most common and traditional type of inverter for residential systems
 
 - **"Weakest Link" Problem**: The biggest drawback is that the performance of the entire string is limited by its lowest-performing panel. If one panel is shaded by a tree branch or covered in dust, the output of every other panel in that string will drop to match it
 
-**Best for**: Homes with a simple roof layout that receives consistent, unobstructed sunlight throughout the day.
+**Best for**: Homes with a simple roof layout that receives consistent, unobstructed sunlight throughout the day
 
 ## 2. Microinverters
 
@@ -173,7 +173,7 @@ Microinverters are a more modern and increasingly popular solution.
 - **Higher Cost**: Microinverters are more expensive than string inverters due to the cost of having one for each panel
 - **Maintenance**: If a microinverter fails, a technician will need to go onto the roof to replace it
 
-**Best for**: Systems with complex roof layouts, or roofs that experience partial shading from trees, chimneys, or other obstructions.
+**Best for**: Systems with complex roof layouts, or roofs that experience partial shading from trees, chimneys, or other obstructions
 
 ## 3. Hybrid Inverters
 
@@ -191,7 +191,7 @@ A hybrid inverter combines the functions of a traditional inverter and a battery
 
 - **Higher Upfront Cost**: A hybrid system is more expensive due to the cost of the inverter and the required batteries
 
-**Best for**: Homes and businesses in areas with frequent power outages, or for those who want to be more energy-independent.
+**Best for**: Homes and businesses in areas with frequent power outages, or for those who want to be more energy-independent
 
 ## Final Thoughts
 
