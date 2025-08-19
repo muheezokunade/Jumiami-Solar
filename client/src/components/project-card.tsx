@@ -9,7 +9,6 @@ interface Project {
   category: string;
   location: string;
   capacity: string;
-  savings: string;
   duration: string;
   image: string;
   description: string;
@@ -100,15 +99,9 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
         </p>
         
         {/* Project Stats */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="text-center p-4 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl border border-orange-100">
-            <div className="text-lg font-bold text-orange-600 mb-1">{project.savings}</div>
-            <div className="text-xs text-gray-600">Monthly Savings</div>
-          </div>
-          <div className="text-center p-4 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl border border-orange-100">
-            <div className="text-lg font-bold text-orange-600 mb-1">{project.duration}</div>
-            <div className="text-xs text-gray-600">Installation Time</div>
-          </div>
+        <div className="text-center p-4 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl border border-orange-100 mb-6">
+          <div className="text-lg font-bold text-orange-600 mb-1">{project.duration}</div>
+          <div className="text-xs text-gray-600">Installation Time</div>
         </div>
         
         {/* Features Preview */}

@@ -46,7 +46,6 @@ interface Project {
   category: string;
   location: string;
   capacity: string;
-  savings: string;
   duration: string;
   image: string;
   beforeImage: string;
@@ -71,7 +70,6 @@ const projects: Project[] = [
     category: "commercial",
     location: "Victoria Island, Lagos",
     capacity: "75kW",
-    savings: "₦450,000/month",
     duration: "3 weeks",
     description: "Complete solar power system for MRS Filling Station ensuring 24/7 operations with backup power for fuel pumps and lighting systems.",
     image: "https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg",
@@ -100,7 +98,6 @@ const projects: Project[] = [
     category: "commercial",
     location: "Ikeja, Lagos",
     capacity: "120kW",
-    savings: "₦680,000/month",
     duration: "4 weeks",
     description: "Solar power installation for a 3-story shopping complex housing 25 retail shops, restaurants, and office spaces.",
     image: "https://images.pexels.com/photos/433311/pexels-photo-433311.jpeg",
@@ -129,7 +126,6 @@ const projects: Project[] = [
     category: "residential",
     location: "VGC, Ajah, Lagos",
     capacity: "25kW",
-    savings: "₦180,000/month",
     duration: "2 weeks",
     description: "Premium residential solar installation for a 5-bedroom mansion with swimming pool, home theater, and smart home systems.",
     image: "https://images.pexels.com/photos/433314/pexels-photo-433314.jpeg",
@@ -158,7 +154,6 @@ const projects: Project[] = [
     category: "commercial",
     location: "Surulere, Lagos",
     capacity: "40kW",
-    savings: "₦250,000/month",
     duration: "2 weeks",
     description: "Solar power system for commercial bakery with industrial ovens, refrigeration units, and air conditioning systems.",
     image: "https://images.pexels.com/photos/433317/pexels-photo-433317.jpeg",
@@ -187,7 +182,6 @@ const projects: Project[] = [
     category: "commercial",
     location: "Ilorin, Kwara State",
     capacity: "100kW",
-    savings: "₦550,000/month",
     duration: "5 weeks",
     description: "Critical solar power system for private hospital ensuring uninterrupted power for medical equipment, lighting, and air conditioning.",
     image: "https://images.pexels.com/photos/371917/pexels-photo-371917.jpeg",
@@ -216,7 +210,6 @@ const projects: Project[] = [
     category: "industrial",
     location: "Abeokuta, Ogun State",
     capacity: "60kW",
-    savings: "₦320,000/month",
     duration: "3 weeks",
     description: "Solar power system for large-scale poultry farm with automated feeding systems, climate control, and processing facilities.",
     image: "https://images.pexels.com/photos/17489152/pexels-photo-17489152.jpeg",
@@ -264,7 +257,6 @@ export default function ProjectsPage() {
   const stats = {
     totalProjects: projects.length,
     totalCapacity: projects.reduce((sum, project) => sum + parseInt(project.capacity), 0),
-    totalSavings: projects.reduce((sum, project) => sum + parseInt(project.savings.replace(/[^\d]/g, '')), 0),
     averageRating: projects.reduce((sum, project) => sum + project.rating, 0) / projects.length
   };
 
