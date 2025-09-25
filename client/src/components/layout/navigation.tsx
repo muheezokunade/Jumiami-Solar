@@ -54,7 +54,7 @@ export default function Navigation() {
           <Link href="/">
             <a className="flex items-center space-x-3">
               <img 
-                src="https://stellar-cucurucho-723bf1.netlify.app/images/FB_IMG_1753880100791%20-%20Faridah%20Sulaimon_1753982843756-EIXfVty_.jpg"
+                src="https://i.postimg.cc/pTnk7B4W/Screenshot-2025-09-25-at-12-04-48.png"
                 alt="Jumiami Solar Logo"
                 className="h-10 w-auto rounded-lg"
               />
